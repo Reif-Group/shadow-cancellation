@@ -1,3 +1,8 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Author: Shalin Shah
+% Date created: 04/01/2020
+% Affiliation: Duke University
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 clear; clc;
 concX = 2; stopTime = 300; nCatalytic = 5;
 

@@ -1,5 +1,8 @@
-% demonstrates consensus reactions reach majority;
-
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Author: Shalin Shah
+% Date created: 04/01/2020
+% Affiliation: Duke University
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 cat_consensus(2.7, 0.3, 1, 5, 5, 1);
 cat_consensus(0.6, 2.4, 1, 5, 5, 2);
 cat_consensus(1.3, 1.7, 1, 5, 5, 3);
