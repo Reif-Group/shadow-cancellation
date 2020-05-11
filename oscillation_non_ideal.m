@@ -178,14 +178,14 @@ function ideal_cat_lv_oscillator(initX, initY, N, stopTime, figNo)
     
     subplot(2, 1, 2);
     box on; hold on;
-    plot(t./60, sum(X(:, 1:N), 2), ':','LineWidth', 2.0);
-    plot(t./60, sum(X(:, N+1:2*N), 2), ':','LineWidth', 2.0);
+    plot(t./60, sum(X(:, 1:N), 2), 'LineWidth', 2.0);
+    plot(t./60, sum(X(:, N+1:2*N), 2), 'LineWidth', 2.0);
     ylabel('Concentration'); xlabel('Time');
     set(gca, 'LineWidth', 2.0); legend('X', 'Y'); %ylim([0 5])
 end
 
 function approx_cat_lv_oscillator(initX, initY, N, stopTime, figNo)
-    % implements a DNA version of catalytic lotka volterra oscillator 
+ % implements a DNA version of catalytic lotka volterra oscillator 
     %
     % initX is the initial concentration of X
     % initY is the initial concentration of Y
@@ -199,7 +199,7 @@ function approx_cat_lv_oscillator(initX, initY, N, stopTime, figNo)
     % slow down all reactions by multiplying with a scaling factor 1e-3
     rate = (1/60);
     % fastest reaction are assumed to occur 
-    infRate = 1e3*(rate);
+    infRate = 1*(rate);
     % inf concentration of gates will be 1000 uM
     infConc = 1e3*(base);
     
@@ -209,7 +209,7 @@ function approx_cat_lv_oscillator(initX, initY, N, stopTime, figNo)
     
     % create a sym bio model for simulation
     model = sbiomodel('Approximate CRNs for LV oscillator');
-    r = cell(1, 7*N);
+    r = cell(1, 5*N);
     k = cell(1, length(r));
     p = cell(1, length(r));
     
@@ -228,12 +228,12 @@ function approx_cat_lv_oscillator(initX, initY, N, stopTime, figNo)
     
     % add catalytic approximations for X + Y -> Y + Y step
     for i = 1 : N - 1
-        r{2*N+2*i-1} = addreaction(model, strcat('x', int2str(i), ' + Gy', int2str(i),...
+        r{2*N+2*i-1} = addreaction(model, strcat('x', int2str(i), ' + y', int2str(i),...
             ' -> Iy', int2str(i))); 
         r{2*N+2*i} = addreaction(model, strcat('Iy', int2str(i), ' + Gy', int2str(i),...
             '2 -> y', int2str(i),' + y', int2str(i+1))); 
     end
-    r{4*N-1} = addreaction(model, strcat('x', int2str(N), ' + Gy', int2str(N),...
+    r{4*N-1} = addreaction(model, strcat('x', int2str(N), ' + y', int2str(N),...
             ' -> Iy', int2str(N))); 
     r{4*N} = addreaction(model, strcat('Iy', int2str(N), ' + Gy', int2str(N),...
             '2 -> y', int2str(N),' + y1')); 
@@ -242,13 +242,8 @@ function approx_cat_lv_oscillator(initX, initY, N, stopTime, figNo)
     for i = 4 * N + 1 : 5 * N
         r{i} = addreaction(model,strcat('y',  int2str(i-4*N), ' + Gw', int2str(i-4*N),' -> waste')); 
     end
-    % add linker reactions
-    for i = 5*N+1:6*N
-        r{i} = addreaction(model,strcat('y',  int2str(i-5*N),' -> Gy', int2str(i-5*N))); 
-        r{i+N} = addreaction(model,strcat('Gy',  int2str(i-5*N),' -> y', int2str(i-5*N)));
-    end
    
-    for i = 1 : 7*N
+    for i = 1 : 5*N
         k{i} = addkineticlaw(r{i}, 'MassAction'); 
         k{i}.ParameterVariableNames = {strcat('c', int2str(i))};
     end
@@ -265,9 +260,6 @@ function approx_cat_lv_oscillator(initX, initY, N, stopTime, figNo)
         p{2*N+2*i} = addparameter(k{2*N+2*i}, strcat('c', int2str(2*N+2*i)), 'Value', q4);
         % add rates for Y -> phi
         p{4*N+i} = addparameter(k{4*N+i}, strcat('c', int2str(4*N+i)), 'Value', q1);
-        % add rates for Y <-> Gy
-        p{5*N+i} = addparameter(k{5*N+i}, strcat('c', int2str(5*N+i)), 'Value', q4);
-        p{6*N+i} = addparameter(k{6*N+i}, strcat('c', int2str(6*N+i)), 'Value', q4);
     end
     
 
@@ -275,7 +267,6 @@ function approx_cat_lv_oscillator(initX, initY, N, stopTime, figNo)
     for i = 1 : N
         r{2*N+2*i-1}.Reactants(1).InitialAmount = initX * base * (1/N); % X
         r{2*N+2*i-1}.Reactants(2).InitialAmount = initY * base * (1/N); % Gy
-        r{4*N+i}.Reactants(1).InitialAmount = initY * base * (1/N); % Y
     end
     % set initial concentrations for excess gates
     for i = 1 : N
@@ -298,9 +289,7 @@ function approx_cat_lv_oscillator(initX, initY, N, stopTime, figNo)
     [t,X] = sbiosimulate(model);
     
     % plot
-%     x =  sum(X(:, 1:4:N*4), 2); y = sum(X(:, 4*N+1:3:4*N+3*N), 2);
-%     x =  sum(X(:, 1:4:N*4), 2); y = X(:, 4*N+1) + sum(X(:, 4*N+6:4:4*N+4*N), 2);
-    x =  sum(X(:, 1:4:N*4), 2); y = sum(X(:, 4*N+4:4*N+5), 2) + sum(X(:, 4*N+9:4:4*N+4*N), 2);
+    x =  sum(X(:, 1:4:N*4), 2); y = sum(X(:, 4*N+1:3:4*N+3*N), 2);
     figure(figNo); subplot(2, 1, 1);
     hold on; box on;
     plot(x, y, 'LineWidth', 2.0);
@@ -309,9 +298,9 @@ function approx_cat_lv_oscillator(initX, initY, N, stopTime, figNo)
     
     subplot(2, 1, 2);
     box on; hold on;
-    plot(t./60, x, 'LineWidth', 2.0);
-    plot(t./60, y, 'LineWidth', 2.0);
+    plot(t./60, x, ':','LineWidth', 2.0);
+    plot(t./60, y, ':','LineWidth', 2.0);
     ylabel('Concentration (nM)'); xlabel('Time (mins)');
-    set(gca, 'LineWidth', 2.0); 
+    set(gca, 'LineWidth', 2.0);
     legend('cat. X', 'cat. Y', 'approx. X', 'approx. Y'); 
 end
