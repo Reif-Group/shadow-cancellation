@@ -1,3 +1,8 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Author: Shalin Shah
+% Date created: 04/01/2020
+% Affiliation: Duke University
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 concX = 1; concY = 0.5; stopTime = 2;
 
 idealampnoncat(concX, concY, stopTime, 1)
