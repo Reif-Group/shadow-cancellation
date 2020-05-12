@@ -11,6 +11,7 @@ concX = 4; concY = 2; stopTime = 2000; nCatalytic = 3;
 % ideal_lv_oscillator(concX, concY, stopTime, 1)
 ideal_cat_lv_oscillator(concX, concY, nCatalytic, stopTime, 1);
 approx_cat_lv_oscillator(concX, concY, nCatalytic, stopTime, 1);
+% approx_link_cat_lv_oscillator(concX, concY, nCatalytic, stopTime, 1);
 
 function ideal_lv_oscillator(concA, concB, stopTime, figNo)
     % enter A and B concentration assuming all gates are excess
@@ -302,5 +303,138 @@ function approx_cat_lv_oscillator(initX, initY, N, stopTime, figNo)
     plot(t./60, y, ':','LineWidth', 2.0);
     ylabel('Concentration (nM)'); xlabel('Time (mins)');
     set(gca, 'LineWidth', 2.0);
+    legend('cat. X', 'cat. Y', 'approx. X', 'approx. Y'); 
+end
+
+function approx_link_cat_lv_oscillator(initX, initY, N, stopTime, figNo)
+    % implements a DNA version of catalytic lotka volterra oscillator 
+    %
+    % initX is the initial concentration of X
+    % initY is the initial concentration of Y
+    % N is the number of catalytic reactions
+    % stopTime is simulation time (eg. 100)
+    % figNo is the figure # for plot
+
+    % set all the default params and initialize model
+    % default rate and concentration
+    base = 1;
+    % slow down all reactions by multiplying with a scaling factor 1e-3
+    rate = (1/60);
+    % fastest reaction are assumed to occur 
+    infRate = 1e5*(rate);
+    % inf concentration of gates will be 1000 uM
+    infConc = 1e5*(base);
+    
+    % allowed error rate tolerance value in pico molars
+    absTol = 1e-12;
+    relTol = 1e-12;
+    
+    % create a sym bio model for simulation
+    model = sbiomodel('Approximate CRNs for LV oscillator');
+    r = cell(1, 7*N);
+    k = cell(1, length(r));
+    p = cell(1, length(r));
+    
+    % add two-step catalytic approximations for X -> X + X step
+    % For N catalytic reaction, we have 2N reactions
+    for i = 1 : N - 1
+        r{2*i-1} = addreaction(model, strcat('x', int2str(i), ' + Gx', int2str(i), ...
+            '1 -> Ix', int2str(i))); 
+        r{2*i} = addreaction(model, strcat('Ix', int2str(i), ...
+            ' + Gx', int2str(i),'2 -> x', int2str(i),' + x', int2str(i+1))); 
+    end
+    r{2*N-1} = addreaction(model, strcat('x', int2str(N), ' + Gx', int2str(N), ...
+            '1 -> Ix', int2str(N)));
+    r{2*N} = addreaction(model, strcat('Ix', int2str(N), ...
+            ' + Gx', int2str(N),'2 -> x', int2str(N),' + x1')); 
+    
+    % add catalytic approximations for X + Y -> Y + Y step
+    for i = 1 : N - 1
+        r{2*N+2*i-1} = addreaction(model, strcat('x', int2str(i), ' + Gy', int2str(i),...
+            '1 -> Iy', int2str(i))); 
+        r{2*N+2*i} = addreaction(model, strcat('Iy', int2str(i), ' + Gy', int2str(i),...
+            '2 -> y', int2str(i),' + y', int2str(i+1))); 
+    end
+    r{4*N-1} = addreaction(model, strcat('x', int2str(N), ' + Gy', int2str(N),...
+            '1 -> Iy', int2str(N))); 
+    r{4*N} = addreaction(model, strcat('Iy', int2str(N), ' + Gy', int2str(N),...
+            '2 -> y', int2str(N),' + y1')); 
+        
+    % add one ideal waste reaction for LV, and linker reactions
+    for i = 4 * N + 1 : 5 * N
+        r{i} = addreaction(model,strcat('y',  int2str(i-4*N), ' + Gw', int2str(i-4*N),' -> waste')); 
+        r{N+i} = addreaction(model,strcat('Gy',  int2str(i-4*N), '1 + Gw', int2str(i-4*N),' -> waste')); 
+    end
+   
+    % add linker reactions
+    for i = 6*N+1:7*N
+        r{i} = addreaction(model,strcat('y',  int2str(i-6*N),' -> Gy', int2str(i-6*N), '1')); 
+        r{i+N} = addreaction(model,strcat('Gy',  int2str(i-6*N),'1 -> y', int2str(i-6*N)));
+    end
+   
+    for i = 1 : 8*N
+        k{i} = addkineticlaw(r{i}, 'MassAction'); 
+        k{i}.ParameterVariableNames = {strcat('c', int2str(i))};
+    end
+    
+    q1 = rate/(infConc); q2 = infRate;
+    q3 = rate*N; q4 = infRate;
+    for i = 1 : N
+        % add rates for X -> 2X
+        p{2*i-1} = addparameter(k{2*i-1}, strcat('c', int2str(2*i-1)), 'Value', q1);
+        p{2*i} = addparameter(k{2*i}, strcat('c', int2str(2*i)), 'Value', q2);
+        % add rates for X + Y -> 2Y
+        p{2*N+2*i-1} = addparameter(k{2*N+2*i-1}, strcat('c', int2str(2*N+2*i-1)), 'Value', q3);
+        p{2*N+2*i} = addparameter(k{2*N+2*i}, strcat('c', int2str(2*N+2*i)), 'Value', q4);
+        % add rates for Y -> phi
+        p{4*N+i} = addparameter(k{4*N+i}, strcat('c', int2str(4*N+i)), 'Value', q1);
+        p{5*N+i} = addparameter(k{5*N+i}, strcat('c', int2str(5*N+i)), 'Value', q1);
+        % add rates for Y <-> Gy
+        p{6*N+i} = addparameter(k{6*N+i}, strcat('c', int2str(6*N+i)), 'Value', q4);
+        p{7*N+i} = addparameter(k{7*N+i}, strcat('c', int2str(7*N+i)), 'Value', q4);
+    end
+    
+
+    % set initial concentrations for x and y
+    for i = 1 : N
+        r{2*N+2*i-1}.Reactants(1).InitialAmount = initX * base * (1/N); % X
+        r{2*N+2*i-1}.Reactants(2).InitialAmount = initY * base * (2/N); % Gy
+        r{4*N+i}.Reactants(1).InitialAmount = initY * base * (2/N); % y
+    end
+    % set initial concentrations for excess gates
+    for i = 1 : N
+        r{2*i-1}.Reactants(2).InitialAmount = infConc;
+        r{2*i}.Reactants(2).InitialAmount = infConc;
+        r{2*N+2*i}.Reactants(2).InitialAmount = infConc;
+        r{4*N+i}.Reactants(2).InitialAmount = infConc;
+    end
+    
+    model
+    model.Reactions
+    model.Species
+
+    % get solver config and set ode type, tolerance, stop time
+    cs = getconfigset(model,'active');
+    set(cs.SolverOptions, 'AbsoluteTolerance', absTol);
+    set(cs.SolverOptions, 'RelativeTolerance', relTol);
+    cs.SolverType = 'ode15s';
+    cs.StopTime = stopTime;
+    [t,X] = sbiosimulate(model);
+    
+    % plot
+    x =  sum(X(:, 1:4:N*4), 2); y = X(:, 4*N+1) + sum(X(:, 4*N+6:4:4*N+4*N), 2);
+    gy = X(:, 4*N+4)+ sum(X(:, 4*N+5:4:4*N+4*N), 2);
+    figure(figNo); subplot(2, 1, 1);
+    hold on; box on;
+    plot(x./2, (y+gy)./2, 'LineWidth', 2.0);
+    ylabel('Y'); xlabel('X');
+    set(gca, 'LineWidth', 2.0); 
+    
+    subplot(2, 1, 2);
+    box on; hold on;
+    plot(t./60, x./2, 'LineWidth', 2.0);
+    plot(t./60, (y+gy)./2, 'LineWidth', 2.0);
+    ylabel('Concentration (nM)'); xlabel('Time (mins)');
+    set(gca, 'LineWidth', 2.0); 
     legend('cat. X', 'cat. Y', 'approx. X', 'approx. Y'); 
 end
