@@ -150,7 +150,7 @@ function approx_cat_amp(initX, N, stopTime, figNo)
     relTol = 1e-12;
 
     % leak rate
-    leak_rate = 1e-3;
+    leak_rate = 1e-2;
 %     leak_rate = 0;
     
     % create a sym bio model for simulation
@@ -200,16 +200,15 @@ function approx_cat_amp(initX, N, stopTime, figNo)
     end
     
     for i = 1:N-1
-        p{2*N + 2*i - 1} = addparameter(k{2*N + 2*i - 1}, strcat('c', int2str(2*N + 2*i - 1)), 'Value', leak_rate*q1);
-        p{2*N + 2*i} = addparameter(k{2*N + 2*i}, strcat('c', int2str(2*N + 2*i)), 'Value', leak_rate*q2);
+        p{2*N + 2*i - 1} = addparameter(k{2*N + 2*i - 1}, strcat('c', int2str(2*N + 2*i - 1)), 'Value', leak_rate*q1));
+        p{2*N + 2*i} = addparameter(k{2*N + 2*i}, strcat('c', int2str(2*N + 2*i)), 'Valku')
     end
-    p{2*N + 2*N - 1} = addparameter(k{2*N + 2*N - 1}, strcat('c', int2str(2*N + 2*N - 1)), 'Value', leak_rate*q1);
-    p{2*N + 2*N} = addparameter(k{2*N + 2*N}, strcat('c', int2str(2*N + 2*N)), 'Value', leak_rate*q2);
+
 
     % set initial concentrations for x
     for i = 1 : 2 : 2*N
-%         r{i}.Reactants(1).InitialAmount = initX * (1/N);
-        r{i}.Reactants(1).InitialAmount = 0.0;
+        r{i}.Reactants(1).InitialAmount = initX * (1/N);
+%         r{i}.Reactants(1).InitialAmount = 0.0;
     end
     % set initial concentrations for excess gates
     for i = 1 : 2*N

@@ -4,7 +4,7 @@
 % Affiliation: Duke University
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 clear; clc;
-concX = 20; stopTime = 700; nCatalytic = 5;
+concX = 2; stopTime = 600; nCatalytic = 5;
 
 % compare ideal lotka-volterra simulation with approximation
 ideal_amp(concX, stopTime, 1)
@@ -128,7 +128,7 @@ function cat_amp(initX, N, stopTime, figNo)
 end
 
 function approx_cat_amp(initX, N, stopTime, figNo)
-    % implements a DNA version of catalytic unimolecular amplifier 
+    % implements a DNA version of catalytic lotka volterra oscillator 
     %
     % initX is the initial concentration of X
     % N is the number of catalytic reactions
@@ -141,22 +141,17 @@ function approx_cat_amp(initX, N, stopTime, figNo)
     % slow down all reactions by multiplying with a scaling factor 1e-3
     rate = (1/60); % (or 1 per minute)
     % fastest reaction are assumed to occur 
-    infRate = 1e3*(rate);
+    infRate = 1e3*rate;
     % inf concentration of gates will be 1000 uM
     infConc = 1e5*base;
-    
+   
     % allowed error rate tolerance value in pico molars
     absTol = 1e-12;
     relTol = 1e-12;
-
-    % leak rate
-    leak_rate = 1e-3;
-%     leak_rate = 0;
     
     % create a sym bio model for simulation
     model = sbiomodel('Approximate CRNs for autocatalytic CRNs');
-    % r = cell(1, 2*N);
-    r = cell(1, 4*N);
+    r = cell(1, 2*N);
     k = cell(1, length(r));
     p = cell(1, length(r));
     
@@ -172,44 +167,21 @@ function approx_cat_amp(initX, N, stopTime, figNo)
             '1 -> Ix', int2str(N)));
     r{2*N} = addreaction(model, strcat('Ix', int2str(N), ...
             ' + Gx', int2str(N),'2 -> x', int2str(N),' + x1')); 
-
-    % NEW: Add the leaky reactions
-    for i = 1:N-1
-        r{2*N + 2*i-1} = addreaction(model, strcat('Gx', int2str(i), '1 -> Ix', int2str(i))); 
-        r{2*N + 2*i} = addreaction(model, strcat('Gx', int2str(i), '2 -> x', int2str(i), ' + x', int2str(i+1)));
-    end
-    r{2*N + 2*N - 1} = addreaction(model, strcat('Gx', int2str(N), '1 -> Ix', int2str(N)));
-    r{2*N + 2*N} = addreaction(model, strcat('Gx', int2str(N), '2 -> x', int2str(N), ' + x1'));
-    
     
     for i = 1 : 2*N
         k{i} = addkineticlaw(r{i}, 'MassAction'); 
         k{i}.ParameterVariableNames = {strcat('c', int2str(i))};
     end
     
-    % NEW: Add kinetics to leaky reactions
-    for i = 1: 2*N
-        k{2*N + i} = addkineticlaw(r{2*N + i}, 'MassAction');
-        k{2*N + i}.ParameterVariableNames = {strcat('c', int2str(2*N + i))};
-    end
-
     q1 = rate/infConc; q2 = infRate;
     for i = 1:N
         p{2*i-1} = addparameter(k{2*i-1}, strcat('c', int2str(2*i-1)), 'Value', q1);
         p{2*i} = addparameter(k{2*i}, strcat('c', int2str(2*i)), 'Value', q2);
     end
-    
-    for i = 1:N-1
-        p{2*N + 2*i - 1} = addparameter(k{2*N + 2*i - 1}, strcat('c', int2str(2*N + 2*i - 1)), 'Value', leak_rate*q1);
-        p{2*N + 2*i} = addparameter(k{2*N + 2*i}, strcat('c', int2str(2*N + 2*i)), 'Value', leak_rate*q2);
-    end
-    p{2*N + 2*N - 1} = addparameter(k{2*N + 2*N - 1}, strcat('c', int2str(2*N + 2*N - 1)), 'Value', leak_rate*q1);
-    p{2*N + 2*N} = addparameter(k{2*N + 2*N}, strcat('c', int2str(2*N + 2*N)), 'Value', leak_rate*q2);
 
     % set initial concentrations for x
     for i = 1 : 2 : 2*N
-%         r{i}.Reactants(1).InitialAmount = initX * (1/N);
-        r{i}.Reactants(1).InitialAmount = 0.0;
+        r{i}.Reactants(1).InitialAmount = initX * (1/N);
     end
     % set initial concentrations for excess gates
     for i = 1 : 2*N
@@ -232,7 +204,7 @@ function approx_cat_amp(initX, N, stopTime, figNo)
     figure(figNo);
     box on; hold on;
     x = sum(X(:, 1:4:N*4), 2);
-    plot(t, x, '-','LineWidth', 3.0);   
+    plot(t, x, '-','LineWidth', 2.0);   
     ylabel('Concentration (nM)'); xlabel('Time (mins)');
-    set(gca, 'LineWidth', 2.0); legend('auto. X', 'cat. X', 'approx. X');
+    set(gca, 'LineWidth', 2.0);
 end
