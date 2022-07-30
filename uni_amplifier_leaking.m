@@ -4,7 +4,7 @@
 % Affiliation: Duke University
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 clear; clc;
-concX = 20; stopTime = 700; nCatalytic = 5;
+concX = 2; stopTime = 900; nCatalytic = 5;
 
 % compare ideal lotka-volterra simulation with approximation
 ideal_amp(concX, stopTime, 1)
@@ -141,16 +141,16 @@ function approx_cat_amp(initX, N, stopTime, figNo)
     % slow down all reactions by multiplying with a scaling factor 1e-3
     rate = (1/60); % (or 1 per minute)
     % fastest reaction are assumed to occur 
-    infRate = 1e3*(rate);
+    infRate = 8e2*(rate);
     % inf concentration of gates will be 1000 uM
-    infConc = 1e5*base;
+    infConc = 5e3*base;
     
     % allowed error rate tolerance value in pico molars
     absTol = 1e-12;
     relTol = 1e-12;
 
     % leak rate
-    leak_rate = 1e-3;
+    leak_rate = 1e-7;
 %     leak_rate = 0;
     
     % create a sym bio model for simulation
