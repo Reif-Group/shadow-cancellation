@@ -4,11 +4,11 @@
 % Affiliation: Duke University
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 clear; clc;
-concX = 2; stopTime = 900; nCatalytic = 5;
+concX = 2; stopTime = 6000; nCatalytic = 5;
 
 % compare ideal lotka-volterra simulation with approximation
-ideal_amp(concX, stopTime, 1)
-cat_amp(concX, nCatalytic, stopTime, 1);
+% ideal_amp(concX, stopTime, 1)
+% cat_amp(concX, nCatalytic, stopTime, 1);
 approx_cat_amp(concX, nCatalytic, stopTime, 1);
 
 function ideal_amp(concA, stopTime, figNo)
@@ -60,7 +60,7 @@ function ideal_amp(concA, stopTime, figNo)
 %     % plot X over the time
     figure(figNo);
     box on; hold on;
-%     plot(t, X, 'LineWidth', 2.0);
+    plot(t, X, 'LineWidth', 2.0);
     ylabel('Concentration'); xlabel('Time');
     set(gca, 'LineWidth', 2.0); 
 end
@@ -122,7 +122,7 @@ function cat_amp(initX, N, stopTime, figNo)
 %     % plot
     figure(figNo);
     box on; hold on;
-%     plot(t, sum(X, 2), ':', 'LineWidth', 2);
+    plot(t, sum(X, 2), ':', 'LineWidth', 2);
     ylabel('Concentration (nM)'); xlabel('Time (mins)'); 
     set(gca, 'LineWidth', 2.0); 
 end
@@ -134,16 +134,16 @@ function approx_cat_amp(initX, N, stopTime, figNo)
     % slow down all reactions
     rate = 1/60;
     % fastest rate reactions
-    infRate = 1e5*(rate);
+    infRate = 1e2*(rate);
     % inf concentration of the gates will be 1000uM
-    infConc = 1e5*(base);
+    infConc = 1e3*(base);
 
     % allowed error rate tolerance value in pico molars
     absTol = 1e-12
     relTol = 1e-12;
 
     % leak rate
-    leak_rate = 1e-8;
+    leak_rate = 1e-4;
 
     % switch shadow circuit flag. 1 is ON, 0 is OFF
     shadow = 1; 
@@ -280,7 +280,7 @@ function approx_cat_amp(initX, N, stopTime, figNo)
     end
     % Set initial concentration for shadow gates
     for i = 4*N + 1: 6*N
-        r{i}.Reactants(2).InitialAmount = infConc*0.1 % check. This is good!
+        r{i}.Reactants(2).InitialAmount = infConc*1e-2 % check. This is good!
     end
     model
     model.Reactions
@@ -302,7 +302,7 @@ function approx_cat_amp(initX, N, stopTime, figNo)
     plot(t, x, '-','LineWidth', 3.0);
     plot(t, s, ':', LineWidth=3.0)
     ylabel('Concentration (nM)'); xlabel('Time (mins)');
-%     set(gca, 'LineWidth', 2.0); legend('auto. X', 'cat. X', 'approx. X', 'leak. S');    
-    set(gca, 'LineWidth', 2.0); legend('cat.X', 'leak.S');    
+    set(gca, 'LineWidth', 2.0); %legend('auto. X', 'cat. X', 'approx. X', 'leak. S');    
+%     set(gca, 'LineWidth', 2.0); legend('cat.X', 'leak.S');    
     
 end

@@ -4,7 +4,7 @@
 % Affiliation: Duke University
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 clear; clc;
-concX = 2; stopTime = 900; nCatalytic = 5;
+concX = 2; stopTime = 600; nCatalytic = 5;
 
 % compare ideal lotka-volterra simulation with approximation
 ideal_amp(concX, stopTime, 1)
@@ -150,7 +150,7 @@ function approx_cat_amp(initX, N, stopTime, figNo)
     relTol = 1e-12;
 
     % leak rate
-    leak_rate = 1e-7;
+    leak_rate = 1e-3;
 %     leak_rate = 0;
     
     % create a sym bio model for simulation
