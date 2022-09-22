@@ -4,7 +4,7 @@
 % Affiliation: Duke University
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 clear; clc;
-concX = 2; stopTime = 6000; nCatalytic = 5;
+concX = 2; stopTime = 1000; nCatalytic = 5;
 
 % compare ideal lotka-volterra simulation with approximation
 % ideal_amp(concX, stopTime, 1)
@@ -97,8 +97,9 @@ function cat_amp(initX, N, stopTime, figNo)
     % add all the rate laws as mass action kinetics
     for i = 1:N
         k{i} = addkineticlaw(r{i}, 'MassAction'); 
-        k{i}.ParameterVariableNames = {strcat('c', int2str(i))};
         p{i} = addparameter(k{i}, strcat('c', int2str(i)), 'Value', rate);
+        k{i}.ParameterVariableNames = {strcat('c', int2str(i))};
+        
     end
     
     % set initial concentrations
@@ -136,15 +137,14 @@ function approx_cat_amp(initX, N, stopTime, figNo)
     % fastest rate reactions
     infRate = 1e2*(rate);
     % inf concentration of the gates will be 1000uM
-    infConc = 1e3*(base);
+    infConc = 1e4*(base);
 
     % allowed error rate tolerance value in pico molars
     absTol = 1e-12
     relTol = 1e-12;
 
     % leak rate
-    leak_rate = 1e-4;
-
+    leak_rate = 1e-6 ;
     % switch shadow circuit flag. 1 is ON, 0 is OFF
     shadow = 1; 
 
@@ -238,8 +238,8 @@ function approx_cat_amp(initX, N, stopTime, figNo)
 
     % Rate params for the leaks in the regular circuit
     for i = 2*N + 1:2:4*N - 1
-        p{i} = addparameter(k{i}, strcat('c', int2str(i)), 'Value', leak*leak_rate*q1);
-        p{i+1} = addparameter(k{i+1}, strcat('c', int2str(i + 1)), 'Value', leak*leak_rate*q2);
+        p{i} = addparameter(k{i}, strcat('c', int2str(i)), 'Value', leak*leak_rate);
+        p{i+1} = addparameter(k{i+1}, strcat('c', int2str(i + 1)), 'Value', leak*leak_rate);
     end
 
 
@@ -252,8 +252,8 @@ function approx_cat_amp(initX, N, stopTime, figNo)
 
     % Rate for the shadow leaks
       for i = 6*N + 1: 2: 8*N - 1
-        p{i} = addparameter(k{i}, strcat('c', int2str(i)), 'Value', leak*shadow*leak_rate*q1);
-        p{i+1} = addparameter(k{i+1}, strcat('c', int2str(i + 1)), 'Value', leak*shadow*leak_rate*q2);
+        p{i} = addparameter(k{i}, strcat('c', int2str(i)), 'Value', leak*shadow*leak_rate);
+        p{i+1} = addparameter(k{i+1}, strcat('c', int2str(i + 1)), 'Value', leak*shadow*leak_rate);
       end
 
 
@@ -280,7 +280,7 @@ function approx_cat_amp(initX, N, stopTime, figNo)
     end
     % Set initial concentration for shadow gates
     for i = 4*N + 1: 6*N
-        r{i}.Reactants(2).InitialAmount = infConc*1e-2 % check. This is good!
+        r{i}.Reactants(2).InitialAmount = infConc  %check
     end
     model
     model.Reactions
@@ -302,7 +302,7 @@ function approx_cat_amp(initX, N, stopTime, figNo)
     plot(t, x, '-','LineWidth', 3.0);
     plot(t, s, ':', LineWidth=3.0)
     ylabel('Concentration (nM)'); xlabel('Time (mins)');
-    set(gca, 'LineWidth', 2.0); %legend('auto. X', 'cat. X', 'approx. X', 'leak. S');    
+    set(gca, 'LineWidth', 2.0); legend('auto. X', 'cat. X', 'approx. X', 'leak. S');    
 %     set(gca, 'LineWidth', 2.0); legend('cat.X', 'leak.S');    
     
 end
