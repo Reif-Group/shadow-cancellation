@@ -13,7 +13,7 @@
 % ideal_consensus(6, 24, 30., 30, 4);
 
 % demonstrates consensus reactions reach majority
-dna_cat_consensus(2.7, 0.3, 3, 3, 5e11, 1);
+dna_cat_consensus(2.7, 0.3, 3, 3, 50000, 1);
 
 function ideal_consensus(initA, initB, initY, stopTime, figNo)
     
@@ -199,8 +199,8 @@ function dna_cat_consensus(initA, initB, initY, N, stopTime, figNo)
     rate = rateConstant*alpha;
 
     % Set infConc and infRate
-    infConc = 1e3*beta;
-    infRate = 1e3*alpha;
+    infConc = 1e4*beta;
+    infRate = 1e4*alpha;
 
     % Set leak rate
     leak_rate = 1e-6*alpha;
@@ -231,14 +231,14 @@ function dna_cat_consensus(initA, initB, initY, N, stopTime, figNo)
     for i = 1:N
         istr = int2str(i);
         inxt = int2str(max(1, rem(i+1, N+1)));
-        r{6*N + 2*i - 1} = addreaction(model, strcat('a', istr, ' -> Ag', istr));
-        r{6*N + 2*i} = addreaction(model, strcat('Ag', istr, ' -> a', istr));
+        r{6*N + 2*i - 1} = addreaction(model, strcat('a', istr, ' + La', istr, ' -> Ag', istr));
+        r{6*N + 2*i} = addreaction(model, strcat('Ag', istr, ' + RLa', istr, ' -> a', istr));
         
-        r{8*N + 2*i - 1} = addreaction(model, strcat('b', istr, ' -> Bg', istr));
-        r{8*N + 2*i} = addreaction(model, strcat('Bg', istr, ' -> b', istr));
+        r{8*N + 2*i - 1} = addreaction(model, strcat('b', istr, ' + Lb', istr, ' -> Bg', istr));
+        r{8*N + 2*i} = addreaction(model, strcat('Bg', istr, ' + RLb', istr, ' -> b', istr));
         
-        r{10*N + 2*i - 1} = addreaction(model, strcat('y', istr, ' -> Yg', istr));
-        r{10*N + 2*i} = addreaction(model, strcat('Yg', istr, ' -> y', istr));
+        r{10*N + 2*i - 1} = addreaction(model, strcat('y', istr, ' + Ly', istr, ' -> Yg', istr));
+        r{10*N + 2*i} = addreaction(model, strcat('Yg', istr, ' + RLy', istr, ' -> y', istr));
     end
     
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -280,7 +280,7 @@ function dna_cat_consensus(initA, initB, initY, N, stopTime, figNo)
         k{i}.ParameterVariableNames = {strcat('c', int2str(i))};
     end
     
-    q1 = 2*N*rate;
+    q1 = 2*N*rate*(1/beta);
     for i = 1:N
         p{2*i-1} = addparameter(k{2*i-1}, strcat('c', int2str(2*i-1)), 'Value', q1);
         p{2*i} = addparameter(k{2*i}, strcat('c', int2str(2*i)), 'Value', infRate);
@@ -318,12 +318,12 @@ function dna_cat_consensus(initA, initB, initY, N, stopTime, figNo)
         r{4*N + 2*i}.Reactants(2).InitialAmount = infConc;
 
         % Linker gates
-%         r{6*N + 2*i-1}.Reactants(2).InitialAmount = infConc;
-%         r{6*N + 2*i}.Reactants(2).InitialAmount = infConc;
-%         r{8*N + 2*i-1}.Reactants(2).InitialAmount = infConc;
-%         r{8*N + 2*i}.Reactants(2).InitialAmount = infConc;
-%         r{10*N + 2*i-1}.Reactants(2).InitialAmount = infConc;
-%         r{10*N + 2*i}.Reactants(2).InitialAmount = infConc;
+        r{6*N + 2*i-1}.Reactants(2).InitialAmount = infConc;
+        r{6*N + 2*i}.Reactants(2).InitialAmount = infConc;
+        r{8*N + 2*i-1}.Reactants(2).InitialAmount = infConc;
+        r{8*N + 2*i}.Reactants(2).InitialAmount = infConc;
+        r{10*N + 2*i-1}.Reactants(2).InitialAmount = infConc;
+        r{10*N + 2*i}.Reactants(2).InitialAmount = infConc;
     end
 
     % Model display
