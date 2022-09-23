@@ -280,6 +280,7 @@ function dna_cat_consensus(initA, initB, initY, N, stopTime, figNo)
         k{i}.ParameterVariableNames = {strcat('c', int2str(i))};
     end
     
+    % Since the 
     q1 = 2*N*rate*(1/beta);
     for i = 1:N
         p{2*i-1} = addparameter(k{2*i-1}, strcat('c', int2str(2*i-1)), 'Value', q1);
