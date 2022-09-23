@@ -191,7 +191,7 @@ function dna_cat_consensus(initA, initB, initY, N, stopTime, figNo)
     relTol = 1e-12;
 
     % Flags for leak and shadow
-    leak = 0;
+    leak = 1;
     shadow = 0;
     
     % Rate
@@ -245,37 +245,37 @@ function dna_cat_consensus(initA, initB, initY, N, stopTime, figNo)
     %%%%%%%%%%%%%%%% Leak Profile %%%%%%%%%%%%%%%%%%%%%%%%
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     
-%     % Leaks in regular reactions
-%     for i = 1:N
-%         istr = int2str(i);
-%         inxt = int2str(max(1, rem(i+1, N+1)));
-%         r{12*N + 2*i-1} = addreaction(model, strcat('Bg', istr, ' -> Iy', istr));
-%         r{12*N + 2*i} = addreaction(model, strcat('Gy', istr, ' -> y', istr, ' + y', inxt));
-%         
-%         r{14*N + 2*i - 1} = addreaction(model, strcat('Yg', istr, ' -> Ib', istr));
-%         r{14*N + 2*i} = addreaction(model, strcat('Gb', istr, ' -> b', istr, ' + b', inxt));
-%         
-%         r{16*N + 2*i - 1} = addreaction(model, strcat('Ag', istr, ' -> Ia', istr));
-%         r{16*N + 2*i} = addreaction(model, strcat('Ga', istr, ' -> a', istr, ' + a', inxt));
-%     end
-% 
-%     % Leaks in linker reactions
-%     for i = 1:N
-%         istr = int2str(i);
-%         inxt = int2str(max(1, rem(i+1, N+1)));
-%         r{6*N + 2*i - 1} = addreaction(model, strcat('a', istr, ' -> Ag', istr));
-%         r{6*N + 2*i} = addreaction(model, strcat('Ag', istr, ' -> a', istr));
-%         
-%         r{8*N + 2*i - 1} = addreaction(model, strcat('b', istr, ' -> Bg', istr));
-%         r{8*N + 2*i} = addreaction(model, strcat('Bg', istr, ' -> b', istr));
-%         
-%         r{10*N + 2*i - 1} = addreaction(model, strcat('y', istr, ' -> Yg', istr));
-%         r{10*N + 2*i} = addreaction(model, strcat('Yg', istr, ' -> y', istr));
-%     end
+    % Leaks in regular reactions
+    for i = 1:N
+        istr = int2str(i);
+        inxt = int2str(max(1, rem(i+1, N+1)));
+        r{12*N + 2*i-1} = addreaction(model, strcat('Bg', istr, ' -> Iy', istr));
+        r{12*N + 2*i} = addreaction(model, strcat('Gy', istr, ' -> y', istr, ' + y', inxt));
+        
+        r{14*N + 2*i - 1} = addreaction(model, strcat('Yg', istr, ' -> Ib', istr));
+        r{14*N + 2*i} = addreaction(model, strcat('Gb', istr, ' -> b', istr, ' + b', inxt));
+        
+        r{16*N + 2*i - 1} = addreaction(model, strcat('Ag', istr, ' -> Ia', istr));
+        r{16*N + 2*i} = addreaction(model, strcat('Ga', istr, ' -> a', istr, ' + a', inxt));
+    end
+
+    % Leaks in linker reactions
+    for i = 1:N
+        istr = int2str(i);
+        inxt = int2str(max(1, rem(i+1, N+1)));
+        r{18*N + 2*i - 1} = addreaction(model, strcat('La', istr, ' -> Ag', istr));
+        r{18*N + 2*i} = addreaction(model, strcat('RLa', istr, ' -> a', istr));
+        
+        r{20*N + 2*i - 1} = addreaction(model, strcat('Lb', istr, ' -> Bg', istr));
+        r{20*N + 2*i} = addreaction(model, strcat('RLb', istr, ' -> b', istr));
+        
+        r{22*N + 2*i - 1} = addreaction(model, strcat('Ly', istr, ' -> Yg', istr));
+        r{22*N + 2*i} = addreaction(model, strcat('RLy', istr, ' -> y', istr));
+    end
 
 
     % Add rate kinetics
-    for i = 1:12*N
+    for i = 1:24*N
         k{i} = addkineticlaw(r{i}, 'MassAction');
         k{i}.ParameterVariableNames = {strcat('c', int2str(i))};
     end
@@ -304,6 +304,25 @@ function dna_cat_consensus(initA, initB, initY, N, stopTime, figNo)
 
         p{10*N + 2*i-1} = addparameter(k{10*N + 2*i-1}, strcat('c', int2str(10*N + 2*i-1)), 'Value', infRate);
         p{10*N + 2*i} = addparameter(k{10*N + 2*i}, strcat('c', int2str(10*N + 2*i)), 'Value', infRate);
+        
+        p{12*N + 2*i-1} = addparameter(k{12*N + 2*i-1}, strcat('c', int2str(12*N + 2*i-1)), 'Value', leak*leak_rate);
+        p{12*N + 2*i} = addparameter(k{12*N + 2*i}, strcat('c', int2str(12*N + 2*i)), 'Value', leak*leak_rate);
+        
+        p{14*N + 2*i-1} = addparameter(k{14*N + 2*i-1}, strcat('c', int2str(14*N + 2*i-1)), 'Value', leak*leak_rate);
+        p{14*N + 2*i} = addparameter(k{14*N + 2*i}, strcat('c', int2str(14*N + 2*i)), 'Value', leak*leak_rate);
+
+        p{16*N + 2*i-1} = addparameter(k{16*N + 2*i-1}, strcat('c', int2str(16*N + 2*i-1)), 'Value', leak*leak_rate);
+        p{16*N + 2*i} = addparameter(k{16*N + 2*i}, strcat('c', int2str(16*N + 2*i)), 'Value', leak*leak_rate);
+
+        p{18*N + 2*i-1} = addparameter(k{18*N + 2*i-1}, strcat('c', int2str(18*N + 2*i-1)), 'Value', leak*leak_rate);
+        p{18*N + 2*i} = addparameter(k{18*N + 2*i}, strcat('c', int2str(18*N + 2*i)), 'Value', leak*leak_rate);
+
+        p{20*N + 2*i-1} = addparameter(k{20*N + 2*i-1}, strcat('c', int2str(20*N + 2*i-1)), 'Value', leak*leak_rate);
+        p{20*N + 2*i} = addparameter(k{20*N + 2*i}, strcat('c', int2str(20*N + 2*i)), 'Value', leak*leak_rate);
+
+        p{22*N + 2*i-1} = addparameter(k{22*N + 2*i-1}, strcat('c', int2str(22*N + 2*i-1)), 'Value', leak*leak_rate);
+        p{22*N + 2*i} = addparameter(k{22*N + 2*i}, strcat('c', int2str(22*N + 2*i)), 'Value', leak*leak_rate);
+
     end
 
     % Add initial amounts
@@ -380,9 +399,9 @@ function dna_cat_consensus(initA, initB, initY, N, stopTime, figNo)
         end
     end
     
-    aplot = (a + ag);
-    bplot = (b + bg);
-    yplot = (y + yg);
+    atotal = (a + ag);
+    btotal = (b + bg);
+    ytotal = (y + yg);
     
     % Set figure
     figure(figNo);
@@ -393,9 +412,9 @@ function dna_cat_consensus(initA, initB, initY, N, stopTime, figNo)
 %     plot(t/3600, ag/1.e-9, 'LineWidth', 2.0, 'Color', 'blue');
 %     plot(t/3600, bg/1.e-9, 'LineWidth', 2.0, 'Color', 'red');
 %     plot(t/3600, yg/1.e-9, ':', 'LineWidth', 2.0, 'Color', 'green');
-    plot(t/3600, aplot/1.e-9, 'LineWidth', 2.0, 'Color', 'blue');
-    plot(t/3600, bplot/1.e-9, 'LineWidth', 2.0, 'Color', 'red');
-    plot(t/3600, yplot/1.e-9, ':', 'LineWidth', 2.0, 'Color', 'green');
+    plot(t/3600, atotal/1.e-9, 'LineWidth', 2.0, 'Color', 'blue');
+    plot(t/3600, btotal/1.e-9, 'LineWidth', 2.0, 'Color', 'red');
+    plot(t/3600, ytotal/1.e-9, ':', 'LineWidth', 2.0, 'Color', 'green');
     ylabel('concentration'); 
     xlabel('time');
 
