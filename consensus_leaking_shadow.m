@@ -13,7 +13,7 @@
 % ideal_consensus(6, 24, 30., 30, 4);
 
 % demonstrates consensus reactions reach majority
-dna_cat_consensus(2.7, 0.3, 1, 3, 20000, 1);
+dna_cat_consensus(2.7, 0.3, 1.0, 3, 10000000, 1);
 
 function ideal_consensus(initA, initB, initY, stopTime, figNo)
     
@@ -201,17 +201,17 @@ function dna_cat_consensus(initA, initB, initY, N, stopTime, figNo)
     rate = rateConstant*alpha;
 
     % Set infConc and infRate
-    infConc = 1e5*base;
-    infRate = 1e5*rate;
+    infConc = 1e5*beta;
+    infRate = 1e5*alpha;
 
     % Set leak rate
-    leak_rate = 1e-6;
+    leak_rate = 1e-6*alpha;
 
     % Define the model
     model = sbiomodel('Ideal Consensus');
     
     % Cells
-    r = cell(1, 24*N);
+    r = cell(1, 39*N);
     k = cell(1, length(r));
     p = cell(1, length(r));
     
@@ -221,56 +221,101 @@ function dna_cat_consensus(initA, initB, initY, N, stopTime, figNo)
         inxt = int2str(max(1, rem(i+1, N+1)));
         r{2*i-1} = addreaction(model, strcat('a', istr, ' + Bg', istr, ' -> Iy', istr));
         r{2*i} = addreaction(model, strcat('Iy', istr, ' + Gy', istr, ' -> y', istr, ' + y', inxt));
-        r{2*N + 2*i-1} = addreaction(model, strcat('b', istr, ' + Yg', istr, ' -> Ib',istr));
+        
+        r{2*N + 2*i - 1} = addreaction(model, strcat('b', istr, ' + Yg', istr, ' -> Ib', istr));
         r{2*N + 2*i} = addreaction(model, strcat('Ib', istr, ' + Gb', istr, ' -> b', istr, ' + b', inxt));
-        r{4*N + 2*i-1} = addreaction(model, strcat('y', istr, ' + Ag', istr, ' -> Ia', istr));
+        
+        r{4*N + 2*i - 1} = addreaction(model, strcat('y', istr, ' + Ag', istr, ' -> Ia', istr));
         r{4*N + 2*i} = addreaction(model, strcat('Ia', istr, ' + Ga', istr, ' -> a', istr, ' + a', inxt));
-        % Linker reactions
-        r{6*N + 2*i-1} = addreaction(model, strcat('a', istr, ' -> Ag', istr));
-        r{6*N + 2*i} = addreaction(model, strcat('Ag', istr, ' -> a', istr));
-        r{8*N + 2*i-1} = addreaction(model, strcat('b', istr, ' -> Bg', istr));
-        r{8*N + 2*i} = addreaction(model, strcat('Bg', istr, ' -> b', istr));
-        r{10*N + 2*i-1} = addreaction(model, strcat('y', istr, ' -> Yg', istr));
-        r{10*N + 2*i} = addreaction(model, strcat('Yg', istr, ' -> y', istr));
-        % Shadow circuit
-        r{12*N + 2*i-1} = addreaction(model, strcat('sa', istr, ' + sBg', istr, ' -> sIy', istr));
-        r{12*N + 2*i} = addreaction(model, strcat('sIy', istr, ' + sGy', istr, ' -> sy', istr, ' + sy', inxt));
-        r{14*N + 2*i-1} = addreaction(model, strcat('sb', istr, ' + sYg', istr, ' -> sIb',istr));
-        r{14*N + 2*i} = addreaction(model, strcat('sIb', istr, ' + sGb', istr, ' -> sb', istr, ' + sb', inxt));
-        r{16*N + 2*i-1} = addreaction(model, strcat('sy', istr, ' + sAg', istr, ' -> sIa', istr));
-        r{16*N + 2*i} = addreaction(model, strcat('sIa', istr, ' + sGa', istr, ' -> sa', istr, ' + sa', inxt));
-        % Shadow Linker
-        r{18*N + 2*i-1} = addreaction(model, strcat('sa', istr, ' -> sAg', istr));
-        r{18*N + 2*i} = addreaction(model, strcat('sAg', istr, ' -> sa', istr));
-        r{20*N + 2*i-1} = addreaction(model, strcat('sb', istr, ' -> sBg', istr));
-        r{20*N + 2*i} = addreaction(model, strcat('sBg', istr, ' -> sb', istr));
-        r{22*N + 2*i-1} = addreaction(model, strcat('sy', istr, ' -> sYg', istr));
-        r{22*N + 2*i} = addreaction(model, strcat('sYg', istr, ' -> sy', istr));
     end
-
-    % Leak and Shadow
+    
+    % Linker reactions
     for i = 1:N
         istr = int2str(i);
         inxt = int2str(max(1, rem(i+1, N+1)));
-        % Gy1 -> y1 + y2
-        r{24*N + i} = addreaction(model, strcat('Gy', istr, ' -> y', istr, ' + y', inxt));
-        r{25*N + i} = addreaction(model, strcat('sGy', istr, ' -> sy', istr, ' + sy', inxt));
-        r{26*N + i} = addreaction(model, strcat('y', istr, ' + sy', istr, ' -> w'));
-        % Ga1 -> a1 + a2
-        r{27*N + i} = addreaction(model, strcat('Ga', istr, ' -> a', istr, ' + a', inxt));
-        r{28*N + i} = addreaction(model, strcat('sGa', istr, ' -> sa', istr, ' + sa', inxt));
-        r{29*N + i} = addreaction(model, strcat('a', istr, ' + sa', istr, ' -> w'));
-        % Gb1 -> b1 + b2
-        r{30*N + i} = addreaction(model, strcat('Gb', istr, ' -> b', istr, ' + b', inxt));
-        r{31*N + i} = addreaction(model, strcat('sGb', istr, ' -> sb', istr, ' + sb', inxt));
-        r{32*N + i} = addreaction(model, strcat('b', istr, ' + sb', istr, ' -> w'));
-
+        r{6*N + 2*i - 1} = addreaction(model, strcat('a', istr, ' + La', istr, ' -> Ag', istr));
+        r{6*N + 2*i} = addreaction(model, strcat('Ag', istr, ' + RLa', istr, ' -> a', istr));
+        
+        r{8*N + 2*i - 1} = addreaction(model, strcat('b', istr, ' + Lb', istr, ' -> Bg', istr));
+        r{8*N + 2*i} = addreaction(model, strcat('Bg', istr, ' + RLb', istr, ' -> b', istr));
+        
+        r{10*N + 2*i - 1} = addreaction(model, strcat('y', istr, ' + Ly', istr, ' -> Yg', istr));
+        r{10*N + 2*i} = addreaction(model, strcat('Yg', istr, ' + RLy', istr, ' -> y', istr));
     end
     
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    %%%%%%%%%%%%%%%% Shadow Circuit %%%%%%%%%%%%%%%%%%%%%%
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+    % Shadow regular reactions
+    for i = 1:N
+        istr = int2str(i);
+        inxt = int2str(max(1, rem(i+1, N+1)));
+        r{12*N + 2*i-1} = addreaction(model, strcat('sa', istr, ' + sBg', istr, ' -> sIy', istr));
+        r{12*N + 2*i} = addreaction(model, strcat('sIy', istr, ' + sGy', istr, ' -> sy', istr, ' + sy', inxt));
+        
+        r{14*N + 2*i - 1} = addreaction(model, strcat('sb', istr, ' + sYg', istr, ' -> sIb', istr));
+        r{14*N + 2*i} = addreaction(model, strcat('sIb', istr, ' + sGb', istr, ' -> sb', istr, ' + sb', inxt));
+        
+        r{16*N + 2*i - 1} = addreaction(model, strcat('sy', istr, ' + sAg', istr, ' -> sIa', istr));
+        r{16*N + 2*i} = addreaction(model, strcat('sIa', istr, ' + sGa', istr, ' -> sa', istr, ' + sa', inxt));
+    end
+    
+    % Shadow linker reactions
+    for i = 1:N
+        istr = int2str(i);
+        inxt = int2str(max(1, rem(i+1, N+1)));
+        r{18*N + 2*i - 1} = addreaction(model, strcat('sa', istr, ' + sLa', istr, ' -> sAg', istr));
+        r{18*N + 2*i} = addreaction(model, strcat('sAg', istr, ' + sRLa', istr, ' -> sa', istr));
+        
+        r{20*N + 2*i - 1} = addreaction(model, strcat('sb', istr, ' + sLb', istr, ' -> sBg', istr));
+        r{20*N + 2*i} = addreaction(model, strcat('sBg', istr, ' + sRLb', istr, ' -> sb', istr));
+        
+        r{22*N + 2*i - 1} = addreaction(model, strcat('sy', istr, ' + sLy', istr, ' -> sYg', istr));
+        r{22*N + 2*i} = addreaction(model, strcat('sYg', istr, ' + sRLy', istr, ' -> sy', istr));
+    end
     
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     %%%%%%%%%%%%%%%% Leak Profile %%%%%%%%%%%%%%%%%%%%%%%%
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    
+   
+    for i = 1:N
+        istr = int2str(i);
+        inxt = int2str(max(1, rem(i+1, N+1)));
+         % Regular gate leaks
+        r{24*N + i} = addreaction(model, strcat('Gy', istr, ' -> y', istr, ' + y', inxt));
+        r{25*N + i} = addreaction(model, strcat('Gb', istr, ' -> b', istr, ' + b', inxt));
+        r{26*N + i} = addreaction(model, strcat('Ga', istr, ' -> a', istr, ' + a', inxt));
+
+        % Shadow gate leaks
+        r{27*N + i} = addreaction(model, strcat('sGy', istr, ' -> sy', istr, ' + sy', inxt));
+        r{28*N + i} = addreaction(model, strcat('sGb', istr, ' -> sb', istr, ' + sb', inxt));
+        r{29*N + i} = addreaction(model, strcat('sGa', istr, ' -> sa', istr, ' + sa', inxt));
+
+    end
+    
+    %%%%%%%%% Annihilation Reactions %%%%%%%%%%%%%%%%%%%%%
+    for i = 1:N
+        istr = int2str(i);
+        inxt = int2str(max(1, rem(i+1, N+1)));
+        r{30*N + i} = addreaction(model, strcat('a', istr, ' + sa', istr, ' -> w'));
+        r{31*N + i} = addreaction(model, strcat('b', istr, ' + sb', istr, ' -> w'));
+        r{32*N + i} = addreaction(model, strcat('y', istr, ' + sy', istr, ' -> w'));
+        r{33*N + i} = addreaction(model, strcat('Ag', istr, ' + sAg', istr, ' -> w'));
+        r{34*N + i} = addreaction(model, strcat('Bg', istr, ' + sBg', istr, ' -> w'));
+        r{35*N + i} = addreaction(model, strcat('Yg', istr, ' + sYg', istr, ' -> w'));
+        r{36*N + i} = addreaction(model, strcat('Iy', istr, ' + sIy', istr, ' -> w'));
+        r{37*N + i} = addreaction(model, strcat('Ib', istr, ' + sIb', istr, ' -> w'));
+        r{38*N + i} = addreaction(model, strcat('Ia', istr, ' + sIa', istr, ' -> w'));
+    end
+
+    
+
+   
+
+    
+
     % Add rate kinetics
     for i = 1:length(r)
         k{i} = addkineticlaw(r{i}, 'MassAction');
@@ -282,33 +327,36 @@ function dna_cat_consensus(initA, initB, initY, N, stopTime, figNo)
     %%%%%%%%%%%%%%%% Rate constants %%%%%%%%%%%%%%%%%%%%%%
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     
-    gamma = 2;
-    bimol_scaled_rate = N*rate; % When xi = x/N, yi = y/N
-    bimol = gamma*bimol_scaled_rate; % Accounting for the presence of y strand in both gate form and strand form
-    
+    q1 = 2*(1/beta)*N*rate/infConc;
     for i = 1:N
         % Regular reactions
-        p{2*i-1} = addparameter(k{2*i-1}, strcat('c', int2str(2*i-1)), 'Value', bimol);
+        p{2*i-1} = addparameter(k{2*i-1}, strcat('c', int2str(2*i-1)), 'Value', q1);
         p{2*i} = addparameter(k{2*i}, strcat('c', int2str(2*i)), 'Value', infRate);
-        p{2*N + 2*i-1} = addparameter(k{2*N + 2*i-1}, strcat('c', int2str(2*N + 2*i-1)), 'Value', bimol);
+
+        p{2*N + 2*i-1} = addparameter(k{2*N + 2*i-1}, strcat('c', int2str(2*N + 2*i-1)), 'Value', q1);
         p{2*N + 2*i} = addparameter(k{2*N + 2*i}, strcat('c', int2str(2*N + 2*i)), 'Value', infRate);
-        p{4*N + 2*i-1} = addparameter(k{4*N + 2*i-1}, strcat('c', int2str(4*N + 2*i-1)), 'Value', bimol);
+
+        p{4*N + 2*i-1} = addparameter(k{4*N + 2*i-1}, strcat('c', int2str(4*N + 2*i-1)), 'Value', q1);
         p{4*N + 2*i} = addparameter(k{4*N + 2*i}, strcat('c', int2str(4*N + 2*i)), 'Value', infRate);
-        % Linker reactions
+        
+        % Regular Linker reactions
         p{6*N + 2*i-1} = addparameter(k{6*N + 2*i-1}, strcat('c', int2str(6*N + 2*i-1)), 'Value', infRate);
         p{6*N + 2*i} = addparameter(k{6*N + 2*i}, strcat('c', int2str(6*N + 2*i)), 'Value', infRate);
         p{8*N + 2*i-1} = addparameter(k{8*N + 2*i-1}, strcat('c', int2str(8*N + 2*i-1)), 'Value', infRate);
         p{8*N + 2*i} = addparameter(k{8*N + 2*i}, strcat('c', int2str(8*N + 2*i)), 'Value', infRate);
         p{10*N + 2*i-1} = addparameter(k{10*N + 2*i-1}, strcat('c', int2str(10*N + 2*i-1)), 'Value', infRate);
         p{10*N + 2*i} = addparameter(k{10*N + 2*i}, strcat('c', int2str(10*N + 2*i)), 'Value', infRate);
-
-        % Shadow Regular reactions
-        p{12*N + 2*i-1} = addparameter(k{12*N + 2*i-1}, strcat('c', int2str(12*N + 2*i-1)), 'Value', shadow*bimol);
+    
+        % Shadow reactions
+        p{12*N + 2*i-1} = addparameter(k{12*N + 2*i-1}, strcat('c', int2str(12*N + 2*i-1)), 'Value', shadow*q1);
         p{12*N + 2*i} = addparameter(k{12*N + 2*i}, strcat('c', int2str(12*N + 2*i)), 'Value', shadow*infRate);
-        p{14*N + 2*i-1} = addparameter(k{14*N + 2*i-1}, strcat('c', int2str(14*N + 2*i-1)), 'Value', shadow*bimol);
+
+        p{14*N + 2*i-1} = addparameter(k{14*N + 2*i-1}, strcat('c', int2str(14*N + 2*i-1)), 'Value', shadow*q1);
         p{14*N + 2*i} = addparameter(k{14*N + 2*i}, strcat('c', int2str(14*N + 2*i)), 'Value', shadow*infRate);
-        p{16*N + 2*i-1} = addparameter(k{16*N + 2*i-1}, strcat('c', int2str(16*N + 2*i-1)), 'Value', shadow*bimol);
+
+        p{16*N + 2*i-1} = addparameter(k{16*N + 2*i-1}, strcat('c', int2str(16*N + 2*i-1)), 'Value', shadow*q1);
         p{16*N + 2*i} = addparameter(k{16*N + 2*i}, strcat('c', int2str(16*N + 2*i)), 'Value', shadow*infRate);
+        
         % Shadow Linker reactions
         p{18*N + 2*i-1} = addparameter(k{18*N + 2*i-1}, strcat('c', int2str(18*N + 2*i-1)), 'Value', shadow*infRate);
         p{18*N + 2*i} = addparameter(k{18*N + 2*i}, strcat('c', int2str(18*N + 2*i)), 'Value', shadow*infRate);
@@ -317,42 +365,65 @@ function dna_cat_consensus(initA, initB, initY, N, stopTime, figNo)
         p{22*N + 2*i-1} = addparameter(k{22*N + 2*i-1}, strcat('c', int2str(22*N + 2*i-1)), 'Value', shadow*infRate);
         p{22*N + 2*i} = addparameter(k{22*N + 2*i}, strcat('c', int2str(22*N + 2*i)), 'Value', shadow*infRate);
 
-        % Leaks, shadow and Annihilation
-        % Gy1 -> y1 + y2
+        % Regular gate leaks
         p{24*N + i} = addparameter(k{24*N + i}, strcat('c', int2str(24*N + i)), 'Value', leak*leak_rate);
-        p{25*N + i} = addparameter(k{25*N + i}, strcat('c', int2str(25*N + i)), 'Value', leak*shadow*leak_rate);
-        p{26*N + i} = addparameter(k{26*N + i}, strcat('c', int2str(26*N + i)), 'Value', leak*shadow*infRate*1e3);
-        % Ga1 -> a1 + a2
-        p{27*N + i} = addparameter(k{27*N + i}, strcat('c', int2str(27*N + i)), 'Value', leak*leak_rate);
-        p{28*N + i} = addparameter(k{28*N + i}, strcat('c', int2str(28*N + i)), 'Value', leak*shadow*leak_rate);
-        p{29*N + i} = addparameter(k{29*N + i}, strcat('c', int2str(29*N + i)), 'Value', leak*shadow*infRate*1e3);
-        % Gb1 -> b1 + b2
-        p{30*N + i} = addparameter(k{30*N + i}, strcat('c', int2str(30*N + i)), 'Value', leak*leak_rate);
-        p{31*N + i} = addparameter(k{31*N + i}, strcat('c', int2str(31*N + i)), 'Value', leak*shadow*leak_rate);
-        p{32*N + i} = addparameter(k{32*N + i}, strcat('c', int2str(32*N + i)), 'Value', leak*shadow*infRate*1e3);
+        p{25*N + i} = addparameter(k{25*N + i}, strcat('c', int2str(25*N + i)), 'Value', leak*leak_rate);
+        p{26*N + i} = addparameter(k{26*N + i}, strcat('c', int2str(26*N + i)), 'Value', leak*leak_rate);
         
-        
+        % Shadow gate leaks
+        p{27*N + i} = addparameter(k{27*N + i}, strcat('c', int2str(27*N + i)), 'Value', shadow*leak*leak_rate);
+        p{28*N + i} = addparameter(k{28*N + i}, strcat('c', int2str(28*N + i)), 'Value', shadow*leak*leak_rate);
+        p{29*N + i} = addparameter(k{29*N + i}, strcat('c', int2str(29*N + i)), 'Value', shadow*leak*leak_rate);
+
+        % Annihilation reactions
+        p{30*N + i} = addparameter(k{30*N + i}, strcat('c', int2str(30*N + i)), 'Value', annihilation*shadow*leak*infRate);
+        p{31*N + i} = addparameter(k{31*N + i}, strcat('c', int2str(31*N + i)), 'Value', annihilation*shadow*leak*infRate);
+        p{32*N + i} = addparameter(k{32*N + i}, strcat('c', int2str(32*N + i)), 'Value', annihilation*shadow*leak*infRate);
+        p{33*N + i} = addparameter(k{33*N + i}, strcat('c', int2str(33*N + i)), 'Value', annihilation*shadow*leak*infRate);
+        p{34*N + i} = addparameter(k{34*N + i}, strcat('c', int2str(34*N + i)), 'Value', annihilation*shadow*leak*infRate);
+        p{35*N + i} = addparameter(k{35*N + i}, strcat('c', int2str(35*N + i)), 'Value', annihilation*shadow*leak*infRate);
+        p{36*N + i} = addparameter(k{36*N + i}, strcat('c', int2str(36*N + i)), 'Value', annihilation*shadow*leak*infRate);
+        p{37*N + i} = addparameter(k{37*N + i}, strcat('c', int2str(37*N + i)), 'Value', annihilation*shadow*leak*infRate);
+        p{38*N + i} = addparameter(k{38*N + i}, strcat('c', int2str(38*N + i)), 'Value', annihilation*shadow*leak*infRate);
     end
+    
+
 
     % Add initial amounts
     for i = 1:N
-        % Substrates
-        r{2*i-1}.Reactants(1).InitialAmount = initA/N;
-        r{2*N + 2*i-1}.Reactants(1).InitialAmount = initB/N;
-        r{4*N + 2*i-1}.Reactants(1).InitialAmount = initY/N;
-
+        r{2*i-1}.Reactants(1).InitialAmount = beta*initA/N; 
+        r{2*N + 2*i-1}.Reactants(1).InitialAmount = beta*initB/N;
+        r{4*N + 2*i-1}.Reactants(1).InitialAmount = beta*initY/N;
+        
         % Regular gates
         r{2*i}.Reactants(2).InitialAmount = infConc;
         r{2*N + 2*i}.Reactants(2).InitialAmount = infConc;
         r{4*N + 2*i}.Reactants(2).InitialAmount = infConc;
+
+        % Regular Linker gates
+        r{6*N + 2*i - 1}.Reactants(2).InitialAmount = infConc;
+        r{6*N + 2*i}.Reactants(2).InitialAmount = infConc;
+        r{8*N + 2*i - 1}.Reactants(2).InitialAmount = infConc;
+        r{8*N + 2*i}.Reactants(2).InitialAmount = infConc;
+        r{10*N + 2*i - 1}.Reactants(2).InitialAmount = infConc;
+        r{10*N + 2*i}.Reactants(2).InitialAmount = infConc;
         
         % Shadow gates
         r{12*N + 2*i}.Reactants(2).InitialAmount = infConc;
         r{14*N + 2*i}.Reactants(2).InitialAmount = infConc;
         r{16*N + 2*i}.Reactants(2).InitialAmount = infConc;
-       
-       
+        
+        % Shadow Linker gates
+        r{18*N + 2*i - 1}.Reactants(2).InitialAmount = infConc;
+        r{18*N + 2*i}.Reactants(2).InitialAmount = infConc;
+        r{20*N + 2*i - 1}.Reactants(2).InitialAmount = infConc;
+        r{20*N + 2*i}.Reactants(2).InitialAmount = infConc;
+        r{22*N + 2*i - 1}.Reactants(2).InitialAmount = infConc;
+        r{22*N + 2*i}.Reactants(2).InitialAmount = infConc;
+        
+
     end
+    
 
     % Model display
     model
@@ -366,13 +437,14 @@ function dna_cat_consensus(initA, initB, initY, N, stopTime, figNo)
     cs.SolverType = 'ode15s';
     cs.StopTime = stopTime;
     [t, X, names] = sbiosimulate(model);
-    
 
     function [val] = get_plot_values(X, names, s, n)
-        val = zeros(length(X));
+        val = zeros(length(t), 1);
+        
         for iter = 1:length(names)
             if strncmp(names{iter}, s, n)
                 disp(strcat(names{iter}, ' should be ', s));
+                
                 val = val + X(:, iter);
             end
         end
@@ -406,7 +478,7 @@ function dna_cat_consensus(initA, initB, initY, N, stopTime, figNo)
     figure(figNo);
     box on; hold on;
 
-    plot(t/3600, atotal/1.e-9, 'LineWidth', 2.0);
+    plot(t/3600, atotal/1.e-9, 'LineWidth', 2.0, 'Color', 'blue');
     plot(t/3600, btotal/1.e-9, 'LineWidth', 2.0, 'Color', 'red');
     plot(t/3600, ytotal/1.e-9, ':', 'LineWidth', 2.0, 'Color', 'green');
 %     plot(t/3600, satotal/1.e-9, 'LineWidth', 2.0, 'Color', 'blue');

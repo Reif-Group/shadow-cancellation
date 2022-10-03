@@ -13,7 +13,7 @@
 % ideal_consensus(6, 24, 30., 30, 4);
 
 % demonstrates consensus reactions reach majority
-dna_cat_consensus(2.7, 0.3, 3, 3, 50000, 1);
+dna_cat_consensus(0.0, 0.0, 0.0, 3, 72000, 1);
 
 function ideal_consensus(initA, initB, initY, stopTime, figNo)
     
@@ -175,6 +175,7 @@ function ideal_cat_consensus(initA, initB, initY, N, stopTime, figNo)
 
 end
 
+
 function dna_cat_consensus(initA, initB, initY, N, stopTime, figNo)
  
     % Base concentration
@@ -191,16 +192,17 @@ function dna_cat_consensus(initA, initB, initY, N, stopTime, figNo)
     relTol = 1e-12;
 
     % Flags for leak and shadow
-    leak = 0;
+    leak = 1;
     shadow = 0;
+    annihilation = 1;
     
     % Rate
     rateConstant = 1.0;
     rate = rateConstant*alpha;
 
     % Set infConc and infRate
-    infConc = 1e4*beta;
-    infRate = 1e4*alpha;
+    infConc = 1e5*beta;
+    infRate = 1e5*alpha;
 
     % Set leak rate
     leak_rate = 1e-6*alpha;
@@ -209,7 +211,7 @@ function dna_cat_consensus(initA, initB, initY, N, stopTime, figNo)
     model = sbiomodel('Ideal Consensus');
     
     % Cells
-    r = cell(1, 12*N);
+    r = cell(1, 27*N);
     k = cell(1, length(r));
     p = cell(1, length(r));
     
@@ -242,47 +244,84 @@ function dna_cat_consensus(initA, initB, initY, N, stopTime, figNo)
     end
     
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    %%%%%%%%%%%%%%%% Shadow Circuit %%%%%%%%%%%%%%%%%%%%%%
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+    % Shadow regular reactions
+    for i = 1:N
+        istr = int2str(i);
+        inxt = int2str(max(1, rem(i+1, N+1)));
+        r{12*N + 2*i-1} = addreaction(model, strcat('sa', istr, ' + sBg', istr, ' -> sIy', istr));
+        r{12*N + 2*i} = addreaction(model, strcat('sIy', istr, ' + sGy', istr, ' -> sy', istr, ' + sy', inxt));
+        
+        r{14*N + 2*i - 1} = addreaction(model, strcat('sb', istr, ' + sYg', istr, ' -> sIb', istr));
+        r{14*N + 2*i} = addreaction(model, strcat('sIb', istr, ' + sGb', istr, ' -> sb', istr, ' + sb', inxt));
+        
+        r{16*N + 2*i - 1} = addreaction(model, strcat('sy', istr, ' + sAg', istr, ' -> sIa', istr));
+        r{16*N + 2*i} = addreaction(model, strcat('sIa', istr, ' + sGa', istr, ' -> sa', istr, ' + sa', inxt));
+    end
+    
+    % Shadow linker reactions
+    for i = 1:N
+        istr = int2str(i);
+        inxt = int2str(max(1, rem(i+1, N+1)));
+        r{18*N + 2*i - 1} = addreaction(model, strcat('sa', istr, ' + sLa', istr, ' -> sAg', istr));
+        r{18*N + 2*i} = addreaction(model, strcat('sAg', istr, ' + sRLa', istr, ' -> sa', istr));
+        
+        r{20*N + 2*i - 1} = addreaction(model, strcat('sb', istr, ' + sLb', istr, ' -> sBg', istr));
+        r{20*N + 2*i} = addreaction(model, strcat('sBg', istr, ' + sRLb', istr, ' -> sb', istr));
+        
+        r{22*N + 2*i - 1} = addreaction(model, strcat('sy', istr, ' + sLy', istr, ' -> sYg', istr));
+        r{22*N + 2*i} = addreaction(model, strcat('sYg', istr, ' + sRLy', istr, ' -> sy', istr));
+    end
+    
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     %%%%%%%%%%%%%%%% Leak Profile %%%%%%%%%%%%%%%%%%%%%%%%
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     
-%     % Leaks in regular reactions
-%     for i = 1:N
-%         istr = int2str(i);
-%         inxt = int2str(max(1, rem(i+1, N+1)));
-%         r{12*N + 2*i-1} = addreaction(model, strcat('Bg', istr, ' -> Iy', istr));
-%         r{12*N + 2*i} = addreaction(model, strcat('Gy', istr, ' -> y', istr, ' + y', inxt));
-%         
-%         r{14*N + 2*i - 1} = addreaction(model, strcat('Yg', istr, ' -> Ib', istr));
-%         r{14*N + 2*i} = addreaction(model, strcat('Gb', istr, ' -> b', istr, ' + b', inxt));
-%         
-%         r{16*N + 2*i - 1} = addreaction(model, strcat('Ag', istr, ' -> Ia', istr));
-%         r{16*N + 2*i} = addreaction(model, strcat('Ga', istr, ' -> a', istr, ' + a', inxt));
-%     end
-% 
-%     % Leaks in linker reactions
-%     for i = 1:N
-%         istr = int2str(i);
-%         inxt = int2str(max(1, rem(i+1, N+1)));
-%         r{6*N + 2*i - 1} = addreaction(model, strcat('a', istr, ' -> Ag', istr));
-%         r{6*N + 2*i} = addreaction(model, strcat('Ag', istr, ' -> a', istr));
-%         
-%         r{8*N + 2*i - 1} = addreaction(model, strcat('b', istr, ' -> Bg', istr));
-%         r{8*N + 2*i} = addreaction(model, strcat('Bg', istr, ' -> b', istr));
-%         
-%         r{10*N + 2*i - 1} = addreaction(model, strcat('y', istr, ' -> Yg', istr));
-%         r{10*N + 2*i} = addreaction(model, strcat('Yg', istr, ' -> y', istr));
-%     end
+   
+    for i = 1:N
+        istr = int2str(i);
+        inxt = int2str(max(1, rem(i+1, N+1)));
+         % Regular gate leaks
+        r{24*N + i} = addreaction(model, strcat('Gy', istr, ' -> y', istr, ' + y', inxt));
+        r{25*N + i} = addreaction(model, strcat('Gb', istr, ' -> b', istr, ' + b', inxt));
+        r{26*N + i} = addreaction(model, strcat('Ga', istr, ' -> a', istr, ' + a', inxt));
 
+        % Shadow gate leaks
+        r{27*N + i} = addreaction(model, strcat('sGy', istr, ' -> sy', istr, ' + sy', inxt));
+        r{28*N + i} = addreaction(model, strcat('sGb', istr, ' -> sb', istr, ' + sb', inxt));
+        r{29*N + i} = addreaction(model, strcat('sGa', istr, ' -> sa', istr, ' + sa', inxt));
+
+    end
+    
+    %%%%%%%%% Annihilation Reactions %%%%%%%%%%%%%%%%%%%%%
+    for i = 1:N
+        istr = int2str(i);
+        inxt = int2str(max(1, rem(i+1, N+1)));
+        r{30*N + i} = addreaction(model, strcat('a', istr, ' + sa', istr, ' -> w'));
+    end
+
+    
+
+   
+
+    
 
     % Add rate kinetics
-    for i = 1:12*N
+    for i = 1:length(r)
         k{i} = addkineticlaw(r{i}, 'MassAction');
         k{i}.ParameterVariableNames = {strcat('c', int2str(i))};
     end
+
+
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    %%%%%%%%%%%%%%%% Rate constants %%%%%%%%%%%%%%%%%%%%%%
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     
-    % Since the 
     q1 = 2*N*rate*(1/beta);
     for i = 1:N
+        % Regular reactions
         p{2*i-1} = addparameter(k{2*i-1}, strcat('c', int2str(2*i-1)), 'Value', q1);
         p{2*i} = addparameter(k{2*i}, strcat('c', int2str(2*i)), 'Value', infRate);
 
@@ -292,40 +331,77 @@ function dna_cat_consensus(initA, initB, initY, N, stopTime, figNo)
         p{4*N + 2*i-1} = addparameter(k{4*N + 2*i-1}, strcat('c', int2str(4*N + 2*i-1)), 'Value', q1);
         p{4*N + 2*i} = addparameter(k{4*N + 2*i}, strcat('c', int2str(4*N + 2*i)), 'Value', infRate);
         
-        % Rate constants of the linker reactions. Since the gates have
-        % infinite concentration, I think setting their rate constant to
-        % regular rates is fine.  Note: These rate parameters shouldn't
-        % matter.
+        % Regular Linker reactions
         p{6*N + 2*i-1} = addparameter(k{6*N + 2*i-1}, strcat('c', int2str(6*N + 2*i-1)), 'Value', infRate);
         p{6*N + 2*i} = addparameter(k{6*N + 2*i}, strcat('c', int2str(6*N + 2*i)), 'Value', infRate);
-
         p{8*N + 2*i-1} = addparameter(k{8*N + 2*i-1}, strcat('c', int2str(8*N + 2*i-1)), 'Value', infRate);
         p{8*N + 2*i} = addparameter(k{8*N + 2*i}, strcat('c', int2str(8*N + 2*i)), 'Value', infRate);
-
         p{10*N + 2*i-1} = addparameter(k{10*N + 2*i-1}, strcat('c', int2str(10*N + 2*i-1)), 'Value', infRate);
         p{10*N + 2*i} = addparameter(k{10*N + 2*i}, strcat('c', int2str(10*N + 2*i)), 'Value', infRate);
+    
+        % Shadow reactions
+        p{12*N + 2*i-1} = addparameter(k{12*N + 2*i-1}, strcat('c', int2str(12*N + 2*i-1)), 'Value', shadow*q1);
+        p{12*N + 2*i} = addparameter(k{12*N + 2*i}, strcat('c', int2str(12*N + 2*i)), 'Value', shadow*infRate);
+
+        p{14*N + 2*i-1} = addparameter(k{14*N + 2*i-1}, strcat('c', int2str(14*N + 2*i-1)), 'Value', shadow*q1);
+        p{14*N + 2*i} = addparameter(k{14*N + 2*i}, strcat('c', int2str(14*N + 2*i)), 'Value', shadow*infRate);
+
+        p{16*N + 2*i-1} = addparameter(k{16*N + 2*i-1}, strcat('c', int2str(16*N + 2*i-1)), 'Value', shadow*q1);
+        p{16*N + 2*i} = addparameter(k{16*N + 2*i}, strcat('c', int2str(16*N + 2*i)), 'Value', shadow*infRate);
+        
+        % Shadow Linker reactions
+        p{18*N + 2*i-1} = addparameter(k{18*N + 2*i-1}, strcat('c', int2str(18*N + 2*i-1)), 'Value', shadow*infRate);
+        p{18*N + 2*i} = addparameter(k{18*N + 2*i}, strcat('c', int2str(18*N + 2*i)), 'Value', shadow*infRate);
+        p{20*N + 2*i-1} = addparameter(k{20*N + 2*i-1}, strcat('c', int2str(20*N + 2*i-1)), 'Value', shadow*infRate);
+        p{20*N + 2*i} = addparameter(k{20*N + 2*i}, strcat('c', int2str(20*N + 2*i)), 'Value', shadow*infRate);
+        p{22*N + 2*i-1} = addparameter(k{22*N + 2*i-1}, strcat('c', int2str(22*N + 2*i-1)), 'Value', shadow*infRate);
+        p{22*N + 2*i} = addparameter(k{22*N + 2*i}, strcat('c', int2str(22*N + 2*i)), 'Value', shadow*infRate);
+
+        % Regular gate leaks
+        p{24*N + i} = addparameter(k{24*N + i}, strcat('c', int2str(24*N + i)), 'Value', leak*leak_rate);
+        p{25*N + i} = addparameter(k{25*N + i}, strcat('c', int2str(25*N + i)), 'Value', leak*leak_rate);
+        p{26*N + i} = addparameter(k{26*N + i}, strcat('c', int2str(26*N + i)), 'Value', leak*leak_rate);
+
+    
     end
+    
+
 
     % Add initial amounts
     for i = 1:N
-        % Substrates
-        r{2*i-1}.Reactants(1).InitialAmount = beta*initA/N;
+        r{2*i-1}.Reactants(1).InitialAmount = beta*initA/N; 
         r{2*N + 2*i-1}.Reactants(1).InitialAmount = beta*initB/N;
         r{4*N + 2*i-1}.Reactants(1).InitialAmount = beta*initY/N;
-
+        
         % Regular gates
         r{2*i}.Reactants(2).InitialAmount = infConc;
         r{2*N + 2*i}.Reactants(2).InitialAmount = infConc;
         r{4*N + 2*i}.Reactants(2).InitialAmount = infConc;
 
-        % Linker gates
-        r{6*N + 2*i-1}.Reactants(2).InitialAmount = infConc;
+        % Regular Linker gates
+        r{6*N + 2*i - 1}.Reactants(2).InitialAmount = infConc;
         r{6*N + 2*i}.Reactants(2).InitialAmount = infConc;
-        r{8*N + 2*i-1}.Reactants(2).InitialAmount = infConc;
+        r{8*N + 2*i - 1}.Reactants(2).InitialAmount = infConc;
         r{8*N + 2*i}.Reactants(2).InitialAmount = infConc;
-        r{10*N + 2*i-1}.Reactants(2).InitialAmount = infConc;
+        r{10*N + 2*i - 1}.Reactants(2).InitialAmount = infConc;
         r{10*N + 2*i}.Reactants(2).InitialAmount = infConc;
+        
+        % Shadow gates
+        r{12*N + 2*i}.Reactants(2).InitialAmount = infConc;
+        r{14*N + 2*i}.Reactants(2).InitialAmount = infConc;
+        r{16*N + 2*i}.Reactants(2).InitialAmount = infConc;
+        
+        % Shadow Linker gates
+        r{18*N + 2*i - 1}.Reactants(2).InitialAmount = infConc;
+        r{18*N + 2*i}.Reactants(2).InitialAmount = infConc;
+        r{20*N + 2*i - 1}.Reactants(2).InitialAmount = infConc;
+        r{20*N + 2*i}.Reactants(2).InitialAmount = infConc;
+        r{22*N + 2*i - 1}.Reactants(2).InitialAmount = infConc;
+        r{22*N + 2*i}.Reactants(2).InitialAmount = infConc;
+        
+
     end
+    
 
     % Model display
     model
@@ -339,63 +415,61 @@ function dna_cat_consensus(initA, initB, initY, N, stopTime, figNo)
     cs.SolverType = 'ode15s';
     cs.StopTime = stopTime;
     [t, X, names] = sbiosimulate(model);
-    
-    a = zeros(length(t));
-    b = zeros(length(t));
-    y = zeros(length(t));
-    ag = zeros(length(t));
-    bg = zeros(length(t));
-    yg = zeros(length(t));
 
-    for i  = 1:length(names)
-        if strncmpi(names{i}, 'Ag', 2)
-            disp(strcat(names{i}, 'should be Ag'));
-            ag = ag + X(:, i);
-            continue;
-        end
-        if strncmpi(names{i}, 'Bg', 2)
-            disp(strcat(names{i}, 'should be Bg'));
-            bg = bg + X(:, i);
-            continue;
-        end
-        if strncmpi(names{i}, 'Yg', 2)
-            disp(strcat(names{i}, 'should be Yg'));
-            yg = yg + X(:, i);
-            continue;
-        end
-        if strncmpi(names{i}, 'a', 1)
-            disp(strcat(names{i}, 'should be a'));
-            a = a + X(:, i);
-            continue;
-        end
-        if strncmpi(names{i}, 'b', 1)
-            disp(strcat(names{i}, 'should be b'));
-            b = b + X(:, i);
-            continue;
-        end
-        if strncmpi(names{i}, 'y', 1)
-            disp(strcat(names{i}, 'should be y'));
-            y = y + X(:, i);
-            continue;
+    function [val] = get_plot_values(X, names, s, n)
+        val = zeros(length(t), 1);
+        
+        for iter = 1:length(names)
+            if strncmp(names{iter}, s, n)
+                disp(strcat(names{iter}, ' should be ', s));
+                
+                val = val + X(:, iter);
+            end
         end
     end
     
-    aplot = (a + ag);
-    bplot = (b + bg);
-    yplot = (y + yg);
+
+    a = get_plot_values(X, names, 'a', 1);
+    ag = get_plot_values(X, names, 'Ag', 2);
+    b = get_plot_values(X, names, 'b', 1);
+    bg = get_plot_values(X, names, 'Bg', 2);
+    y = get_plot_values(X, names, 'y', 1);
+    yg = get_plot_values(X, names, 'Yg', 2);
     
+    atotal = (a + ag);
+    btotal = (b + bg);
+    ytotal = (y + yg);
+
+    % Shadow variables
+    sa = get_plot_values(X, names, 'sa', 2);
+    sag = get_plot_values(X, names, 'sAg', 3);
+    sb = get_plot_values(X, names, 'sb', 2);
+    sbg = get_plot_values(X, names, 'sBg', 3);
+    sy = get_plot_values(X, names, 'sy', 2);
+    syg = get_plot_values(X, names, 'sYg', 3);
+    
+    satotal = (sa + sag);
+    sbtotal = (sb + sbg);
+    sytotal = (sy + syg);
+
     % Set figure
     figure(figNo);
     box on; hold on;
-%     plot(t/3600, a/1.e-9, 'LineWidth', 2.0, 'Color', 'blue');
-%     plot(t/3600, b/1.e-9, 'LineWidth', 2.0, 'Color', 'red');
-%     plot(t/3600, y/1.e-9, ':', 'LineWidth', 2.0, 'Color', 'green');
-%     plot(t/3600, ag/1.e-9, 'LineWidth', 2.0, 'Color', 'blue');
+
+    plot(t/3600, atotal/1.e-9, 'LineWidth', 2.0, 'Color', 'blue');
+    plot(t/3600, btotal/1.e-9, 'LineWidth', 2.0, 'Color', 'red');
+    plot(t/3600, ytotal/1.e-9, ':', 'LineWidth', 2.0, 'Color', 'green');
+%     plot(t/3600, satotal/1.e-9, 'LineWidth', 2.0, 'Color', 'blue');
+%     plot(t/3600, sbtotal/1.e-9, 'LineWidth', 2.0, 'Color', 'red');
+%     plot(t/3600, sytotal/1.e-9, ':', 'LineWidth', 2.0, 'Color', 'green');
+%     plot(t/3600, ag/1.e-9, 'LineWidth', 2.0);
 %     plot(t/3600, bg/1.e-9, 'LineWidth', 2.0, 'Color', 'red');
 %     plot(t/3600, yg/1.e-9, ':', 'LineWidth', 2.0, 'Color', 'green');
-    plot(t/3600, aplot/1.e-9, 'LineWidth', 2.0, 'Color', 'blue');
-    plot(t/3600, bplot/1.e-9, 'LineWidth', 2.0, 'Color', 'red');
-    plot(t/3600, yplot/1.e-9, ':', 'LineWidth', 2.0, 'Color', 'green');
+%     plot(t/3600, atotal/1.e-9, 'LineWidth', 2.0, 'Color', 'blue');
+%     plot(t/3600, btotal/1.e-9, 'LineWidth', 2.0, 'Color', 'red');
+%     plot(t/3600, ytotal/1.e-9, ':', 'LineWidth', 2.0, 'Color', 'green');
+%     plot(t/3600, sa/1e-9, ':', 'LineWidth', 2.0);
+%     plot(t/3600, sag/1e-9, ':', 'LineWidth', 2.0);
     ylabel('concentration'); 
     xlabel('time');
 
