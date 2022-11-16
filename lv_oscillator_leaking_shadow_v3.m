@@ -1,6 +1,5 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Author: Shalin Shah
-% Date created: 04/01/2020
+% Author: Rajiv Nagipogu
 % Affiliation: Duke University
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 

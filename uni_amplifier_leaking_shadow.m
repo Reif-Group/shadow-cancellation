@@ -4,7 +4,7 @@
 % Affiliation: Duke University
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 clear; clc;
-concX = 2; stopTime = 1000; nCatalytic = 5;
+concX = 2; stopTime = 2000; nCatalytic = 5;
 
 % compare ideal lotka-volterra simulation with approximation
 % ideal_amp(concX, stopTime, 1)
@@ -302,7 +302,7 @@ function approx_cat_amp(initX, N, stopTime, figNo)
     plot(t, x, '-','LineWidth', 3.0);
     plot(t, s, ':', LineWidth=3.0)
     ylabel('Concentration (nM)'); xlabel('Time (mins)');
-    set(gca, 'LineWidth', 2.0); legend('auto. X', 'cat. X', 'approx. X', 'leak. S');    
+%     set(gca, 'LineWidth', 2.0); legend('auto. X', 'cat. X', 'approx. X', 'leak. S');    
 %     set(gca, 'LineWidth', 2.0); legend('cat.X', 'leak.S');    
     
 end

@@ -1,6 +1,5 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Author: Shalin Shah
-% Date created: 04/01/2020
+% Author: Rajiv Nagipogu
 % Affiliation: Duke University
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % ideal_cat_consensus(2.7, 0.3, 1, 3, 200, 1);
@@ -174,7 +173,6 @@ function ideal_cat_consensus(initA, initB, initY, N, stopTime, figNo)
     set(gca, 'LineWidth', 2.0); 
 
 end
-
 
 function dna_cat_consensus(initA, initB, initY, N, stopTime, figNo)
  
