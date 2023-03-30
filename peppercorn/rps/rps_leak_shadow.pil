@@ -1,0 +1,92 @@
+length hCj = 15
+length fC = 7
+length sC = 7
+length mC = 15
+length hCjR = 15
+length fCR = 7
+length sCR = 7
+length mCR = 15
+length hBr = 15
+length fB = 7
+length sB = 7
+length mB = 15
+length hBrR = 15
+length fBR = 7
+length sBR = 7
+length mBR = 15
+length hAk = 15
+length fA = 7
+length sA = 7
+length mA = 15
+length hAkR = 15
+length fAR = 7
+length sAR = 7
+length mAR = 15
+
+Cj = sC mC fC hCj @initial 7 nM
+Br = sB mB fB hBr @initial 1 nM
+Ak = sA mA fA hAk @initial 3 nM
+
+sCj = hCjR fCR mCR sCR @initial 1e-4 nM
+sBr = hBrR fBR mBR sBR @initial 1e-4 nM
+sAk = hAkR fAR mAR sAR @initial 1e-4 nM
+
+ReactCBCj = fB( sC( mC( + fC* ) ) ) mB*( sB*( + hCj ) ) @initial 100 nM
+ProduceBCjCj = sC mC fC( hCj( + sB* ) ) hCj*( fC*( + sC mC ) ) @initial 100 nM
+BackCB = fB sC mC @initial 100 nM
+HelperCCj = fC hCj fC @initial 75 nM
+ReactBABr = fA( sB( mB( + fB* ) ) ) mA*( sA*( + hBr ) ) @initial 100 nM
+ProduceABrBr = sB mB fB( hBr( + sA* ) ) hBr*( fB*( + sB mB ) ) @initial 100 nM
+BackBA = fA sB mB @initial 100 nM
+HelperBBr = fB hBr fB @initial 75 nM
+ReactACAk = fC( sA( mA( + fA* ) ) ) mC*( sC*( + hAk ) ) @initial 100 nM
+ProduceCAkAk = sA mA fA( hAk( + sC* ) ) hAk*( fA*( + sA mA ) ) @initial 100 nM
+BackAC = fC sA mA @initial 100 nM
+HelperAAk = fA hAk fA @initial 75 nM
+LeakWasteCB = sC mC fC hCj( + sB* ) fC*( hCj*( fC*( + ) ) ) @initial 0 nM
+LeakWasteBA = sB mB fB hBr( + sA* ) fB*( hBr*( fB*( + ) ) ) @initial 0 nM
+LeakWasteAC = sA mA fA hAk( + sC* ) fA*( hAk*( fA*( + ) ) ) @initial 0 nM
+
+sReactCBCj = mBR( sBR( hCjR + ) ) fBR*( sCR*( mCR*( fCR* + ) ) ) @initial 100 nM
+sProduceBCjCj = hCjR( fCR( mCR sCR + hCjR( fCR( mCR sCR + ) ) ) ) sBR* @initial 100 nM
+sBackCB = mCR sCR fBR @initial 100 nM
+sHelperCCj = fCR hCjR fCR @initial 75 nM
+
+sReactBABr = mAR( sAR( hBrR + ) ) fAR*( sBR*( mBR*( fBR* + ) ) ) @initial 100 nM
+sProduceABrBr = hBrR( fBR( mBR sBR + hBrR( fBR( mBR sBR + ) ) ) ) sAR* @initial 100 nM
+sBackBA = mBR sBR fAR @initial 100 nM
+sHelperBBr = fBR hBrR fBR @initial 75 nM
+sReactACAk = mCR( sCR( hAkR + ) ) fCR*( sAR*( mAR*( fAR* + ) ) ) @initial 100 nM
+sProduceCAkAk = hAkR( fAR( mAR sAR + hAkR( fAR( mAR sAR + ) ) ) ) sCR* @initial 100 nM
+sBackAC = mAR sAR fCR @initial 100 nM
+sHelperAAk = fAR hAkR fAR @initial 75 nM
+
+sLeakWasteCB = hCjR( fCR mCR sCR + fCR( hCjR( fCR( + ) ) ) ) sBR* @initial 0 nM
+sLeakWasteBA = hBrR( fBR mBR sBR + fBR( hBrR( fBR( + ) ) ) ) sAR* @initial 0 nM
+sLeakWasteAC = hAkR( fAR mAR sAR + fAR( hAkR( fAR( + ) ) ) ) sCR* @initial 0 nM
+
+CancelC = mCR( sCR( sC( mC( + fC* ) ) ) ) fCR* @initial 0 nM
+dispC = mCR sCR sC mC @initial 0 nM
+CancelB = mBR( sBR( sB( mB( + fB* ) ) ) ) fBR* @initial 0 nM
+dispB = mBR sBR sB mB @initial 0 nM
+CancelA = mAR( sAR( sA( mA( + fA* ) ) ) ) fAR* @initial 0 nM
+dispA = mAR sAR sA mA @initial 0 nM
+
+
+#macrostate LeakWasteCB = [LeakWasteCB]
+#macrostate LeakWasteBA = [LeakWasteBA]
+#macrostate LeakWasteAC = [LeakWasteAC]
+#macrostate sLeakWasteCB = [sLeakWasteCB]
+#macrostate sLeakWasteBA = [sLeakWasteBA]
+#macrostate sLeakWasteAC = [sLeakWasteAC]
+
+
+
+#reaction [condensed    = 0.000001 /nM/s ] ProduceBCjCj + HelperCCj -> Cj + LeakWasteCB
+#reaction [condensed    = 0.000001 /nM/s ] ProduceABrBr + HelperBBr -> Br + LeakWasteBA
+#reaction [condensed    = 0.000001 /nM/s ] ProduceCAkAk + HelperAAk -> Ak + LeakWasteAC
+#reaction [condensed    = 0.000001 /nM/s ] sProduceBCjCj + sHelperCCj -> sCj + sLeakWasteCB
+#reaction [condensed    = 0.000001 /nM/s ] sProduceABrBr + sHelperBBr -> sBr + sLeakWasteBA
+#reaction [condensed    = 0.000001 /nM/s ] sProduceCAkAk + sHelperAAk -> sAk + sLeakWasteAC
+
+

@@ -1,0 +1,47 @@
+length hcj = 15
+length hck = 15
+length hbr = 15
+length sb = 7
+length mb = 15
+length sc = 7
+length fc = 7
+length sc = 7
+length fb = 7
+length mc = 15
+
+length hcjr = 15
+length hckr = 15
+length hbrr = 15
+length sbr = 7
+length mbr = 15
+length scr = 7
+length fcr = 7
+length scr = 7
+length fbr = 7
+length mcr = 15
+
+
+Br = sb mb fb hbr @initial 10 nM
+Cj = sc mc fc hcj @initial 5 nM 
+Ck = sc mc fc hck @initial 5 nM
+
+ReactCBCj = fb(sc( mc( + fc* ) ) ) mb*(sb*( + hcj) ) @initial 100 nM
+BackCB = fb sc mc @initial 100 nM
+ProduceBCjCk = sc mc fc( hcj( + sb* ) ) hck*( fc*( + sc mc ) ) @initial 100 nM
+HelperCCk = fc hck fc @initial 75 nM
+
+
+
+sBr = hbrr fbr mbr sbr @initial 10 nM
+sCj = hcjr fcr mcr scr @initial 0 nM
+sCk = hckr fcr mcr scr @initial 0 nM
+
+sReactCBCj = mbr( sbr( hcjr + ) ) fbr*( scr*( mcr*( fcr* + ) ) ) @initial 100 nM
+sBackCB = mcr scr fbr @initial 100 nM
+sProduceBCjCk = hcjr( fcr( mcr scr + hckr( fcr( mcr scr + ) ) ) ) sbr* @initial 100 nM
+sHelperCCk = fcr hckr fcr @initial 75 nM
+
+
+Cancel = mcr( scr( sc( mc( + fc* ) ) ) ) fcr* @initial 100 nM
+disp = mcr scr sc mc @initial 0 nM
+

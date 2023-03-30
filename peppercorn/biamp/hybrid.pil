@@ -1,0 +1,25 @@
+length hcj = 15
+length hck = 15
+length hbr = 15
+length sb = 7
+length mb = 15
+length sc = 7
+length fc = 7
+length sc = 7
+length fb = 7
+length mc = 15
+
+length hcjr = 15
+length hckr = 15
+length hbrr = 15
+length sbr = 7
+length mbr = 15
+length scr = 7
+length fcr = 7
+length scr = 7
+length fbr = 7
+length mcr = 15
+
+
+S = hcj fc mc sc
+SS = sc* mc* fc* hcj*

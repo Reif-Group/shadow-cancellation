@@ -1,0 +1,36 @@
+length hcj = 15
+length hck = 15
+length hbr = 15
+length sb = 7
+length mb = 15
+length sc = 7
+length fc = 7
+length sc = 7
+length fb = 7
+length mc = 15
+
+length hcjr = 15
+length hckr = 15
+length hbrr = 15
+length sbr = 7
+length mbr = 15
+length scr = 7
+length fcr = 7
+length scr = 7
+length fbr = 7
+length mcr = 15
+
+
+Cj = sc mc fc hcj @initial 5 nM
+
+ProduceBCjCj = sc mc fc( hcj( + sb* ) ) hcj*( fc*( + sc mc ) ) @initial 100 nM
+HelperCCj = fc hcj fc @initial 75 nM
+
+
+sCj = hcjr fcr mcr scr @initial 0 nM
+
+sProduceBCjCj = hcjr( fcr( mcr scr + hcjr( fcr( mcr scr + ) ) ) ) sbr* @initial 100 nM
+sHelperCCj = fcr hcjr fcr @initial 75 nM
+
+sLeakWaste = hcjr( fcr mcr scr + fcr( hcjr( fcr( + ) ) ) ) sbr* @initial 0 nM
+LeakWaste = sc mc fc hcj( + sb* ) fc*( hcj*( fc*( + ) ) ) @initial 0 nM
