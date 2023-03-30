@@ -1,0 +1,28 @@
+length hcj = 37
+length hck = 37
+length hbr = 37
+length sb = 7
+length mb = 15
+length sc = 7
+length fc = 7
+length sc = 7
+length fb = 7
+length mc = 15
+
+Cj = sc mc fc hcj @initial 10 nM 
+ReactCBCj = fb(sc( mc( + fc* ) ) ) mb*(sb*( + hcj) ) @initial 100 nM
+BACKCB = fb sc mc @initial 100 nM 
+ReactIntCjBCj = sc( mc( fc( hcj + ) ) ) fb* mb*( sb*( + hcj ) ) @initial 0 nM
+
+Br = sb mb fb hbr @initial 10 nM
+FluxBCj = hcj sb mb @initial 0 nM
+Waste = sc( mc( fc( hcj + ) ) ) fb*( mb*( sb*( + ) ) ) hbr
+
+ProduceBCjCk = sc mc fc( hcj( + sb* ) ) hck*(fc*( + sc mc ) ) @initial 100 nM
+HelperCCk = fc hck fc @initial 75 nM
+
+Ck = sc mc fc hck @initial 0 nM
+Waste2 = hcj( sb( mb + ) ) fc*( hck*( fc*( + ) ) ) @initial 0 nM
+ProduceIntBCjCk = hcj( sb( mb + ) ) fc* hck*( fc*( + sc mc ) ) @initial 0 nM
+
+
