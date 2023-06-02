@@ -1,0 +1,42 @@
+length hCj = 15
+length fC = 7
+length sC = 7
+length mC = 15
+length hCjR = 15
+length fCR = 7
+length sCR = 7
+length mCR = 15
+length hBr = 15
+length fB = 7
+length sB = 7
+length mB = 15
+length hBrR = 15
+length fBR = 7
+length sBR = 7
+length mBR = 15
+length hAk = 15
+length fA = 7
+length sA = 7
+length mA = 15
+length hAkR = 15
+length fAR = 7
+length sAR = 7
+length mAR = 15
+
+Cj = sC mC fC hCj @initial 3 nM
+Br = sB mB fB hBr @initial 10 nM
+Ak = sA mA fA hAk @initial 11 nM
+
+ReactCBCj = fB( sC( mC( + fC* ) ) ) mB*( sB*( + hCj ) ) @initial 100 nM
+ProduceBCjCj = sC mC fC( hCj( + sB* ) ) hCj*( fC*( + sC mC ) ) @initial 100 nM
+BackCB = fB sC mC @initial 100 nM
+HelperCCj = fC hCj fC @initial 75 nM
+ReactBABr = fA( sB( mB( + fB* ) ) ) mA*( sA*( + hBr ) ) @initial 100 nM
+ProduceABrBr = sB mB fB( hBr( + sA* ) ) hBr*( fB*( + sB mB ) ) @initial 100 nM
+BackBA = fA sB mB @initial 100 nM
+HelperBBr = fB hBr fB @initial 75 nM
+ReactACAk = fC( sA( mA( + fA* ) ) ) mC*( sC*( + hAk ) ) @initial 100 nM
+ProduceCAkAk = sA mA fA( hAk( + sC* ) ) hAk*( fA*( + sA mA ) ) @initial 100 nM
+BackAC = fC sA mA @initial 100 nM
+HelperAAk = fA hAk fA @initial 75 nM
+

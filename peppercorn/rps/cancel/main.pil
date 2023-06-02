@@ -1,0 +1,41 @@
+length hCj = 15
+length fC = 7
+length sC = 7
+length mC = 15
+length hCjR = 15
+length fCR = 7
+length sCR = 7
+length mCR = 15
+length hBr = 15
+length fB = 7
+length sB = 7
+length mB = 15
+length hBrR = 15
+length fBR = 7
+length sBR = 7
+length mBR = 15
+length hAk = 15
+length fA = 7
+length sA = 7
+length mA = 15
+length hAkR = 15
+length fAR = 7
+length sAR = 7
+length mAR = 15
+
+Cj = sC mC fC hCj @initial 3 nM
+Br = sB mB fB hBr @initial 10 nM
+Ak = sA mA fA hAk @initial 11 nM
+
+sCj = hCjR fCR mCR sCR @initial 3 nM
+sBr = hBrR fBR mBR sBR @initial 10 nM
+sAk = hAkR fAR mAR sAR @initial 11 nM
+
+CancelC = mCR( sCR( sC( mC( + fC* ) ) ) ) fCR* @initial 20 nM
+dispC = mCR sCR sC mC @initial 0 nM
+CancelB = mBR( sBR( sB( mB( + fB* ) ) ) ) fBR* @initial 20 nM
+dispB = mBR sBR sB mB @initial 0 nM
+CancelA = mAR( sAR( sA( mA( + fA* ) ) ) ) fAR* @initial 20 nM
+dispA = mAR sAR sA mA @initial 0 nM
+
+
