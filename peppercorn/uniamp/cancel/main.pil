@@ -1,0 +1,19 @@
+length hCj = 15
+length hCk = 15
+length fC = 7
+length sC = 7
+length mC = 15
+length hCjR = 15
+length hCkR = 15
+length fCR = 7
+length sCR = 7
+length mCR = 15
+
+Cj = sC mC fC hCj @initial 4 nM
+Ck = sC mC fC hCk @initial 4 nM
+
+sCj = hCjR fCR mCR sCR @initial 4 nM
+sCk = hCkR fCR mCR sCR @initial 4 nM
+
+CancelC = mCR( sCR( sC( mC( + fC* ) ) ) ) fCR* @initial 100 nM
+dispC = mCR sCR sC mC @initial 0 nM

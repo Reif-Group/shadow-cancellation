@@ -1,4 +1,6 @@
 #!/bin/bash
+# Generates data for creating the plots on our own terms.
+#
 
 FOLDER=$1
 TIME=$2
