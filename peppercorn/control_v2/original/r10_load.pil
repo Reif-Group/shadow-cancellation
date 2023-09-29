@@ -1,0 +1,35 @@
+length hX2 = 15
+length fX2 = 7
+length sX2 = 7
+length mX2 = 15
+length hX1 = 15
+length fX1 = 7
+length sX1 = 7
+length mX1 = 15
+
+length hO1 = 15
+length hO2 = 15
+length fO1 = 7
+length fO2 = 7
+length sO1 = 7
+length sO2 = 7
+length mO1 = 15
+length mO2 = 15
+
+
+X2 = sX2 mX2 fX2 hX2 @initial 2 nM
+X1 = sX1 mX1 fX1 hX1 @initial 2 nM
+O1 = sO1 mO1 fO1 hO1 @initial 2 nM
+O2 = sO2 mO2 fO2 hO2 @initial 2 nM
+
+
+X1 = sX1 mX1 fX1 hX1 @initial 1 nM
+X2 = sX2 mX2 fX2 hX2 @initial 1 nM
+
+
+R_NUM_ReactX2X1 = fX2 hX2 sX1( mX2( + fX2( sX1( mX1( + fX1* ) ) ) ) ) @initial 10 nM
+R_NUM_ProduceX1X2 = sX2 mX2 fX2( hX2( + sX1* ) ) @initial 5000 nM
+R_NUM_BackX1X2 = fX2 sX1 mX1 @initial 10 nM
+
+
+

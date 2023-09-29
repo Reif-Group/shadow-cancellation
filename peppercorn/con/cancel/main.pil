@@ -1,0 +1,39 @@
+length hA = 15
+length fA = 7
+length sA = 7
+length mA = 15
+length hB = 15
+length fB = 7
+length sB = 7
+length mB = 15
+length hY = 15
+length mY = 15
+length fY = 7
+length sY = 7
+length hAR = 15
+length fAR = 7
+length sAR = 7
+length mAR = 15
+length hBR = 15
+length fBR = 7
+length sBR = 7
+length mBR = 15
+length hYR = 15
+length mYR = 15
+length fYR = 7
+length sYR = 7
+
+A = sA mA fA hA @initial 3 nM
+B = sB mB fB hB @initial 8 nM
+Y = sY mY fY hY @initial 5 nM
+
+shA = hAR fAR mAR sAR @initial 3 nM
+shB = hBR fBR mBR sBR @initial 8 nM
+shY = hYR fYR mYR sYR @initial 5 nM
+
+CancelA = mAR( sAR( sA( mA( + fA* ) ) ) ) fAR* @initial 20 nM
+dispA = mAR sAR sA mA @initial 1e-5 nM
+CancelB = mBR( sBR( sB( mB( + fB* ) ) ) ) fBR* @initial 20 nM
+dispB = mBR sBR sB mB @initial 1e-5 nM
+CancelY = mYR( sYR( sY( mY( + fY* ) ) ) ) fYR* @initial 20 nM
+dispY = mYR sYR sY mY @initial 1e-5 nM

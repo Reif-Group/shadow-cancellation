@@ -1,0 +1,31 @@
+length hC= 15
+length fC = 7
+length sC = 7
+length mC = 15
+
+length hA = 15
+length fA = 7
+length sA = 7
+length mA = 7
+
+length sW = 7
+length fW = 7
+length mW = 15
+length hW = 15
+
+
+C = sC mC fC hC @initial 16 nM
+ReactCC = hC sC( mC( + fC* ) ) @initial 100 nM
+ProduceCC = sC mC fC( hC( + sC mC fC( hC( + sC* ) ) ) )  @initial 200 nM
+HelperCC = fC hC fC @initial 200 nM
+
+#A = sA mA fA hA @initial 8 nM
+#ReactACA = hA sC( mC( + fC( sA( mA( + fA* ) ) ) ) ) @initial 100 nM
+#ProduceCAA = sA mA fA( hA( + sA mA fA( hA( + sC* ) ) ) ) @initial 200 nM
+#BackAC = fC sA mA @initial 100 nM
+#HelperAA = fA hA fA @initial 100 nM
+#
+#
+#W = sW mW fW hW @initial 0 nM
+#ReactAW = hW sW( mA( + fA* ) ) @initial 100 nM
+#ProduceW = sW mW fW( hW( + sW* ) ) @initial 500 nM

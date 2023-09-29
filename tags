@@ -1,0 +1,264 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+HOME_DIR	paramsearch/globals.py	/^HOME_DIR='.\/'$/;"	v
+ODETemplateError	peppercorn/odesystem.py	/^class ODETemplateError(Exception):$/;"	c
+ODETemplateError	peppercorn/old/biamp/odesystem.py	/^class ODETemplateError(Exception):$/;"	c
+ODETemplateError	peppercorn/old/odesystem.py	/^class ODETemplateError(Exception):$/;"	c
+ODETemplateError	peppercorn/old/rps/odesystem.py	/^class ODETemplateError(Exception):$/;"	c
+ODETemplateError	peppercorn_old/odesystem.py	/^class ODETemplateError(Exception):$/;"	c
+ODETemplateError	peppercorn_old/old/biamp/odesystem.py	/^class ODETemplateError(Exception):$/;"	c
+ODETemplateError	peppercorn_old/old/odesystem.py	/^class ODETemplateError(Exception):$/;"	c
+ODETemplateError	peppercorn_old/old/rps/odesystem.py	/^class ODETemplateError(Exception):$/;"	c
+ThreadPoolExecutor	paramsearch/main.py	/^from concurrent.futures import ThreadPoolExecutor$/;"	i
+ThreadPoolExecutor	paramsearch/utils/generic.py	/^from concurrent.futures import ThreadPoolExecutor$/;"	i
+add_integrator_args	peppercorn/odesystem.py	/^def add_integrator_args(parser):$/;"	f
+add_integrator_args	peppercorn/old/biamp/odesystem.py	/^def add_integrator_args(parser):$/;"	f
+add_integrator_args	peppercorn/old/odesystem.py	/^def add_integrator_args(parser):$/;"	f
+add_integrator_args	peppercorn/old/rps/odesystem.py	/^def add_integrator_args(parser):$/;"	f
+add_integrator_args	peppercorn_old/odesystem.py	/^def add_integrator_args(parser):$/;"	f
+add_integrator_args	peppercorn_old/old/biamp/odesystem.py	/^def add_integrator_args(parser):$/;"	f
+add_integrator_args	peppercorn_old/old/odesystem.py	/^def add_integrator_args(parser):$/;"	f
+add_integrator_args	peppercorn_old/old/rps/odesystem.py	/^def add_integrator_args(parser):$/;"	f
+approx_cat_amp	matlab/bi_amplifier.m	/^function approx_cat_amp(initX, initY, N, stopTime, figNo)$/;"	f
+approx_cat_amp	matlab/uni_amplifier.m	/^function approx_cat_amp(initX, N, stopTime, figNo)$/;"	f
+approx_cat_amp	matlab/uni_amplifier_leaking_shadow.m	/^function approx_cat_amp(initX, N, stopTime, figNo)$/;"	f
+approx_cat_amp	matlab/uni_amplifier_rajiv.m	/^function approx_cat_amp(initX, N, stopTime, figNo)$/;"	f
+approx_cat_lv_oscillator	matlab/lv_oscillator_leaking_shadow.m	/^function approx_cat_lv_oscillator(initX, initY, N, stopTime, figNo)$/;"	f
+approx_cat_lv_oscillator	matlab/lv_oscillator_leaking_shadow_v2.m	/^function approx_cat_lv_oscillator(initX, initY, N, stopTime, figNo)$/;"	f
+approx_cat_lv_oscillator	matlab/lv_oscillator_leaking_shadow_v3.m	/^function approx_cat_lv_oscillator(initX, initY, N, stopTime, figNo)$/;"	f
+approx_cat_lv_oscillator	matlab/oscillation_non_ideal.m	/^function approx_cat_lv_oscillator(initX, initY, N, stopTime, figNo)$/;"	f
+approx_link_cat_lv_oscillator	matlab/lv_oscillator_leaking_shadow.m	/^function approx_link_cat_lv_oscillator(initX, initY, N, stopTime, figNo)$/;"	f
+approx_link_cat_lv_oscillator	matlab/lv_oscillator_leaking_shadow_v2.m	/^function approx_link_cat_lv_oscillator(initX, initY, N, stopTime, figNo)$/;"	f
+approx_link_cat_lv_oscillator	matlab/lv_oscillator_leaking_shadow_v3.m	/^function approx_link_cat_lv_oscillator(initX, initY, N, stopTime, figNo)$/;"	f
+approx_link_cat_lv_oscillator	matlab/oscillation_non_ideal.m	/^function approx_link_cat_lv_oscillator(initX, initY, N, stopTime, figNo)$/;"	f
+approx_link_cat_lv_oscillator_leaky_shadow	matlab/lv_oscillator_leaking_shadow_v2.m	/^function approx_link_cat_lv_oscillator_leaky_shadow(initX, initY, N, stopTime, figNo)$/;"	f
+approx_link_cat_lv_oscillator_leaky_shadow	matlab/lv_oscillator_leaking_shadow_v3.m	/^function approx_link_cat_lv_oscillator_leaky_shadow(initX, initY, N, stopTime, figNo)$/;"	f
+argparse	peppercorn/odesystem.py	/^import argparse$/;"	i
+argparse	peppercorn/old/biamp/odesystem.py	/^import argparse$/;"	i
+argparse	peppercorn/old/odesystem.py	/^import argparse$/;"	i
+argparse	peppercorn/old/plot_nxy.py	/^import argparse$/;"	i
+argparse	peppercorn/old/rps/odesystem.py	/^import argparse$/;"	i
+argparse	peppercorn_old/odesystem.py	/^import argparse$/;"	i
+argparse	peppercorn_old/old/biamp/odesystem.py	/^import argparse$/;"	i
+argparse	peppercorn_old/old/odesystem.py	/^import argparse$/;"	i
+argparse	peppercorn_old/old/plot_nxy.py	/^import argparse$/;"	i
+argparse	peppercorn_old/old/rps/odesystem.py	/^import argparse$/;"	i
+args	peppercorn/odesystem.py	/^    args = parser.parse_args()$/;"	v
+args	peppercorn/old/biamp/odesystem.py	/^    args = parser.parse_args()$/;"	v
+args	peppercorn/old/odesystem.py	/^    args = parser.parse_args()$/;"	v
+args	peppercorn/old/rps/odesystem.py	/^    args = parser.parse_args()$/;"	v
+args	peppercorn_old/odesystem.py	/^    args = parser.parse_args()$/;"	v
+args	peppercorn_old/old/biamp/odesystem.py	/^    args = parser.parse_args()$/;"	v
+args	peppercorn_old/old/odesystem.py	/^    args = parser.parse_args()$/;"	v
+args	peppercorn_old/old/rps/odesystem.py	/^    args = parser.parse_args()$/;"	v
+cartesianproduct	paramsearch/main.py	/^from utils.generic import cartesianproduct, execute$/;"	i
+cartesianproduct	paramsearch/utils/generic.py	/^def cartesianproduct(ranges):$/;"	f
+cat_amp	matlab/bi_amplifier.m	/^function cat_amp(initX, initY, N, stopTime, figNo)$/;"	f
+cat_amp	matlab/uni_amplifier.m	/^function cat_amp(initX, N, stopTime, figNo)$/;"	f
+cat_amp	matlab/uni_amplifier_leaking_shadow.m	/^function cat_amp(initX, N, stopTime, figNo)$/;"	f
+cat_amp	matlab/uni_amplifier_rajiv.m	/^function cat_amp(initX, N, stopTime, figNo)$/;"	f
+cat_consensus	matlab/consensus_non_ideal.m	/^function cat_consensus(initA, initB, initY, N, stopTime, figNo)$/;"	f
+collections	paramsearch/utils/generic.py	/^import collections$/;"	i
+crnconsensus	matlab/consensus_original.m	/^function crnconsensus(concA, concB, concY, stopTime, figNo)$/;"	f
+df_from_lol	peppercorn/old/plot_nxy.py	/^def df_from_lol(lol, headers=None):$/;"	f
+df_from_lol	peppercorn_old/old/plot_nxy.py	/^def df_from_lol(lol, headers=None):$/;"	f
+dna_cat_consensus	matlab/consensus_leaking_shadow.m	/^function dna_cat_consensus(initA, initB, initY, N, stopTime, figNo)$/;"	f
+dna_cat_consensus	matlab/consensus_non_ideal_leaking_shadow.m	/^function dna_cat_consensus(initA, initB, initY, N, stopTime, figNo)$/;"	f
+dna_cat_rps	matlab/rock_paper_scissors_leaking_shadow.m	/^function dna_cat_rps(initA, initB, initC, N, stopTime, figNo, leak, shadow)$/;"	f
+execute	paramsearch/main.py	/^from utils.generic import cartesianproduct, execute$/;"	i
+execute	paramsearch/utils/generic.py	/^def execute(rn,$/;"	f
+filepath	paramsearch/main.py	/^    filepath = sys.argv[1]$/;"	v
+find_optimal_param_values	paramsearch/main.py	/^def find_optimal_param_values(rn,$/;"	f
+flint	peppercorn/odesystem.py	/^def flint(inp):$/;"	f
+flint	peppercorn/old/biamp/odesystem.py	/^def flint(inp):$/;"	f
+flint	peppercorn/old/odesystem.py	/^def flint(inp):$/;"	f
+flint	peppercorn/old/rps/odesystem.py	/^def flint(inp):$/;"	f
+flint	peppercorn_old/odesystem.py	/^def flint(inp):$/;"	f
+flint	peppercorn_old/old/biamp/odesystem.py	/^def flint(inp):$/;"	f
+flint	peppercorn_old/old/odesystem.py	/^def flint(inp):$/;"	f
+flint	peppercorn_old/old/rps/odesystem.py	/^def flint(inp):$/;"	f
+formatter_class	peppercorn/odesystem.py	/^        formatter_class=argparse.ArgumentDefaultsHelpFormatter)$/;"	v
+formatter_class	peppercorn/old/biamp/odesystem.py	/^        formatter_class=argparse.ArgumentDefaultsHelpFormatter)$/;"	v
+formatter_class	peppercorn/old/odesystem.py	/^        formatter_class=argparse.ArgumentDefaultsHelpFormatter)$/;"	v
+formatter_class	peppercorn/old/rps/odesystem.py	/^        formatter_class=argparse.ArgumentDefaultsHelpFormatter)$/;"	v
+formatter_class	peppercorn_old/odesystem.py	/^        formatter_class=argparse.ArgumentDefaultsHelpFormatter)$/;"	v
+formatter_class	peppercorn_old/old/biamp/odesystem.py	/^        formatter_class=argparse.ArgumentDefaultsHelpFormatter)$/;"	v
+formatter_class	peppercorn_old/old/odesystem.py	/^        formatter_class=argparse.ArgumentDefaultsHelpFormatter)$/;"	v
+formatter_class	peppercorn_old/old/rps/odesystem.py	/^        formatter_class=argparse.ArgumentDefaultsHelpFormatter)$/;"	v
+get_args	peppercorn/old/plot_nxy.py	/^def get_args():$/;"	f
+get_args	peppercorn_old/old/plot_nxy.py	/^def get_args():$/;"	f
+help	peppercorn/odesystem.py	/^        help = "Print logging output. (-vv increases verbosity.)")$/;"	v
+help	peppercorn/old/biamp/odesystem.py	/^        help = "Print logging output. (-vv increases verbosity.)")$/;"	v
+help	peppercorn/old/odesystem.py	/^        help = "Print logging output. (-vv increases verbosity.)")$/;"	v
+help	peppercorn/old/rps/odesystem.py	/^        help = "Print logging output. (-vv increases verbosity.)")$/;"	v
+help	peppercorn_old/odesystem.py	/^        help = "Print logging output. (-vv increases verbosity.)")$/;"	v
+help	peppercorn_old/old/biamp/odesystem.py	/^        help = "Print logging output. (-vv increases verbosity.)")$/;"	v
+help	peppercorn_old/old/odesystem.py	/^        help = "Print logging output. (-vv increases verbosity.)")$/;"	v
+help	peppercorn_old/old/rps/odesystem.py	/^        help = "Print logging output. (-vv increases verbosity.)")$/;"	v
+ideal_amp	matlab/bi_amplifier.m	/^function ideal_amp(concA, concB, stopTime, figNo)$/;"	f
+ideal_amp	matlab/uni_amplifier.m	/^function ideal_amp(concA, stopTime, figNo)$/;"	f
+ideal_amp	matlab/uni_amplifier_leaking_shadow.m	/^function ideal_amp(concA, stopTime, figNo)$/;"	f
+ideal_amp	matlab/uni_amplifier_rajiv.m	/^function ideal_amp(concA, stopTime, figNo)$/;"	f
+ideal_cat_consensus	matlab/consensus_leaking_shadow.m	/^function ideal_cat_consensus(initA, initB, initY, N, stopTime, figNo)$/;"	f
+ideal_cat_consensus	matlab/consensus_non_ideal_leaking_shadow.m	/^function ideal_cat_consensus(initA, initB, initY, N, stopTime, figNo)$/;"	f
+ideal_cat_lv_oscillator	matlab/lv_oscillator_leaking_shadow.m	/^function ideal_cat_lv_oscillator(initX, initY, N, stopTime, figNo)$/;"	f
+ideal_cat_lv_oscillator	matlab/lv_oscillator_leaking_shadow_v2.m	/^function ideal_cat_lv_oscillator(initX, initY, N, stopTime, figNo)$/;"	f
+ideal_cat_lv_oscillator	matlab/lv_oscillator_leaking_shadow_v3.m	/^function ideal_cat_lv_oscillator(initX, initY, N, stopTime, figNo)$/;"	f
+ideal_cat_lv_oscillator	matlab/oscillation_non_ideal.m	/^function ideal_cat_lv_oscillator(initX, initY, N, stopTime, figNo)$/;"	f
+ideal_cat_rps	matlab/rock_paper_scissors_leaking_shadow.m	/^function ideal_cat_rps(initA, initB, initC, N, stopTime, figNo)$/;"	f
+ideal_consensus	matlab/consensus_leaking_shadow.m	/^function ideal_consensus(initA, initB, initY, stopTime, figNo)$/;"	f
+ideal_consensus	matlab/consensus_non_ideal.m	/^function ideal_consensus(initA, initB, initY, stopTime, figNo)$/;"	f
+ideal_consensus	matlab/consensus_non_ideal_leaking_shadow.m	/^function ideal_consensus(initA, initB, initY, stopTime, figNo)$/;"	f
+ideal_consensus	matlab/pid_controller_leaking_shadow.m	/^function ideal_consensus(initA, initB, initY, stopTime, figNo)$/;"	f
+ideal_linear_control	matlab/linear_control_leaking_shadow.m	/^function ideal_linear_control(init, init, initC, stopTime, figNo)$/;"	f
+ideal_lv_oscillator	matlab/lv_oscillator_leaking_shadow.m	/^function ideal_lv_oscillator(concA, concB, stopTime, figNo)$/;"	f
+ideal_lv_oscillator	matlab/lv_oscillator_leaking_shadow_v2.m	/^function ideal_lv_oscillator(concA, concB, stopTime, figNo)$/;"	f
+ideal_lv_oscillator	matlab/lv_oscillator_leaking_shadow_v3.m	/^function ideal_lv_oscillator(concA, concB, stopTime, figNo)$/;"	f
+ideal_lv_oscillator	matlab/oscillation_non_ideal.m	/^function ideal_lv_oscillator(concA, concB, stopTime, figNo)$/;"	f
+ideal_rps	matlab/rock_paper_scissors_leaking_shadow.m	/^function ideal_rps(initA, initB, initC, stopTime, figNo)$/;"	f
+idealampautocat	matlab/basic_crn.m	/^function idealampautocat(concA, concB, stopTime, figNo)$/;"	f
+idealampcat	matlab/basic_crn.m	/^function idealampcat(concA, concB, stopTime, figNo)$/;"	f
+idealampnoncat	matlab/basic_crn.m	/^function idealampnoncat(concA, concB, stopTime, figNo)$/;"	f
+integrate	peppercorn/odesystem.py	/^def integrate(args, setlogger = False):$/;"	f
+integrate	peppercorn/old/biamp/odesystem.py	/^def integrate(args, setlogger = False):$/;"	f
+integrate	peppercorn/old/odesystem.py	/^def integrate(args, setlogger = False):$/;"	f
+integrate	peppercorn/old/rps/odesystem.py	/^def integrate(args, setlogger = False):$/;"	f
+integrate	peppercorn_old/odesystem.py	/^def integrate(args, setlogger = False):$/;"	f
+integrate	peppercorn_old/old/biamp/odesystem.py	/^def integrate(args, setlogger = False):$/;"	f
+integrate	peppercorn_old/old/odesystem.py	/^def integrate(args, setlogger = False):$/;"	f
+integrate	peppercorn_old/old/rps/odesystem.py	/^def integrate(args, setlogger = False):$/;"	f
+itertools	paramsearch/utils/generic.py	/^import itertools$/;"	i
+jacobian	peppercorn/odesystem.py	/^def jacobian(p0, t0, r):$/;"	f
+jacobian	peppercorn/old/biamp/odesystem.py	/^def jacobian(p0, t0, r):$/;"	f
+jacobian	peppercorn/old/odesystem.py	/^def jacobian(p0, t0, r):$/;"	f
+jacobian	peppercorn/old/rps/odesystem.py	/^def jacobian(p0, t0, r):$/;"	f
+jacobian	peppercorn_old/odesystem.py	/^def jacobian(p0, t0, r):$/;"	f
+jacobian	peppercorn_old/old/biamp/odesystem.py	/^def jacobian(p0, t0, r):$/;"	f
+jacobian	peppercorn_old/old/odesystem.py	/^def jacobian(p0, t0, r):$/;"	f
+jacobian	peppercorn_old/old/rps/odesystem.py	/^def jacobian(p0, t0, r):$/;"	f
+labels	paramsearch/main.py	/^                          labels="X1 X2 O1 O2",$/;"	v
+logger	peppercorn/odesystem.py	/^logger = logging.getLogger(__name__)$/;"	v
+logger	peppercorn/old/biamp/odesystem.py	/^logger = logging.getLogger(__name__)$/;"	v
+logger	peppercorn/old/odesystem.py	/^logger = logging.getLogger(__name__)$/;"	v
+logger	peppercorn/old/rps/odesystem.py	/^logger = logging.getLogger(__name__)$/;"	v
+logger	peppercorn_old/odesystem.py	/^logger = logging.getLogger(__name__)$/;"	v
+logger	peppercorn_old/old/biamp/odesystem.py	/^logger = logging.getLogger(__name__)$/;"	v
+logger	peppercorn_old/old/odesystem.py	/^logger = logging.getLogger(__name__)$/;"	v
+logger	peppercorn_old/old/rps/odesystem.py	/^logger = logging.getLogger(__name__)$/;"	v
+logging	peppercorn/odesystem.py	/^import logging$/;"	i
+logging	peppercorn/old/biamp/odesystem.py	/^import logging$/;"	i
+logging	peppercorn/old/odesystem.py	/^import logging$/;"	i
+logging	peppercorn/old/plot_nxy.py	/^import logging$/;"	i
+logging	peppercorn/old/rps/odesystem.py	/^import logging$/;"	i
+logging	peppercorn_old/odesystem.py	/^import logging$/;"	i
+logging	peppercorn_old/old/biamp/odesystem.py	/^import logging$/;"	i
+logging	peppercorn_old/old/odesystem.py	/^import logging$/;"	i
+logging	peppercorn_old/old/plot_nxy.py	/^import logging$/;"	i
+logging	peppercorn_old/old/rps/odesystem.py	/^import logging$/;"	i
+matplotlib	peppercorn/old/plot_nxy.py	/^import matplotlib.pyplot as plt$/;"	i
+matplotlib	peppercorn_old/old/plot_nxy.py	/^import matplotlib.pyplot as plt$/;"	i
+np	paramsearch/main.py	/^import numpy as np$/;"	i
+np	paramsearch/utils/generic.py	/^import numpy as np$/;"	i
+np	peppercorn/odesystem.py	/^import numpy as np$/;"	i
+np	peppercorn/old/biamp/odesystem.py	/^import numpy as np$/;"	i
+np	peppercorn/old/odesystem.py	/^import numpy as np$/;"	i
+np	peppercorn/old/plot_nxy.py	/^import numpy as np$/;"	i
+np	peppercorn/old/rps/odesystem.py	/^import numpy as np$/;"	i
+np	peppercorn_old/odesystem.py	/^import numpy as np$/;"	i
+np	peppercorn_old/old/biamp/odesystem.py	/^import numpy as np$/;"	i
+np	peppercorn_old/old/odesystem.py	/^import numpy as np$/;"	i
+np	peppercorn_old/old/plot_nxy.py	/^import numpy as np$/;"	i
+np	peppercorn_old/old/rps/odesystem.py	/^import numpy as np$/;"	i
+ode_plotter	peppercorn/odesystem.py	/^        from crnsimulator.plotting import ode_plotter$/;"	i
+ode_plotter	peppercorn/old/biamp/odesystem.py	/^        from crnsimulator.plotting import ode_plotter$/;"	i
+ode_plotter	peppercorn/old/odesystem.py	/^        from crnsimulator.plotting import ode_plotter$/;"	i
+ode_plotter	peppercorn/old/rps/odesystem.py	/^        from crnsimulator.plotting import ode_plotter$/;"	i
+ode_plotter	peppercorn_old/odesystem.py	/^        from crnsimulator.plotting import ode_plotter$/;"	i
+ode_plotter	peppercorn_old/old/biamp/odesystem.py	/^        from crnsimulator.plotting import ode_plotter$/;"	i
+ode_plotter	peppercorn_old/old/odesystem.py	/^        from crnsimulator.plotting import ode_plotter$/;"	i
+ode_plotter	peppercorn_old/old/rps/odesystem.py	/^        from crnsimulator.plotting import ode_plotter$/;"	i
+odeint	peppercorn/odesystem.py	/^from scipy.integrate import odeint$/;"	i
+odeint	peppercorn/old/biamp/odesystem.py	/^from scipy.integrate import odeint$/;"	i
+odeint	peppercorn/old/odesystem.py	/^from scipy.integrate import odeint$/;"	i
+odeint	peppercorn/old/rps/odesystem.py	/^from scipy.integrate import odeint$/;"	i
+odeint	peppercorn_old/odesystem.py	/^from scipy.integrate import odeint$/;"	i
+odeint	peppercorn_old/old/biamp/odesystem.py	/^from scipy.integrate import odeint$/;"	i
+odeint	peppercorn_old/old/odesystem.py	/^from scipy.integrate import odeint$/;"	i
+odeint	peppercorn_old/old/rps/odesystem.py	/^from scipy.integrate import odeint$/;"	i
+odesystem	peppercorn/odesystem.py	/^def odesystem(p0, t0, r):$/;"	f
+odesystem	peppercorn/old/biamp/odesystem.py	/^def odesystem(p0, t0, r):$/;"	f
+odesystem	peppercorn/old/odesystem.py	/^def odesystem(p0, t0, r):$/;"	f
+odesystem	peppercorn/old/rps/odesystem.py	/^def odesystem(p0, t0, r):$/;"	f
+odesystem	peppercorn_old/odesystem.py	/^def odesystem(p0, t0, r):$/;"	f
+odesystem	peppercorn_old/old/biamp/odesystem.py	/^def odesystem(p0, t0, r):$/;"	f
+odesystem	peppercorn_old/old/odesystem.py	/^def odesystem(p0, t0, r):$/;"	f
+odesystem	peppercorn_old/old/rps/odesystem.py	/^def odesystem(p0, t0, r):$/;"	f
+os	paramsearch/__init__.py	/^import os$/;"	i
+os	paramsearch/utils/generic.py	/^import os$/;"	i
+os	peppercorn/old/plot_nxy.py	/^import os$/;"	i
+os	peppercorn_old/old/plot_nxy.py	/^import os$/;"	i
+params	paramsearch/main.py	/^    params = [$/;"	v
+parser	peppercorn/odesystem.py	/^    parser = argparse.ArgumentParser($/;"	v
+parser	peppercorn/old/biamp/odesystem.py	/^    parser = argparse.ArgumentParser($/;"	v
+parser	peppercorn/old/odesystem.py	/^    parser = argparse.ArgumentParser($/;"	v
+parser	peppercorn/old/rps/odesystem.py	/^    parser = argparse.ArgumentParser($/;"	v
+parser	peppercorn_old/odesystem.py	/^    parser = argparse.ArgumentParser($/;"	v
+parser	peppercorn_old/old/biamp/odesystem.py	/^    parser = argparse.ArgumentParser($/;"	v
+parser	peppercorn_old/old/odesystem.py	/^    parser = argparse.ArgumentParser($/;"	v
+parser	peppercorn_old/old/rps/odesystem.py	/^    parser = argparse.ArgumentParser($/;"	v
+pd	paramsearch/main.py	/^import pandas as pd$/;"	i
+pd	paramsearch/utils/generic.py	/^import pandas as pd$/;"	i
+pd	peppercorn/old/plot_nxy.py	/^import pandas as pd$/;"	i
+pd	peppercorn_old/old/plot_nxy.py	/^import pandas as pd$/;"	i
+pkl	peppercorn/old/plot_nxy.py	/^import pickle as pkl$/;"	i
+pkl	peppercorn_old/old/plot_nxy.py	/^import pickle as pkl$/;"	i
+plot_df	peppercorn/old/plot_nxy.py	/^def plot_df(df, output):$/;"	f
+plot_df	peppercorn_old/old/plot_nxy.py	/^def plot_df(df, output):$/;"	f
+plt	peppercorn/old/plot_nxy.py	/^import matplotlib.pyplot as plt$/;"	i
+plt	peppercorn_old/old/plot_nxy.py	/^import matplotlib.pyplot as plt$/;"	i
+preds	paramsearch/main.py	/^                          preds=["X2"],$/;"	v
+preprocess	peppercorn/old/plot_nxy.py	/^def preprocess(file, group=None):$/;"	f
+preprocess	peppercorn_old/old/plot_nxy.py	/^def preprocess(file, group=None):$/;"	f
+random	paramsearch/main.py	/^import random$/;"	i
+random	paramsearch/utils/generic.py	/^import random$/;"	i
+random	peppercorn/old/plot_nxy.py	/^import random$/;"	i
+random	peppercorn_old/old/plot_nxy.py	/^import random$/;"	i
+ranges	paramsearch/main.py	/^    ranges = [$/;"	v
+rates	peppercorn/odesystem.py	/^rates = {$/;"	v
+rates	peppercorn/old/biamp/odesystem.py	/^rates = {$/;"	v
+rates	peppercorn/old/odesystem.py	/^rates = {$/;"	v
+rates	peppercorn/old/rps/odesystem.py	/^rates = {$/;"	v
+rates	peppercorn_old/odesystem.py	/^rates = {$/;"	v
+rates	peppercorn_old/old/biamp/odesystem.py	/^rates = {$/;"	v
+rates	peppercorn_old/old/odesystem.py	/^rates = {$/;"	v
+rates	peppercorn_old/old/rps/odesystem.py	/^rates = {$/;"	v
+re	paramsearch/main.py	/^import re$/;"	i
+re	paramsearch/utils/generic.py	/^import re$/;"	i
+read_lines	peppercorn/old/plot_nxy.py	/^def read_lines(file):$/;"	f
+read_lines	peppercorn_old/old/plot_nxy.py	/^def read_lines(file):$/;"	f
+rn	paramsearch/main.py	/^        rn = fin.read()$/;"	v
+scipy	paramsearch/main.py	/^import scipy$/;"	i
+set_logger	peppercorn/odesystem.py	/^def set_logger(verbose, logfile):$/;"	f
+set_logger	peppercorn/old/biamp/odesystem.py	/^def set_logger(verbose, logfile):$/;"	f
+set_logger	peppercorn/old/odesystem.py	/^def set_logger(verbose, logfile):$/;"	f
+set_logger	peppercorn/old/rps/odesystem.py	/^def set_logger(verbose, logfile):$/;"	f
+set_logger	peppercorn_old/odesystem.py	/^def set_logger(verbose, logfile):$/;"	f
+set_logger	peppercorn_old/old/biamp/odesystem.py	/^def set_logger(verbose, logfile):$/;"	f
+set_logger	peppercorn_old/old/odesystem.py	/^def set_logger(verbose, logfile):$/;"	f
+set_logger	peppercorn_old/old/rps/odesystem.py	/^def set_logger(verbose, logfile):$/;"	f
+sns	peppercorn/old/plot_nxy.py	/^import seaborn as sns$/;"	i
+sns	peppercorn_old/old/plot_nxy.py	/^import seaborn as sns$/;"	i
+sys	paramsearch/__init__.py	/^import sys$/;"	i
+sys	paramsearch/main.py	/^import sys$/;"	i
+sys	peppercorn/old/plot_nxy.py	/^import sys$/;"	i
+sys	peppercorn_old/old/plot_nxy.py	/^import sys$/;"	i
+targets	paramsearch/main.py	/^                          targets=["O2"])$/;"	v
+time	paramsearch/main.py	/^                          time=1000,$/;"	v
+tqdm	paramsearch/main.py	/^from tqdm import tqdm$/;"	i
+tqdm	paramsearch/utils/generic.py	/^from tqdm import tqdm$/;"	i
+tqdm	peppercorn/old/plot_nxy.py	/^from tqdm import tqdm$/;"	i
+tqdm	peppercorn_old/old/plot_nxy.py	/^from tqdm import tqdm$/;"	i

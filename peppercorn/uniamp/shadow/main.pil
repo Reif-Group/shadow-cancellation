@@ -1,0 +1,10 @@
+length hCR = 15
+length fCR = 7
+length sCR = 7
+length mCR = 15
+
+shC = hCR fCR mCR sCR @initial 4 nM
+shReactCC = sCR*( mCR*( fCR* + ) ) hCR @initial 100 nM
+shProduceCC = fCR*( hCR*( fCR*( hCR*( sCR* + ) ) mCR sCR + ) ) mCR sCR  @initial 200 nM
+shHelperCC = fCR hCR fCR @initial 150 nM
+

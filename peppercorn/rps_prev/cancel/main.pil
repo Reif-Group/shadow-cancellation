@@ -1,0 +1,88 @@
+length hCj = 15
+length hCk = 15
+length fC = 7
+length sC = 7
+length mC = 15
+length hBr = 15
+length fB = 7
+length sB = 7
+length mB = 15
+
+
+length hBs = 15
+length hBr = 15
+length fB = 7
+length sB = 7
+length mB = 15
+length hAp = 15
+length fA = 7
+length sA = 7
+length mA = 15
+
+length hAq = 15
+length hAp = 15
+length fA = 7
+length sA = 7
+length mA = 15
+length hCk = 15
+length fC = 7
+length sC = 7
+length mC = 15
+
+
+Ap = sA mA fA hAp @initial 11 nM
+Aq = sA mA fA hAq @initial 1e-4 nM
+
+Br = sB mB fB hBr @initial 10 nM
+Bs = sB mB fB hBs @initial 1e-4 nM
+
+Cj = sC mC fC hCj @initial  3 nM
+Ck = sC mC fC hCk @initial 1e-4 nM
+
+
+length hCjR = 15
+length hCkR = 15
+length fCR = 7
+length sCR = 7
+length mCR = 15
+length hBrR = 15
+length fBR = 7
+length sBR = 7
+length mBR = 15
+
+
+length hBsR = 15
+length hBrR = 15
+length fBR = 7
+length sBR = 7
+length mBR = 15
+length hApR = 15
+length fAR = 7
+length sAR = 7
+length mAR = 15
+
+length hAqR = 15
+length hApR = 15
+length fAR = 7
+length sAR = 7
+length mAR = 15
+length hCkR = 15
+length fCR = 7
+length sCR = 7
+length mCR = 15
+
+shAp = hApR fAR mAR sAR @initial 11 nM
+shAq = hAqR fAR mAR sAR @initial 1e-4 nM
+
+shBr = hBrR fBR mBR sBR @initial 10 nM
+shBs = hBsR fBR mBR sBR @initial 1e-4 nM
+
+shCj = hCjR fCR mCR sCR @initial  3 nM
+shCk = hCkR fCR mCR sCR @initial 1e-4 nM
+
+CancelC = mCR( sCR( sC( mC( + fC* ) ) ) ) fCR* @initial 40 nM
+dispC = mCR sCR sC mC @initial 1e-5 nM
+CancelB = mBR( sBR( sB( mB( + fB* ) ) ) ) fBR* @initial 40 nM
+dispB = mBR sBR sB mB @initial 1e-5 nM
+CancelA = mAR( sAR( sA( mA( + fA* ) ) ) ) fAR* @initial 40 nM
+dispA = mAR sAR sA mA @initial 1e-5 nM

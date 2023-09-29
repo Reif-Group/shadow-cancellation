@@ -1,0 +1,15 @@
+length hC = 15
+length fC = 7
+length sC = 7
+length mC = 15
+length hB = 15
+length fB = 7
+length sB = 7
+length mB = 15
+
+
+C = sC mC fC hC @initial 4 nM
+B = sB mB fB hB @initial 0 nM
+ReactCB = hB sB( mC( + fC* ) ) @initial 100 nM
+ProduceBC = sC mC fC( hC( + sB mB fB( hB( + sB* ) ) ) )  @initial 200 nM
+HelperBC = fC hC fB @initial 150 nM
