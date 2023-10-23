@@ -492,11 +492,11 @@ reaction [condensed    = 0.001 /nM/s ] R6_ProduceBEmVm + R6_FluxEmB -> R6_10 + E
 # --------
 ##R7: Vp -> W
 # Resting complexes (8) 
-R7_ReactVpW = hW sVp( mVp( + fVp* ) ) @initial 800 nM
+R7_ReactVpW = hW sVp( mVp( + fVp* ) ) @initial 80 nM
 R7_6 = sVp( mVp( fVp( hVp + ) ) )
 R7_7 = hW sVp mVp
 R7_12 = hW( sVp( mVp + ) ) fW*
-R7_ProduceVpW = sW mW fW( hW( + sVp* ) ) @initial 2000 nM
+R7_ProduceVpW = sW mW fW( hW( + sVp* ) ) @initial 200 nM
 
 # Resting macrostates (8) 
 macrostate R7_ReactVpW = [R7_ReactVpW]
@@ -507,14 +507,14 @@ macrostate R7_ProduceVpW = [R7_ProduceVpW]
 
 
 # Condensed reactions (3) 
-reaction [condensed    =  0.000001 /nM/s ] R7_ReactVpW + Vp -> R7_6 + R7_7
+reaction [condensed    =  0.00001 /nM/s ] R7_ReactVpW + Vp -> R7_6 + R7_7
 reaction [condensed    = 0.001 /nM/s ] R7_7 + R7_ProduceVpW -> R7_12 + W
 # reaction [condensed    = 0.001 /nM/s ] R7_12 + W7 -> R7_7 + R7_ProduceVpW # Removing if one reactant is W
 
 
 ##R8: Vm -> W
 # Resting complexes (8) 
-R8_ReactVmW = hW sVm( mVm( + fVm* ) ) @initial 800 nM
+R8_ReactVmW = hW sVm( mVm( + fVm* ) ) @initial 80 nM
 R8_6 = sVm( mVm( fVm( hVm + ) ) )
 R8_7 = hW sVm mVm
 R8_12 = hW( sVm( mVm + ) ) fW*
@@ -532,7 +532,7 @@ macrostate R8_ProduceVmW = [R8_ProduceVmW]
 
 
 # Condensed reactions (3) 
-reaction [condensed    =  0.000001 /nM/s ] R8_ReactVmW + Vm -> R8_6 + R8_7
+reaction [condensed    =  0.00001 /nM/s ] R8_ReactVmW + Vm -> R8_6 + R8_7
 reaction [condensed    = 0.001 /nM/s ] R8_7 + R8_ProduceVmW -> R8_12 + W
 # reaction [condensed    = 0.001 /nM/s ] R8_12 + W -> R8_7 + R8_ProduceVmW
 
@@ -679,12 +679,12 @@ reaction [condensed    = 0.001 /nM/s ] R12_ProduceBYmEp + R12_FluxYmB -> R12_10 
 ##-------
 ##R13: Ep -> W
 # Resting complexes (8) 
-R13_ReactEpW = hW sEp( mEp( + fEp* ) ) @initial 800 nM
+R13_ReactEpW = hW sEp( mEp( + fEp* ) ) @initial 80 nM
 R13_6 = sEp( mEp( fEp( hEp + ) ) )
 R13_7 = hW sEp mEp
 R13_12 = hW( sEp( mEp + ) ) fW*
 W = sW mW fW hW @initial 0 nM
-R13_ProduceEpW = sW mW fW( hW( + sEp* ) ) @initial 2000 nM
+R13_ProduceEpW = sW mW fW( hW( + sEp* ) ) @initial 200 nM
 
 
 # Resting macrostates (8) 
@@ -697,19 +697,19 @@ macrostate R13_ProduceEpW = [R13_ProduceEpW]
 
 
 # Condensed reactions (3) 
-reaction [condensed    =  0.000001 /nM/s ] R13_ReactEpW + Ep -> R13_6 + R13_7
+reaction [condensed    =  0.00001 /nM/s ] R13_ReactEpW + Ep -> R13_6 + R13_7
 reaction [condensed    = 0.001 /nM/s ] R13_7 + R13_ProduceEpW -> R13_12 + W
 # reaction [condensed    = 0.001 /nM/s ] R13_12 + W -> R13_7 + R13_ProduceEpW
 
 
 ##R14: Em -> W
 # Resting complexes (8) 
-R14_ReactEmW = hW sEm( mEm( + fEm* ) ) @initial 800 nM
+R14_ReactEmW = hW sEm( mEm( + fEm* ) ) @initial 80 nM
 R14_6 = sEm( mEm( fEm( hEm + ) ) )
 R14_7 = hW sEm mEm
 R14_12 = hW( sEm( mEm + ) ) fW*
 W = sW mW fW hW @initial 0 nM
-R14_ProduceEmW = sW mW fW( hW( + sEm* ) ) @initial 2000 nM
+R14_ProduceEmW = sW mW fW( hW( + sEm* ) ) @initial 200 nM
 
 
 # Resting macrostates (8) 
@@ -722,7 +722,7 @@ macrostate R14_ProduceEmW = [R14_ProduceEmW]
 
 
 # Condensed reactions (3) 
-reaction [condensed    =  0.000001 /nM/s ] R14_ReactEmW + Em -> R14_6 + R14_7
+reaction [condensed    =  0.00001 /nM/s ] R14_ReactEmW + Em -> R14_6 + R14_7
 reaction [condensed    = 0.001 /nM/s ] R14_7 + R14_ProduceEmW -> R14_12 + W
 # reaction [condensed    = 0.001 /nM/s ] R14_12 + W -> R14_7 + R14_ProduceEmW
 

@@ -1,0 +1,33 @@
+length hX1 = 15
+length hX2 = 15
+length fX1 = 7
+length fX2 = 7
+length sX1 = 7
+length sX2 = 7
+length mX1 = 15
+length mX2 = 15
+length mB = 15
+length fB = 7
+length hB = 15
+length mB = 15
+
+length hX1R = 15
+length hX2R = 15
+length fX1R = 7
+length fX2R = 7
+length sX1R = 7
+length sX2R = 7
+length mX1R = 15
+length mX2R = 15
+length mBR = 15
+length fBR = 7
+length hBR = 15
+length mBR = 15
+
+
+X1 = sX1 mX1 fX1 hX1 @initial 2 nM
+shX1 = sX1R mX1R fX1R hX1R @initial 1e-5 nM
+
+
+R_NUM_CancelX1 = mX1R( sX1R( sX1( mX1( + fX1* ) ) ) ) fX1R* @initial 30 nM
+R_NUM_dispX1 = mX1R sX1R sX1 mX1 @initial 0 nM

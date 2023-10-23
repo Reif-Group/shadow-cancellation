@@ -15,7 +15,7 @@ length sW = 7
 length sX1 = 7
 
 # Resting complexes (8) 
-R_NUM_ReactX1W = hW sX1( mX1( + fX1* ) ) @initial 1000 nM
+R_NUM_ReactX1W = hW sX1( mX1( + fX1* ) ) @initial 80 nM
 R_NUM_6 = sX1( mX1( fX1( hX1 + ) ) )
 R_NUM_7 = hW sX1 mX1
 R_NUM_12 = hW( sX1( mX1 + ) ) fW*
@@ -35,7 +35,7 @@ macrostate R_NUM_ProduceX1W = [R_NUM_ProduceX1W]
 macrostate X1 = [X1]
 
 # Condensed reactions (3) 
-reaction [condensed    =  0.0001 /nM/s ] R_NUM_ReactX1W + X1 -> R_NUM_6 + R_NUM_7
+reaction [condensed    =  0.00001 /nM/s ] R_NUM_ReactX1W + X1 -> R_NUM_6 + R_NUM_7
 reaction [condensed    = 0.001 /nM/s ] R_NUM_7 + R_NUM_ProduceX1W -> R_NUM_12 + W
 # reaction [condensed    = 0.001 /nM/s ] R_NUM_12 + W -> R_NUM_7 + R_NUM_ProduceX1W
-reaction [condensed    = 0.1 /s] O1 -> W
+reaction [condensed    = 0.0008 /s] O1 -> W
