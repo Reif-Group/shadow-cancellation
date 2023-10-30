@@ -1,9 +1,34 @@
-length hC = 15
-length fC = 7
-length sC = 7
-length mC = 15
+length hCj = 15
+length hCk = 15
+length fCj = 7
+length fCk = 7
+length sCj = 7
+length sCk = 7
+length mCj = 15
+length mCk = 15
+length mB = 15
+length fB = 7
+length hB = 15
+length mB = 15
 
-C = sC mC fC hC @initial 4 nM
-ReactCC = hC sC( mC( + fC* ) ) @initial 100 nM
-ProduceCC = sC mC fC( hC( + sC mC fC( hC( + sC* ) ) ) )  @initial 200 nM
-HelperCC = fC hC fC @initial 150 nM
+length fO1 = 7
+length fO2 = 7
+length sO1 = 7
+length sO2 = 7
+length mO1 = 15
+length mO2 = 15
+length hO1 = 15
+length hO2 = 15
+
+
+Cj = sCj mCj fCj hCj @initial 1 nM
+Ck = sCk mCk fCk hCk @initial 1e-5 nM
+O1 = sO1 mO1 fO1 hO1 @initial 1 nM
+O2 = sO2 mO2 fO2 hO2 @initial 1e-5 nM
+
+
+ReactCjB = hCj fB( hB( + fB( sCj( mCj( + fCj* ) ) ) ) ) @initial 100 nM
+BackBCj = fB sCj mCj @initial 1000 nM
+HelperBCj = fB hB fB @initial 100 nM
+ProduceBCjCk = sCk mCk fCk( hCk( + sCj mCj fCj( hCj( + fB* ) ) ) ) @initial 100 nM
+HelperCjCk = fCk hCk fCj @initial 100 nM

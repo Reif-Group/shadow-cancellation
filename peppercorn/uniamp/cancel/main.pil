@@ -1,14 +1,14 @@
-length hC = 15
-length fC = 7
-length sC = 7
-length mC = 15
-length hCR = 15
-length fCR = 7
-length sCR = 7
-length mCR = 15
+length hCj = 15
+length fCj = 7
+length sCj = 7
+length mCj = 15
+length hCjR = 15
+length fCjR = 7
+length sCjR = 7
+length mCjR = 15
 
-C = sC mC fC hC @initial 4 nM
-shC = hCR fCR mCR sCR @initial 0.1 nM
+Cj = sCj mCj fCj hCj @initial 4 nM
+shCj = hCjR fCjR mCjR sCjR @initial 1 nM
 
-CancelC = mCR( sCR( sC( mC( + fC* ) ) ) ) fCR* @initial 30 nM
-dispC = mCR sCR sC mC @initial 0 nM
+CancelC = mCjR( sCjR( sCj( mCj( + fCj* ) ) ) ) fCjR* @initial 30 nM
+dispC = mCjR sCjR sCj mCj @initial 0 nM

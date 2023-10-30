@@ -31,9 +31,9 @@ shA = hAR fAR mAR sAR @initial 3 nM
 shB = hBR fBR mBR sBR @initial 8 nM
 shY = hYR fYR mYR sYR @initial 5 nM
 
-CancelA = mAR( sAR( sA( mA( + fA* ) ) ) ) fAR* @initial 20 nM
+CancelA = mAR( sAR( sA( mA( + fA* ) ) ) ) fAR* @initial 100 nM
 dispA = mAR sAR sA mA @initial 1e-5 nM
-CancelB = mBR( sBR( sB( mB( + fB* ) ) ) ) fBR* @initial 20 nM
+CancelB = mBR( sBR( sB( mB( + fB* ) ) ) ) fBR* @initial 100 nM
 dispB = mBR sBR sB mB @initial 1e-5 nM
-CancelY = mYR( sYR( sY( mY( + fY* ) ) ) ) fYR* @initial 20 nM
+CancelY = mYR( sYR( sY( mY( + fY* ) ) ) ) fYR* @initial 100 nM
 dispY = mYR sYR sY mY @initial 1e-5 nM

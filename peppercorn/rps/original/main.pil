@@ -1,33 +1,42 @@
-length hC = 15
+length hCj = 15
+length hCk = 15
 length fC = 7
 length sC = 7
 length mC = 15
-length hB = 15
+length hBr = 15
+length hBs = 15
 length fB = 7
 length sB = 7
 length mB = 15
-length hA = 15
+length hAp = 15
+length hAq = 15
 length fA = 7
 length sA = 7
 length mA = 15
 
+Ap = sA mA fA hAp @initial 11 nM
+Aq = sA mA fA hAq @initial 1e-5 nM
+Br = sB mB fB hBr @initial 10 nM
+Bs = sB mB fB hBs @initial 1e-5 nM
+Cj = sC mC fC hCj @initial 3 nM
+Ck = sC mC fC hCk @initial 1e-5 nM
 
-A = sA mA fA hA @initial 11 nM
-B = sB mB fB hB @initial 10 nM
-C = sC mC fC hC @initial 3 nM
+ReactCBCj = hCj sB( mB( + fB( sC( mC( + fC* ) ) ) ) ) @initial 300 nM
+ProduceBCjCk = sC mC fC( hCk( + sC mC fC( hCj( + sB* ) ) ) ) @initial 300 nM
+BackCB = fB sC mC @initial 2000 nM
+HelperCCk = fC hCk fC @initial 200 nM
 
+# ---------
 
-ReactCBC = fB( sC( mC( + fC* ) ) ) mB*( sB*( + hC ) ) @initial 200 nM
-ProduceBCC = sC mC fC( hC( + sB* ) ) hC*( fC*( + sC mC ) ) @initial 200 nM
-BackCB = fB sC mC @initial 200 nM
-HelperCC = fC hC fC @initial 150 nM
+ReactBABr = hBr sA( mA( + fA( sB( mB( + fB* ) ) ) ) ) @initial 300 nM
+ProduceABrBs = sB mB fB( hBs( + sB mB fB( hBr( + sA* ) ) ) ) @initial 300 nM
+BackBA = fA sB mB @initial 2000 nM
+HelperBBs = fB hBs fB @initial 200 nM
 
-ReactBAB = fA( sB( mB( + fB* ) ) ) mA*( sA*( + hB ) ) @initial 200 nM
-ProduceABB = sB mB fB( hB( + sA* ) ) hB*( fB*( + sB mB ) ) @initial 200 nM
-BackBA = fA sB mB @initial 200 nM
-HelperBB = fB hB fB @initial 150 nM
+# -------
 
-ReactACA = fC( sA( mA( + fA* ) ) ) mC*( sC*( + hA ) ) @initial 200 nM
-ProduceCAA = sA mA fA( hA( + sC* ) ) hA*( fA*( + sA mA ) ) @initial 200 nM
-BackAC = fC sA mA @initial 200 nM
-HelperAA = fA hA fA @initial 150 nM
+ReactACAp = hAp sC( mC( + fC( sA( mA( + fA* ) ) ) ) ) @initial 300 nM
+ProduceCApAq = sA mA fA( hAq( + sA mA fA( hAp( + sC* ) ) ) ) @initial 300 nM
+BackAC = fC sA mA @initial 2000 nM
+HelperAAq = fA hAq fA @initial 200 nM
+

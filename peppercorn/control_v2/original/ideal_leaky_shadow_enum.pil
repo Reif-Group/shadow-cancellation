@@ -10,11 +10,20 @@ length mXp = 15
 length sEp = 7
 length sXp = 7
 
+length fO1 = 7
+length fO2 = 7
+length sO1 = 7
+length sO2 = 7
+length mO1 = 15
+length mO2 = 15
+length hO1 = 15
+length hO2 = 15
+
 # Signal strands
 Ep = sEp mEp fEp hEp @initial 0 nM
 Em = sEm mEm fEm hEm @initial 0 nM
-Xp = sXp mXp fXp hXp @initial 1 nM
-Xm = sXm mXm fXm hXm @initial 0 nM
+Xp = sXp mXp fXp hXp @initial 2 nM
+Xm = sXm mXm fXm hXm @initial 1 nM
 Yp = sYp mYp fYp hYp @initial 0 nM
 Ym = sYm mYm fYm hYm @initial 0 nM
 Vp = sVp mVp fVp hVp @initial 0 nM
@@ -24,7 +33,9 @@ Lm = sLm mLm fLm hLm @initial 0 nM
 Rp = sRp mRp fRp hRp @initial 4 nM
 Rm = sRm mRm fRm hRm @initial 0 nM
 W = sW mW fW hW @initial 0 nM
-
+O1 = sO1 mO1 fO1 hO1 @initial 1 nM
+O2 = sO2 mO2 fO2 hO2 @initial 1 nM
+ 
 # Signal strands
 Ideal_Ep = sEp mEp fEp hEp @initial 0 nM
 Ideal_Em = sEm mEm fEm hEm @initial 0 nM
@@ -247,6 +258,8 @@ length sW = 7
 length sYp = 7
 length sYm = 7
 
+
+
 macrostate Ep = [Ep]
 macrostate Em = [Em]
 macrostate Xp = [Xp]
@@ -260,6 +273,8 @@ macrostate Lm = [Lm]
 macrostate Rp = [Rp]
 macrostate Rm = [Rm]
 macrostate W = [W]
+macrostate O1 = [O1]
+macrostate O2 = [O2]
 
 ## Ideal
 macrostate Ideal_Ep = [Ideal_Ep]
@@ -277,183 +292,666 @@ macrostate Ideal_Rm = [Ideal_Rm]
 macrostate Ideal_W = [Ideal_W]
 
 
+# R1: Ep --> Ep + Xp
+# Resting complexes (12) 
+R1_HelperBEp = fB hB fB @initial 100 nM
+R1_27 = sEp( mEp( fEp( hEp + ) ) ) fB*( hB*( fB*( + ) ) )
+R1_BackBEp = fB sEp mEp @initial 1000 nM
+R1_ReactEpB = hEp fB( hB( + fB( sEp( mEp( + fEp* ) ) ) ) ) @initial 100 nM
+R1_33 = fXp( hXp( fEp( + hEp( fB( hB + ) ) ) ) )
+R1_9 = fB*( hEp*( fEp* hXp*( fXp*( + sXp mXp ) ) + ) ) hB
+R1_ProduceBEpXp = sXp mXp fXp( hXp( + sEp mEp fEp( hEp( + fB* ) ) ) ) @initial 100 nM
+R1_19 = fEp*( mEp*( sEp*( fB* hB*( fB*( + hEp ) ) + ) ) ) hEp
+R1_HelperEpXp = fXp hXp fEp @initial 100 nM
+R1_FluxEpB = hEp fB hB
+# Ep = sEp mEp fEp hEp @initial 1 nM
+# Xp = sXp mXp fXp hXp @initial 1e-05 nM
+
+# O1 = sO1 mO1 fO1 hO1 @initial 1 nM
+# O2 = sO2 mO2 fO2 hO2 @initial 1e-5 nM
+
+# Resting complexes (12) 
+shR1_HelperBEp = fBR hBR fBR @initial 100 nM
+shR1_34 = fBR( hBR( fBR( + ) ) ) sEpR*( mEpR*( fEpR*( + hEpR ) ) )
+shR1_9 = hBR( fBR( hEpR + ) ) fBR* sEpR*( mEpR*( fEpR*( + hEpR ) ) )
+shR1_ReactEpB = fBR*( hBR*( fBR*( sEpR*( mEpR*( fEpR* + ) ) ) + ) ) hEpR @initial 100 nM
+shR1_HelperEpXp = fEpR hXpR fXpR @initial 100 nM
+shR1_24 = fXpR*( hXpR*( fEpR*( hEpR*( fBR*( + hBR ) ) + ) ) )
+shR1_19 = hBR fBR( hEpR( + hXpR( fXpR( mXpR sXpR + ) ) fEpR* ) )
+shR1_ProduceBEpXp = fXpR*( hXpR*( fEpR*( hEpR*( fBR* + ) ) mEpR sEpR + ) ) mXpR sXpR @initial 100 nM
+shR1_FluxEpB = hBR fBR hEpR
+shEp = hEpR fEpR mEpR sEpR @initial 0 nM
+shXp = hXpR fXpR mXpR sXpR @initial 0 nM
+shR1_BackBEp = mEpR sEpR fBR @initial 1000 nM
+
+EC_R1_7 = mXpR sXpR sXp( mXp( + fXp* ) ) sXpR*( mXpR*( fXpR*( + hXpR ) ) )
+EC_R1_4 = mXpR( sXpR( sXp( mXp( + fXp* ) ) ) ) fXpR*( + hXpR ) mXpR sXpR
+EC_R1_12 = fXp*( mXp*( sXp*( sXpR*( mXpR*( fXpR*( + hXpR ) ) ) + ) ) ) hXp
+R1_CancelXp = mXpR( sXpR( sXp( mXp( + fXp* ) ) ) ) fXpR* @initial 10 nM
+EC_R1_2 = fXp*( mXp*( sXp*( sXpR*( mXpR*( fXpR* + ) ) ) ) + sXp mXp ) hXp
+EC_R1_5 = fXp*( mXp*( sXp*( sXpR*( mXpR*( fXpR* + ) ) sXp mXp + ) ) ) hXp
+R1_dispXp = mXpR sXpR sXp mXp @initial 0 nM
+
+
+# Resting macrostates (12) 
+macrostate R1_HelperBEp = [R1_HelperBEp]
+macrostate R1_27 = [R1_27]
+macrostate R1_BackBEp = [R1_BackBEp]
+macrostate R1_ReactEpB = [R1_ReactEpB]
+macrostate R1_33 = [R1_33]
+macrostate R1_9 = [R1_9]
+macrostate R1_ProduceBEpXp = [R1_ProduceBEpXp]
+macrostate R1_19 = [R1_19]
+macrostate R1_HelperEpXp = [R1_HelperEpXp]
+macrostate R1_FluxEpB = [R1_FluxEpB]
+macrostate Ep = [Ep]
+macrostate Xp = [Xp]
+
+macrostate shR1_HelperBEp = [shR1_HelperBEp]
+macrostate shR1_34 = [shR1_34]
+macrostate shR1_9 = [shR1_9]
+macrostate shR1_ReactEpB = [shR1_ReactEpB]
+macrostate shR1_HelperEpXp = [shR1_HelperEpXp]
+macrostate shR1_24 = [shR1_24]
+macrostate shR1_19 = [shR1_19]
+macrostate shR1_ProduceBEpXp = [shR1_ProduceBEpXp]
+macrostate shR1_FluxEpB = [shR1_FluxEpB]
+macrostate shEp = [shEp]
+macrostate shXp = [shXp]
+macrostate shR1_BackBEp = [shR1_BackBEp]
+
+macrostate EC_R1_7 = [EC_R1_4, EC_R1_7]
+macrostate EC_R1_12 = [EC_R1_12]
+macrostate R1_CancelXp = [R1_CancelXp]
+macrostate EC_R1_2 = [EC_R1_2, EC_R1_5]
+macrostate shXp = [shXp]
+macrostate R1_dispXp = [R1_dispXp]
+macrostate Xp = [Xp]
+
+macrostate O1 = [O1]
+macrostate O2 = [O2]
+
+
+# Condensed reactions (6) 
+reaction [condensed    = 0.002 /nM/s ] R1_HelperBEp + R1_19 -> R1_27 + R1_FluxEpB
+reaction [condensed    = 0.002 /nM/s ] R1_BackBEp + R1_19 -> R1_ReactEpB + Ep
+reaction [condensed    = 0.0001 /nM/s ] R1_ReactEpB + Ep -> R1_BackBEp + R1_19
+reaction [condensed    =  0.002 /nM/s ] R1_9 + R1_HelperEpXp -> R1_33 + Xp
+reaction [condensed    = 0.002 /nM/s ] R1_9 + Ep -> R1_ProduceBEpXp + R1_FluxEpB
+reaction [condensed    = 0.002 /nM/s ] R1_ProduceBEpXp + R1_FluxEpB -> R1_9 + Ep
+#Leak
+# reaction [condensed    = 13e-9 /nM/s ] R1_ProduceBEpXp + R1_HelperEpXp -> Xp
+
+# Shadow
+reaction [condensed    = 0.002 /nM/s ] shR1_HelperBEp + shR1_9 -> shR1_34 + shR1_FluxEpB
+reaction [condensed    = 0.002 /nM/s ] shR1_9 + shR1_BackBEp -> shR1_ReactEpB + shEp
+reaction [condensed    = 0.0001 /nM/s ] shR1_ReactEpB + shEp -> shR1_9 + shR1_BackBEp
+reaction [condensed    =  0.002 /nM/s ] shR1_HelperEpXp + shR1_19 -> shR1_24 + shXp
+reaction [condensed    = 0.002 /nM/s ] shR1_19 + shEp -> shR1_ProduceBEpXp + shR1_FluxEpB
+reaction [condensed    = 0.002 /nM/s ] shR1_ProduceBEpXp + shR1_FluxEpB -> shR1_19 + shEp
+#Leak
+# reaction [condensed    = 13e-9 /nM/s ] shR1_ProduceBEpXp + shR1_HelperEpXp -> shXp
+
+reaction [condensed    =  0.05 /s   ] EC_R1_7 -> R1_CancelXp + shXp
+reaction [condensed    =     0.002 /nM/s ] EC_R1_7 + Xp -> EC_R1_12 + R1_dispXp
+reaction [condensed    =     0.002 /nM/s ] R1_CancelXp + shXp -> EC_R1_7
+reaction [condensed    =     0.002 /nM/s ] R1_CancelXp + Xp -> EC_R1_2
+reaction [condensed    =  0.05 /s   ] EC_R1_2 -> R1_CancelXp + Xp
+reaction [condensed    =     0.002 /nM/s ] EC_R1_2 + shXp -> EC_R1_12 + R1_dispXp
+#Buffer
+reaction [condensed    = 2e-4 /s] O1 -> O1 + R1_CancelXp
 
 
 # R2: Em -> Em + Xm
-# Resting complexes (14) 
-R2_HelperBEm = fB hB fB @initial 1000 nM # cat_help_1
-R2_34 = sEm( mEm( fEm( hEm + ) ) ) fB*( hB*( fB*( + ) ) )
-R2_BackBEm = fB sEm mEm @initial 10000 nM # cat_back
-R2_ReactEmB = hEm fB( hB( + fB( sEm( mEm( + fEm* ) ) ) ) ) @initial 300 nM # cat_react
-R2_17 = fXm( hXm( fEm( + hEm( fB( hB + ) ) ) ) )
-R2_10 = fB*( hEm*( fEm* hXm*( fXm*( + sXm mXm ) ) + ) ) hB
-R2_ProduceBEmXm = sXm mXm fXm( hXm( + sEm mEm fEm( hEm( + fB* ) ) ) ) @initial 1000 nM # cat_prod
-R2_25 = sEm( mEm( fEm( hEm + ) ) ) fB* hB*( fB*( + hEm ) )
-R2_HelperEmXm = fXm hXm fEm @initial 1000 nM # cat_help_2
+# Resting complexes (12) 
+R2_HelperBEm = fB hB fB @initial 100 nM
+R2_27 = sEm( mEm( fEm( hEm + ) ) ) fB*( hB*( fB*( + ) ) )
+R2_BackBEm = fB sEm mEm @initial 1000 nM
+R2_ReactEmB = hEm fB( hB( + fB( sEm( mEm( + fEm* ) ) ) ) ) @initial 100 nM
+R2_33 = fXm( hXm( fEm( + hEm( fB( hB + ) ) ) ) )
+R2_9 = fB*( hEm*( fEm* hXm*( fXm*( + sXm mXm ) ) + ) ) hB
+R2_ProduceBEmXm = sXm mXm fXm( hXm( + sEm mEm fEm( hEm( + fB* ) ) ) ) @initial 100 nM
+R2_19 = fEm*( mEm*( sEm*( fB* hB*( fB*( + hEm ) ) + ) ) ) hEm
+R2_HelperEmXm = fXm hXm fEm @initial 100 nM
 R2_FluxEmB = hEm fB hB
+# Em = sEm mEm fEm hEm @initial 1 nM
+# Xm = sXm mXm fXm hXm @initial 1e-05 nM
 
-# Resting macrostates (14) 
+# O1 = sO1 mO1 fO1 hO1 @initial 1 nM
+# O2 = sO2 mO2 fO2 hO2 @initial 1e-5 nM
+
+# Resting complexes (12) 
+shR2_HelperBEm = fBR hBR fBR @initial 100 nM
+shR2_34 = fBR( hBR( fBR( + ) ) ) sEmR*( mEmR*( fEmR*( + hEmR ) ) )
+shR2_9 = hBR( fBR( hEmR + ) ) fBR* sEmR*( mEmR*( fEmR*( + hEmR ) ) )
+shR2_ReactEmB = fBR*( hBR*( fBR*( sEmR*( mEmR*( fEmR* + ) ) ) + ) ) hEmR @initial 100 nM
+shR2_HelperEmXm = fEmR hXmR fXmR @initial 100 nM
+shR2_24 = fXmR*( hXmR*( fEmR*( hEmR*( fBR*( + hBR ) ) + ) ) )
+shR2_19 = hBR fBR( hEmR( + hXmR( fXmR( mXmR sXmR + ) ) fEmR* ) )
+shR2_ProduceBEmXm = fXmR*( hXmR*( fEmR*( hEmR*( fBR* + ) ) mEmR sEmR + ) ) mXmR sXmR @initial 100 nM
+shR2_FluxEmB = hBR fBR hEmR
+shEm = hEmR fEmR mEmR sEmR @initial 0 nM
+shXm = hXmR fXmR mXmR sXmR @initial 0 nM
+shR2_BackBEm = mEmR sEmR fBR @initial 1000 nM
+
+EC_R2_7 = mXmR sXmR sXm( mXm( + fXm* ) ) sXmR*( mXmR*( fXmR*( + hXmR ) ) )
+EC_R2_4 = mXmR( sXmR( sXm( mXm( + fXm* ) ) ) ) fXmR*( + hXmR ) mXmR sXmR
+EC_R2_12 = fXm*( mXm*( sXm*( sXmR*( mXmR*( fXmR*( + hXmR ) ) ) + ) ) ) hXm
+R2_CancelXm = mXmR( sXmR( sXm( mXm( + fXm* ) ) ) ) fXmR* @initial 10 nM
+EC_R2_2 = fXm*( mXm*( sXm*( sXmR*( mXmR*( fXmR* + ) ) ) ) + sXm mXm ) hXm
+EC_R2_5 = fXm*( mXm*( sXm*( sXmR*( mXmR*( fXmR* + ) ) sXm mXm + ) ) ) hXm
+R2_dispXm = mXmR sXmR sXm mXm @initial 0 nM
+
+
+# Resting macrostates (12) 
 macrostate R2_HelperBEm = [R2_HelperBEm]
-macrostate R2_34 = [R2_34]
+macrostate R2_27 = [R2_27]
 macrostate R2_BackBEm = [R2_BackBEm]
 macrostate R2_ReactEmB = [R2_ReactEmB]
-macrostate R2_17 = [R2_17]
-macrostate R2_10 = [R2_10]
+macrostate R2_33 = [R2_33]
+macrostate R2_9 = [R2_9]
 macrostate R2_ProduceBEmXm = [R2_ProduceBEmXm]
-macrostate R2_25 = [R2_25]
+macrostate R2_19 = [R2_19]
 macrostate R2_HelperEmXm = [R2_HelperEmXm]
 macrostate R2_FluxEmB = [R2_FluxEmB]
+macrostate Em = [Em]
+macrostate Xm = [Xm]
+
+macrostate shR2_HelperBEm = [shR2_HelperBEm]
+macrostate shR2_34 = [shR2_34]
+macrostate shR2_9 = [shR2_9]
+macrostate shR2_ReactEmB = [shR2_ReactEmB]
+macrostate shR2_HelperEmXm = [shR2_HelperEmXm]
+macrostate shR2_24 = [shR2_24]
+macrostate shR2_19 = [shR2_19]
+macrostate shR2_ProduceBEmXm = [shR2_ProduceBEmXm]
+macrostate shR2_FluxEmB = [shR2_FluxEmB]
+macrostate shEm = [shEm]
+macrostate shXm = [shXm]
+macrostate shR2_BackBEm = [shR2_BackBEm]
+
+macrostate EC_R2_7 = [EC_R2_4, EC_R2_7]
+macrostate EC_R2_12 = [EC_R2_12]
+macrostate R2_CancelXm = [R2_CancelXm]
+macrostate EC_R2_2 = [EC_R2_2, EC_R2_5]
+macrostate shXm = [shXm]
+macrostate R2_dispXm = [R2_dispXm]
+macrostate Xm = [Xm]
+
+macrostate O1 = [O1]
+macrostate O2 = [O2]
 
 
 # Condensed reactions (6) 
-reaction [condensed    = 0.004 /nM/s ] R2_HelperBEm + R2_25 -> R2_34 + R2_FluxEmB
-reaction [condensed    = 0.001 /nM/s ] R2_BackBEm + R2_25 -> R2_ReactEmB + Em
-reaction [condensed    = 0.00001 /nM/s ] R2_ReactEmB + Em -> R2_BackBEm + R2_25
-reaction [condensed    =  0.002 /nM/s ] R2_10 + R2_HelperEmXm -> R2_17 + Xm
-reaction [condensed    = 0.001 /nM/s ] R2_10 + Em -> R2_ProduceBEmXm + R2_FluxEmB
-reaction [condensed    = 0.001 /nM/s ] R2_ProduceBEmXm + R2_FluxEmB -> R2_10 + Em
+reaction [condensed    = 0.002 /nM/s ] R2_HelperBEm + R2_19 -> R2_27 + R2_FluxEmB
+reaction [condensed    = 0.002 /nM/s ] R2_BackBEm + R2_19 -> R2_ReactEmB + Em
+reaction [condensed    = 0.0001 /nM/s ] R2_ReactEmB + Em -> R2_BackBEm + R2_19
+reaction [condensed    =  0.002 /nM/s ] R2_9 + R2_HelperEmXm -> R2_33 + Xm
+reaction [condensed    = 0.002 /nM/s ] R2_9 + Em -> R2_ProduceBEmXm + R2_FluxEmB
+reaction [condensed    = 0.002 /nM/s ] R2_ProduceBEmXm + R2_FluxEmB -> R2_9 + Em
+#Leak
+# reaction [condensed    = 13e-9 /nM/s ] R2_ProduceBEmXm + R2_HelperEmXm -> Xm
+
+# Shadow
+reaction [condensed    = 0.002 /nM/s ] shR2_HelperBEm + shR2_9 -> shR2_34 + shR2_FluxEmB
+reaction [condensed    = 0.002 /nM/s ] shR2_9 + shR2_BackBEm -> shR2_ReactEmB + shEm
+reaction [condensed    = 0.0001 /nM/s ] shR2_ReactEmB + shEm -> shR2_9 + shR2_BackBEm
+reaction [condensed    =  0.002 /nM/s ] shR2_HelperEmXm + shR2_19 -> shR2_24 + shXm
+reaction [condensed    = 0.002 /nM/s ] shR2_19 + shEm -> shR2_ProduceBEmXm + shR2_FluxEmB
+reaction [condensed    = 0.002 /nM/s ] shR2_ProduceBEmXm + shR2_FluxEmB -> shR2_19 + shEm
+#Leak
+# reaction [condensed    = 13e-9 /nM/s ] shR2_ProduceBEmXm + shR2_HelperEmXm -> shXm
+
+reaction [condensed    =  0.05 /s   ] EC_R2_7 -> R2_CancelXm + shXm
+reaction [condensed    =     0.002 /nM/s ] EC_R2_7 + Xm -> EC_R2_12 + R2_dispXm
+reaction [condensed    =     0.002 /nM/s ] R2_CancelXm + shXm -> EC_R2_7
+reaction [condensed    =     0.002 /nM/s ] R2_CancelXm + Xm -> EC_R2_2
+reaction [condensed    =  0.05 /s   ] EC_R2_2 -> R2_CancelXm + Xm
+reaction [condensed    =     0.002 /nM/s ] EC_R2_2 + shXm -> EC_R2_12 + R2_dispXm
+#Buffer
+reaction [condensed    = 2e-4 /s] O1 -> O1 + R2_CancelXm
+
 
 #---------
 # R3: Xp -> Xp + Vp
-# Resting complexes (14) 
-R3_HelperBXp = fB hB fB @initial 1000 nM # cat_help_1
-R3_34 = sXp( mXp( fXp( hXp + ) ) ) fB*( hB*( fB*( + ) ) )
-R3_BackBXp = fB sXp mXp @initial 10000 nM # cat_back
-R3_ReactXpB = hXp fB( hB( + fB( sXp( mXp( + fXp* ) ) ) ) ) @initial 300 nM # cat_react
-R3_17 = fVp( hVp( fXp( + hXp( fB( hB + ) ) ) ) )
-R3_10 = fB*( hXp*( fXp* hVp*( fVp*( + sVp mVp ) ) + ) ) hB
-R3_ProduceBXpVp = sVp mVp fVp( hVp( + sXp mXp fXp( hXp( + fB* ) ) ) ) @initial 1000 nM # cat_prod
-R3_25 = sXp( mXp( fXp( hXp + ) ) ) fB* hB*( fB*( + hXp ) )
-R3_HelperXpVp = fVp hVp fXp @initial 1000 nM # cat_help_2
+# Resting complexes (12) 
+R3_HelperBXp = fB hB fB @initial 100 nM
+R3_27 = sXp( mXp( fXp( hXp + ) ) ) fB*( hB*( fB*( + ) ) )
+R3_BackBXp = fB sXp mXp @initial 1000 nM
+R3_ReactXpB = hXp fB( hB( + fB( sXp( mXp( + fXp* ) ) ) ) ) @initial 100 nM
+R3_33 = fVp( hVp( fXp( + hXp( fB( hB + ) ) ) ) )
+R3_9 = fB*( hXp*( fXp* hVp*( fVp*( + sVp mVp ) ) + ) ) hB
+R3_ProduceBXpVp = sVp mVp fVp( hVp( + sXp mXp fXp( hXp( + fB* ) ) ) ) @initial 100 nM
+R3_19 = fXp*( mXp*( sXp*( fB* hB*( fB*( + hXp ) ) + ) ) ) hXp
+R3_HelperXpVp = fVp hVp fXp @initial 100 nM
 R3_FluxXpB = hXp fB hB
+# Xp = sXp mXp fXp hXp @initial 1 nM
+# Vp = sVp mVp fVp hVp @initial 1e-05 nM
 
-# Resting macrostates (14) 
+# O1 = sO1 mO1 fO1 hO1 @initial 1 nM
+# O2 = sO2 mO2 fO2 hO2 @initial 1e-5 nM
+
+# Resting complexes (12) 
+shR3_HelperBXp = fBR hBR fBR @initial 100 nM
+shR3_34 = fBR( hBR( fBR( + ) ) ) sXpR*( mXpR*( fXpR*( + hXpR ) ) )
+shR3_9 = hBR( fBR( hXpR + ) ) fBR* sXpR*( mXpR*( fXpR*( + hXpR ) ) )
+shR3_ReactXpB = fBR*( hBR*( fBR*( sXpR*( mXpR*( fXpR* + ) ) ) + ) ) hXpR @initial 100 nM
+shR3_HelperXpVp = fXpR hVpR fVpR @initial 100 nM
+shR3_24 = fVpR*( hVpR*( fXpR*( hXpR*( fBR*( + hBR ) ) + ) ) )
+shR3_19 = hBR fBR( hXpR( + hVpR( fVpR( mVpR sVpR + ) ) fXpR* ) )
+shR3_ProduceBXpVp = fVpR*( hVpR*( fXpR*( hXpR*( fBR* + ) ) mXpR sXpR + ) ) mVpR sVpR @initial 100 nM
+shR3_FluxXpB = hBR fBR hXpR
+shXp = hXpR fXpR mXpR sXpR @initial 0 nM
+shVp = hVpR fVpR mVpR sVpR @initial 0 nM
+shR3_BackBXp = mXpR sXpR fBR @initial 1000 nM
+
+EC_R3_7 = mVpR sVpR sVp( mVp( + fVp* ) ) sVpR*( mVpR*( fVpR*( + hVpR ) ) )
+EC_R3_4 = mVpR( sVpR( sVp( mVp( + fVp* ) ) ) ) fVpR*( + hVpR ) mVpR sVpR
+EC_R3_12 = fVp*( mVp*( sVp*( sVpR*( mVpR*( fVpR*( + hVpR ) ) ) + ) ) ) hVp
+R3_CancelVp = mVpR( sVpR( sVp( mVp( + fVp* ) ) ) ) fVpR* @initial 10 nM
+EC_R3_2 = fVp*( mVp*( sVp*( sVpR*( mVpR*( fVpR* + ) ) ) ) + sVp mVp ) hVp
+EC_R3_5 = fVp*( mVp*( sVp*( sVpR*( mVpR*( fVpR* + ) ) sVp mVp + ) ) ) hVp
+R3_dispVp = mVpR sVpR sVp mVp @initial 0 nM
+
+
+# Resting macrostates (12) 
 macrostate R3_HelperBXp = [R3_HelperBXp]
-macrostate R3_34 = [R3_34]
+macrostate R3_27 = [R3_27]
 macrostate R3_BackBXp = [R3_BackBXp]
 macrostate R3_ReactXpB = [R3_ReactXpB]
-macrostate R3_17 = [R3_17]
-macrostate R3_10 = [R3_10]
+macrostate R3_33 = [R3_33]
+macrostate R3_9 = [R3_9]
 macrostate R3_ProduceBXpVp = [R3_ProduceBXpVp]
-macrostate R3_25 = [R3_25]
+macrostate R3_19 = [R3_19]
 macrostate R3_HelperXpVp = [R3_HelperXpVp]
 macrostate R3_FluxXpB = [R3_FluxXpB]
+macrostate Xp = [Xp]
+macrostate Vp = [Vp]
+
+macrostate shR3_HelperBXp = [shR3_HelperBXp]
+macrostate shR3_34 = [shR3_34]
+macrostate shR3_9 = [shR3_9]
+macrostate shR3_ReactXpB = [shR3_ReactXpB]
+macrostate shR3_HelperXpVp = [shR3_HelperXpVp]
+macrostate shR3_24 = [shR3_24]
+macrostate shR3_19 = [shR3_19]
+macrostate shR3_ProduceBXpVp = [shR3_ProduceBXpVp]
+macrostate shR3_FluxXpB = [shR3_FluxXpB]
+macrostate shXp = [shXp]
+macrostate shVp = [shVp]
+macrostate shR3_BackBXp = [shR3_BackBXp]
+
+macrostate EC_R3_7 = [EC_R3_4, EC_R3_7]
+macrostate EC_R3_12 = [EC_R3_12]
+macrostate R3_CancelVp = [R3_CancelVp]
+macrostate EC_R3_2 = [EC_R3_2, EC_R3_5]
+macrostate shVp = [shVp]
+macrostate R3_dispVp = [R3_dispVp]
+macrostate Vp = [Vp]
+
+macrostate O1 = [O1]
+macrostate O2 = [O2]
+
 
 # Condensed reactions (6) 
-reaction [condensed    = 0.004 /nM/s ] R3_HelperBXp + R3_25 -> R3_34 + R3_FluxXpB
-reaction [condensed    = 0.001 /nM/s ] R3_BackBXp + R3_25 -> R3_ReactXpB + Xp
-reaction [condensed    = 0.00001 /nM/s ] R3_ReactXpB + Xp -> R3_BackBXp + R3_25
-reaction [condensed    =  0.002 /nM/s ] R3_10 + R3_HelperXpVp -> R3_17 + Vp
-reaction [condensed    = 0.001 /nM/s ] R3_10 + Xp -> R3_ProduceBXpVp + R3_FluxXpB
-reaction [condensed    = 0.001 /nM/s ] R3_ProduceBXpVp + R3_FluxXpB -> R3_10 + Xp
+reaction [condensed    = 0.002 /nM/s ] R3_HelperBXp + R3_19 -> R3_27 + R3_FluxXpB
+reaction [condensed    = 0.002 /nM/s ] R3_BackBXp + R3_19 -> R3_ReactXpB + Xp
+reaction [condensed    = 0.0001 /nM/s ] R3_ReactXpB + Xp -> R3_BackBXp + R3_19
+reaction [condensed    =  0.002 /nM/s ] R3_9 + R3_HelperXpVp -> R3_33 + Vp
+reaction [condensed    = 0.002 /nM/s ] R3_9 + Xp -> R3_ProduceBXpVp + R3_FluxXpB
+reaction [condensed    = 0.002 /nM/s ] R3_ProduceBXpVp + R3_FluxXpB -> R3_9 + Xp
+#Leak
+# reaction [condensed    = 13e-9 /nM/s ] R3_ProduceBXpVp + R3_HelperXpVp -> Vp
+
+# Shadow
+reaction [condensed    = 0.002 /nM/s ] shR3_HelperBXp + shR3_9 -> shR3_34 + shR3_FluxXpB
+reaction [condensed    = 0.002 /nM/s ] shR3_9 + shR3_BackBXp -> shR3_ReactXpB + shXp
+reaction [condensed    = 0.0001 /nM/s ] shR3_ReactXpB + shXp -> shR3_9 + shR3_BackBXp
+reaction [condensed    =  0.002 /nM/s ] shR3_HelperXpVp + shR3_19 -> shR3_24 + shVp
+reaction [condensed    = 0.002 /nM/s ] shR3_19 + shXp -> shR3_ProduceBXpVp + shR3_FluxXpB
+reaction [condensed    = 0.002 /nM/s ] shR3_ProduceBXpVp + shR3_FluxXpB -> shR3_19 + shXp
+#Leak
+# reaction [condensed    = 13e-9 /nM/s ] shR3_ProduceBXpVp + shR3_HelperXpVp -> shVp
+
+reaction [condensed    =  0.05 /s   ] EC_R3_7 -> R3_CancelVp + shVp
+reaction [condensed    =     0.002 /nM/s ] EC_R3_7 + Vp -> EC_R3_12 + R3_dispVp
+reaction [condensed    =     0.002 /nM/s ] R3_CancelVp + shVp -> EC_R3_7
+reaction [condensed    =     0.002 /nM/s ] R3_CancelVp + Vp -> EC_R3_2
+reaction [condensed    =  0.05 /s   ] EC_R3_2 -> R3_CancelVp + Vp
+reaction [condensed    =     0.002 /nM/s ] EC_R3_2 + shVp -> EC_R3_12 + R3_dispVp
+#Buffer
+reaction [condensed    = 2e-4 /s] O1 -> O1 + R3_CancelVp
 
 ## R4: Xm -> Xm + Vm
-# Resting complexes (14) 
-R4_HelperBXm = fB hB fB @initial 1000 nM # cat_help_1
-R4_34 = sXm( mXm( fXm( hXm + ) ) ) fB*( hB*( fB*( + ) ) )
-R4_BackBXm = fB sXm mXm @initial 10000 nM # cat_back
-R4_ReactXmB = hXm fB( hB( + fB( sXm( mXm( + fXm* ) ) ) ) ) @initial 300 nM # cat_react
-R4_17 = fVm( hVm( fXm( + hXm( fB( hB + ) ) ) ) )
-R4_10 = fB*( hXm*( fXm* hVm*( fVm*( + sVm mVm ) ) + ) ) hB
-R4_ProduceBXmVm = sVm mVm fVm( hVm( + sXm mXm fXm( hXm( + fB* ) ) ) ) @initial 1000 nM # cat_prod
-R4_25 = sXm( mXm( fXm( hXm + ) ) ) fB* hB*( fB*( + hXm ) )
-R4_HelperXmVm = fVm hVm fXm @initial 1000 nM # cat_help_2
+# Resting complexes (12) 
+R4_HelperBXm = fB hB fB @initial 100 nM
+R4_27 = sXm( mXm( fXm( hXm + ) ) ) fB*( hB*( fB*( + ) ) )
+R4_BackBXm = fB sXm mXm @initial 1000 nM
+R4_ReactXmB = hXm fB( hB( + fB( sXm( mXm( + fXm* ) ) ) ) ) @initial 100 nM
+R4_33 = fVm( hVm( fXm( + hXm( fB( hB + ) ) ) ) )
+R4_9 = fB*( hXm*( fXm* hVm*( fVm*( + sVm mVm ) ) + ) ) hB
+R4_ProduceBXmVm = sVm mVm fVm( hVm( + sXm mXm fXm( hXm( + fB* ) ) ) ) @initial 100 nM
+R4_19 = fXm*( mXm*( sXm*( fB* hB*( fB*( + hXm ) ) + ) ) ) hXm
+R4_HelperXmVm = fVm hVm fXm @initial 100 nM
 R4_FluxXmB = hXm fB hB
+# Xm = sXm mXm fXm hXm @initial 1 nM
+# Vm = sVm mVm fVm hVm @initial 1e-05 nM
+
+# O1 = sO1 mO1 fO1 hO1 @initial 1 nM
+# O2 = sO2 mO2 fO2 hO2 @initial 1e-5 nM
+
+# Resting complexes (12) 
+shR4_HelperBXm = fBR hBR fBR @initial 100 nM
+shR4_34 = fBR( hBR( fBR( + ) ) ) sXmR*( mXmR*( fXmR*( + hXmR ) ) )
+shR4_9 = hBR( fBR( hXmR + ) ) fBR* sXmR*( mXmR*( fXmR*( + hXmR ) ) )
+shR4_ReactXmB = fBR*( hBR*( fBR*( sXmR*( mXmR*( fXmR* + ) ) ) + ) ) hXmR @initial 100 nM
+shR4_HelperXmVm = fXmR hVmR fVmR @initial 100 nM
+shR4_24 = fVmR*( hVmR*( fXmR*( hXmR*( fBR*( + hBR ) ) + ) ) )
+shR4_19 = hBR fBR( hXmR( + hVmR( fVmR( mVmR sVmR + ) ) fXmR* ) )
+shR4_ProduceBXmVm = fVmR*( hVmR*( fXmR*( hXmR*( fBR* + ) ) mXmR sXmR + ) ) mVmR sVmR @initial 100 nM
+shR4_FluxXmB = hBR fBR hXmR
+shXm = hXmR fXmR mXmR sXmR @initial 0 nM
+shVm = hVmR fVmR mVmR sVmR @initial 0 nM
+shR4_BackBXm = mXmR sXmR fBR @initial 1000 nM
+
+EC_R4_7 = mVmR sVmR sVm( mVm( + fVm* ) ) sVmR*( mVmR*( fVmR*( + hVmR ) ) )
+EC_R4_4 = mVmR( sVmR( sVm( mVm( + fVm* ) ) ) ) fVmR*( + hVmR ) mVmR sVmR
+EC_R4_12 = fVm*( mVm*( sVm*( sVmR*( mVmR*( fVmR*( + hVmR ) ) ) + ) ) ) hVm
+R4_CancelVm = mVmR( sVmR( sVm( mVm( + fVm* ) ) ) ) fVmR* @initial 10 nM
+EC_R4_2 = fVm*( mVm*( sVm*( sVmR*( mVmR*( fVmR* + ) ) ) ) + sVm mVm ) hVm
+EC_R4_5 = fVm*( mVm*( sVm*( sVmR*( mVmR*( fVmR* + ) ) sVm mVm + ) ) ) hVm
+R4_dispVm = mVmR sVmR sVm mVm @initial 0 nM
 
 
-# Resting macrostates (14) 
+# Resting macrostates (12) 
 macrostate R4_HelperBXm = [R4_HelperBXm]
-macrostate R4_34 = [R4_34]
+macrostate R4_27 = [R4_27]
 macrostate R4_BackBXm = [R4_BackBXm]
 macrostate R4_ReactXmB = [R4_ReactXmB]
-macrostate R4_17 = [R4_17]
-macrostate R4_10 = [R4_10]
+macrostate R4_33 = [R4_33]
+macrostate R4_9 = [R4_9]
 macrostate R4_ProduceBXmVm = [R4_ProduceBXmVm]
-macrostate R4_25 = [R4_25]
+macrostate R4_19 = [R4_19]
 macrostate R4_HelperXmVm = [R4_HelperXmVm]
 macrostate R4_FluxXmB = [R4_FluxXmB]
+macrostate Xm = [Xm]
+macrostate Vm = [Vm]
+
+macrostate shR4_HelperBXm = [shR4_HelperBXm]
+macrostate shR4_34 = [shR4_34]
+macrostate shR4_9 = [shR4_9]
+macrostate shR4_ReactXmB = [shR4_ReactXmB]
+macrostate shR4_HelperXmVm = [shR4_HelperXmVm]
+macrostate shR4_24 = [shR4_24]
+macrostate shR4_19 = [shR4_19]
+macrostate shR4_ProduceBXmVm = [shR4_ProduceBXmVm]
+macrostate shR4_FluxXmB = [shR4_FluxXmB]
+macrostate shXm = [shXm]
+macrostate shVm = [shVm]
+macrostate shR4_BackBXm = [shR4_BackBXm]
+
+macrostate EC_R4_7 = [EC_R4_4, EC_R4_7]
+macrostate EC_R4_12 = [EC_R4_12]
+macrostate R4_CancelVm = [R4_CancelVm]
+macrostate EC_R4_2 = [EC_R4_2, EC_R4_5]
+macrostate shVm = [shVm]
+macrostate R4_dispVm = [R4_dispVm]
+macrostate Vm = [Vm]
+
+macrostate O1 = [O1]
+macrostate O2 = [O2]
 
 
 # Condensed reactions (6) 
-reaction [condensed    = 0.004 /nM/s ] R4_HelperBXm + R4_25 -> R4_34 + R4_FluxXmB
-reaction [condensed    = 0.001 /nM/s ] R4_BackBXm + R4_25 -> R4_ReactXmB + Xm
-reaction [condensed    = 0.00001 /nM/s ] R4_ReactXmB + Xm -> R4_BackBXm + R4_25
-reaction [condensed    =  0.002 /nM/s ] R4_10 + R4_HelperXmVm -> R4_17 + Vm
-reaction [condensed    = 0.001 /nM/s ] R4_10 + Xm -> R4_ProduceBXmVm + R4_FluxXmB
-reaction [condensed    = 0.001 /nM/s ] R4_ProduceBXmVm + R4_FluxXmB -> R4_10 + Xm
+reaction [condensed    = 0.002 /nM/s ] R4_HelperBXm + R4_19 -> R4_27 + R4_FluxXmB
+reaction [condensed    = 0.002 /nM/s ] R4_BackBXm + R4_19 -> R4_ReactXmB + Xm
+reaction [condensed    = 0.0001 /nM/s ] R4_ReactXmB + Xm -> R4_BackBXm + R4_19
+reaction [condensed    =  0.002 /nM/s ] R4_9 + R4_HelperXmVm -> R4_33 + Vm
+reaction [condensed    = 0.002 /nM/s ] R4_9 + Xm -> R4_ProduceBXmVm + R4_FluxXmB
+reaction [condensed    = 0.002 /nM/s ] R4_ProduceBXmVm + R4_FluxXmB -> R4_9 + Xm
+#Leak
+# reaction [condensed    = 13e-9 /nM/s ] R4_ProduceBXmVm + R4_HelperXmVm -> Vm
+
+# Shadow
+reaction [condensed    = 0.002 /nM/s ] shR4_HelperBXm + shR4_9 -> shR4_34 + shR4_FluxXmB
+reaction [condensed    = 0.002 /nM/s ] shR4_9 + shR4_BackBXm -> shR4_ReactXmB + shXm
+reaction [condensed    = 0.0001 /nM/s ] shR4_ReactXmB + shXm -> shR4_9 + shR4_BackBXm
+reaction [condensed    =  0.002 /nM/s ] shR4_HelperXmVm + shR4_19 -> shR4_24 + shVm
+reaction [condensed    = 0.002 /nM/s ] shR4_19 + shXm -> shR4_ProduceBXmVm + shR4_FluxXmB
+reaction [condensed    = 0.002 /nM/s ] shR4_ProduceBXmVm + shR4_FluxXmB -> shR4_19 + shXm
+#Leak
+# reaction [condensed    = 13e-9 /nM/s ] shR4_ProduceBXmVm + shR4_HelperXmVm -> shVm
+
+reaction [condensed    =  0.05 /s   ] EC_R4_7 -> R4_CancelVm + shVm
+reaction [condensed    =     0.002 /nM/s ] EC_R4_7 + Vm -> EC_R4_12 + R4_dispVm
+reaction [condensed    =     0.002 /nM/s ] R4_CancelVm + shVm -> EC_R4_7
+reaction [condensed    =     0.002 /nM/s ] R4_CancelVm + Vm -> EC_R4_2
+reaction [condensed    =  0.05 /s   ] EC_R4_2 -> R4_CancelVm + Vm
+reaction [condensed    =     0.002 /nM/s ] EC_R4_2 + shVm -> EC_R4_12 + R4_dispVm
+#Buffer
+reaction [condensed    = 2e-4 /s] O1 -> O1 + R4_CancelVm
 
 
 #--------
-##R5: Ep -> Ep + Vp
-# Resting complexes (14) 
-R5_HelperBEp = fB hB fB @initial 1000 nM # cat_help_1
-R5_34 = sEp( mEp( fEp( hEp + ) ) ) fB*( hB*( fB*( + ) ) )
-R5_BackBEp = fB sEp mEp @initial 10000 nM
-R5_ReactEpB = hEp fB( hB( + fB( sEp( mEp( + fEp* ) ) ) ) ) @initial 300 nM # cat_react
-R5_17 = fVp( hVp( fEp( + hEp( fB( hB + ) ) ) ) )
-R5_10 = fB*( hEp*( fEp* hVp*( fVp*( + sVp mVp ) ) + ) ) hB
-R5_ProduceBEpVp = sVp mVp fVp( hVp( + sEp mEp fEp( hEp( + fB* ) ) ) ) @initial 1000 nM # cat_prod
-R5_25 = sEp( mEp( fEp( hEp + ) ) ) fB* hB*( fB*( + hEp ) )
-R5_HelperEpVp = fVp hVp fEp @initial 1000 nM # cat_help_2
+# R5: Ep -> Ep + Vp
+
+# Resting complexes (12) 
+R5_HelperBEp = fB hB fB @initial 100 nM
+R5_27 = sEp( mEp( fEp( hEp + ) ) ) fB*( hB*( fB*( + ) ) )
+R5_BackBEp = fB sEp mEp @initial 1000 nM
+R5_ReactEpB = hEp fB( hB( + fB( sEp( mEp( + fEp* ) ) ) ) ) @initial 100 nM
+R5_33 = fVp( hVp( fEp( + hEp( fB( hB + ) ) ) ) )
+R5_9 = fB*( hEp*( fEp* hVp*( fVp*( + sVp mVp ) ) + ) ) hB
+R5_ProduceBEpVp = sVp mVp fVp( hVp( + sEp mEp fEp( hEp( + fB* ) ) ) ) @initial 100 nM
+R5_19 = fEp*( mEp*( sEp*( fB* hB*( fB*( + hEp ) ) + ) ) ) hEp
+R5_HelperEpVp = fVp hVp fEp @initial 100 nM
 R5_FluxEpB = hEp fB hB
+# Ep = sEp mEp fEp hEp @initial 1 nM
+# Vp = sVp mVp fVp hVp @initial 1e-05 nM
+
+# O1 = sO1 mO1 fO1 hO1 @initial 1 nM
+# O2 = sO2 mO2 fO2 hO2 @initial 1e-5 nM
+
+# Resting complexes (12) 
+shR5_HelperBEp = fBR hBR fBR @initial 100 nM
+shR5_34 = fBR( hBR( fBR( + ) ) ) sEpR*( mEpR*( fEpR*( + hEpR ) ) )
+shR5_9 = hBR( fBR( hEpR + ) ) fBR* sEpR*( mEpR*( fEpR*( + hEpR ) ) )
+shR5_ReactEpB = fBR*( hBR*( fBR*( sEpR*( mEpR*( fEpR* + ) ) ) + ) ) hEpR @initial 100 nM
+shR5_HelperEpVp = fEpR hVpR fVpR @initial 100 nM
+shR5_24 = fVpR*( hVpR*( fEpR*( hEpR*( fBR*( + hBR ) ) + ) ) )
+shR5_19 = hBR fBR( hEpR( + hVpR( fVpR( mVpR sVpR + ) ) fEpR* ) )
+shR5_ProduceBEpVp = fVpR*( hVpR*( fEpR*( hEpR*( fBR* + ) ) mEpR sEpR + ) ) mVpR sVpR @initial 100 nM
+shR5_FluxEpB = hBR fBR hEpR
+shEp = hEpR fEpR mEpR sEpR @initial 0 nM
+shVp = hVpR fVpR mVpR sVpR @initial 0 nM
+shR5_BackBEp = mEpR sEpR fBR @initial 1000 nM
+
+EC_R5_7 = mVpR sVpR sVp( mVp( + fVp* ) ) sVpR*( mVpR*( fVpR*( + hVpR ) ) )
+EC_R5_4 = mVpR( sVpR( sVp( mVp( + fVp* ) ) ) ) fVpR*( + hVpR ) mVpR sVpR
+EC_R5_12 = fVp*( mVp*( sVp*( sVpR*( mVpR*( fVpR*( + hVpR ) ) ) + ) ) ) hVp
+R5_CancelVp = mVpR( sVpR( sVp( mVp( + fVp* ) ) ) ) fVpR* @initial 50 nM
+EC_R5_2 = fVp*( mVp*( sVp*( sVpR*( mVpR*( fVpR* + ) ) ) ) + sVp mVp ) hVp
+EC_R5_5 = fVp*( mVp*( sVp*( sVpR*( mVpR*( fVpR* + ) ) sVp mVp + ) ) ) hVp
+R5_dispVp = mVpR sVpR sVp mVp @initial 0 nM
 
 
-# Resting macrostates (14) 
+# Resting macrostates (12) 
 macrostate R5_HelperBEp = [R5_HelperBEp]
-macrostate R5_34 = [R5_34]
+macrostate R5_27 = [R5_27]
 macrostate R5_BackBEp = [R5_BackBEp]
 macrostate R5_ReactEpB = [R5_ReactEpB]
-macrostate R5_17 = [R5_17]
-macrostate R5_10 = [R5_10]
+macrostate R5_33 = [R5_33]
+macrostate R5_9 = [R5_9]
 macrostate R5_ProduceBEpVp = [R5_ProduceBEpVp]
-macrostate R5_25 = [R5_25]
+macrostate R5_19 = [R5_19]
 macrostate R5_HelperEpVp = [R5_HelperEpVp]
 macrostate R5_FluxEpB = [R5_FluxEpB]
+macrostate Ep = [Ep]
+macrostate Vp = [Vp]
+
+macrostate shR5_HelperBEp = [shR5_HelperBEp]
+macrostate shR5_34 = [shR5_34]
+macrostate shR5_9 = [shR5_9]
+macrostate shR5_ReactEpB = [shR5_ReactEpB]
+macrostate shR5_HelperEpVp = [shR5_HelperEpVp]
+macrostate shR5_24 = [shR5_24]
+macrostate shR5_19 = [shR5_19]
+macrostate shR5_ProduceBEpVp = [shR5_ProduceBEpVp]
+macrostate shR5_FluxEpB = [shR5_FluxEpB]
+macrostate shEp = [shEp]
+macrostate shVp = [shVp]
+macrostate shR5_BackBEp = [shR5_BackBEp]
+
+macrostate EC_R5_7 = [EC_R5_4, EC_R5_7]
+macrostate EC_R5_12 = [EC_R5_12]
+macrostate R5_CancelVp = [R5_CancelVp]
+macrostate EC_R5_2 = [EC_R5_2, EC_R5_5]
+macrostate shVp = [shVp]
+macrostate R5_dispVp = [R5_dispVp]
+macrostate Vp = [Vp]
+
+macrostate O1 = [O1]
+macrostate O2 = [O2]
 
 
 # Condensed reactions (6) 
-reaction [condensed    = 0.004 /nM/s ] R5_HelperBEp + R5_25 -> R5_34 + R5_FluxEpB
-reaction [condensed    = 0.001 /nM/s ] R5_BackBEp + R5_25 -> R5_ReactEpB + Ep
-reaction [condensed    = 0.00001 /nM/s ] R5_ReactEpB + Ep -> R5_BackBEp + R5_25
-reaction [condensed    =  0.002 /nM/s ] R5_10 + R5_HelperEpVp -> R5_17 + Vp
-reaction [condensed    = 0.001 /nM/s ] R5_10 + Ep -> R5_ProduceBEpVp + R5_FluxEpB
-reaction [condensed    = 0.001 /nM/s ] R5_ProduceBEpVp + R5_FluxEpB -> R5_10 + Ep
+reaction [condensed    = 0.002 /nM/s ] R5_HelperBEp + R5_19 -> R5_27 + R5_FluxEpB
+reaction [condensed    = 0.002 /nM/s ] R5_BackBEp + R5_19 -> R5_ReactEpB + Ep
+reaction [condensed    = 0.0001 /nM/s ] R5_ReactEpB + Ep -> R5_BackBEp + R5_19
+reaction [condensed    =  0.002 /nM/s ] R5_9 + R5_HelperEpVp -> R5_33 + Vp
+reaction [condensed    = 0.002 /nM/s ] R5_9 + Ep -> R5_ProduceBEpVp + R5_FluxEpB
+reaction [condensed    = 0.002 /nM/s ] R5_ProduceBEpVp + R5_FluxEpB -> R5_9 + Ep
+#Leak
+reaction [condensed    = 13e-8 /nM/s ] R5_ProduceBEpVp + R5_HelperEpVp -> Vp
+
+# Shadow
+reaction [condensed    = 0.002 /nM/s ] shR5_HelperBEp + shR5_9 -> shR5_34 + shR5_FluxEpB
+reaction [condensed    = 0.002 /nM/s ] shR5_9 + shR5_BackBEp -> shR5_ReactEpB + shEp
+reaction [condensed    = 0.0001 /nM/s ] shR5_ReactEpB + shEp -> shR5_9 + shR5_BackBEp
+reaction [condensed    =  0.002 /nM/s ] shR5_HelperEpVp + shR5_19 -> shR5_24 + shVp
+reaction [condensed    = 0.002 /nM/s ] shR5_19 + shEp -> shR5_ProduceBEpVp + shR5_FluxEpB
+reaction [condensed    = 0.002 /nM/s ] shR5_ProduceBEpVp + shR5_FluxEpB -> shR5_19 + shEp
+#Leak
+reaction [condensed    = 13e-8 /nM/s ] shR5_ProduceBEpVp + shR5_HelperEpVp -> shVp
+
+reaction [condensed    =  0.05 /s   ] EC_R5_7 -> R5_CancelVp + shVp
+reaction [condensed    =     0.002 /nM/s ] EC_R5_7 + Vp -> EC_R5_12 + R5_dispVp
+reaction [condensed    =     0.002 /nM/s ] R5_CancelVp + shVp -> EC_R5_7
+reaction [condensed    =     0.002 /nM/s ] R5_CancelVp + Vp -> EC_R5_2
+reaction [condensed    =  0.05 /s   ] EC_R5_2 -> R5_CancelVp + Vp
+reaction [condensed    =     0.002 /nM/s ] EC_R5_2 + shVp -> EC_R5_12 + R5_dispVp
+#Buffer
+reaction [condensed    = 2e-4 /s] O1 -> O1 + R5_CancelVp
 
 
-
-## R6: Em -> Em + Vm
-# Resting complexes (14) 
-R6_HelperBEm = fB hB fB @initial 1000 nM # cat_help_1
-R6_34 = sEm( mEm( fEm( hEm + ) ) ) fB*( hB*( fB*( + ) ) )
-R6_BackBEm = fB sEm mEm @initial 10000 nM # cat_back
-R6_ReactEmB = hEm fB( hB( + fB( sEm( mEm( + fEm* ) ) ) ) ) @initial 300 nM # cat_react
-R6_17 = fVm( hVm( fEm( + hEm( fB( hB + ) ) ) ) )
-R6_10 = fB*( hEm*( fEm* hVm*( fVm*( + sVm mVm ) ) + ) ) hB
-R6_ProduceBEmVm = sVm mVm fVm( hVm( + sEm mEm fEm( hEm( + fB* ) ) ) ) @initial 1000 nM # cat_prod
-R6_25 = sEm( mEm( fEm( hEm + ) ) ) fB* hB*( fB*( + hEm ) )
-R6_HelperEmVm = fVm hVm fEm @initial 1000 nM # cat_help_2
+# R6: Em -> Em + Vm
+# Resting complexes (12) 
+R6_HelperBEm = fB hB fB @initial 100 nM
+R6_27 = sEm( mEm( fEm( hEm + ) ) ) fB*( hB*( fB*( + ) ) )
+R6_BackBEm = fB sEm mEm @initial 1000 nM
+R6_ReactEmB = hEm fB( hB( + fB( sEm( mEm( + fEm* ) ) ) ) ) @initial 100 nM
+R6_33 = fVm( hVm( fEm( + hEm( fB( hB + ) ) ) ) )
+R6_9 = fB*( hEm*( fEm* hVm*( fVm*( + sVm mVm ) ) + ) ) hB
+R6_ProduceBEmVm = sVm mVm fVm( hVm( + sEm mEm fEm( hEm( + fB* ) ) ) ) @initial 100 nM
+R6_19 = fEm*( mEm*( sEm*( fB* hB*( fB*( + hEm ) ) + ) ) ) hEm
+R6_HelperEmVm = fVm hVm fEm @initial 100 nM
 R6_FluxEmB = hEm fB hB
+# Em = sEm mEm fEm hEm @initial 1 nM
+# Vm = sVm mVm fVm hVm @initial 1e-05 nM
 
-# Resting macrostates (14) 
+# O1 = sO1 mO1 fO1 hO1 @initial 1 nM
+# O2 = sO2 mO2 fO2 hO2 @initial 1e-5 nM
+
+# Resting complexes (12) 
+shR6_HelperBEm = fBR hBR fBR @initial 100 nM
+shR6_34 = fBR( hBR( fBR( + ) ) ) sEmR*( mEmR*( fEmR*( + hEmR ) ) )
+shR6_9 = hBR( fBR( hEmR + ) ) fBR* sEmR*( mEmR*( fEmR*( + hEmR ) ) )
+shR6_ReactEmB = fBR*( hBR*( fBR*( sEmR*( mEmR*( fEmR* + ) ) ) + ) ) hEmR @initial 100 nM
+shR6_HelperEmVm = fEmR hVmR fVmR @initial 100 nM
+shR6_24 = fVmR*( hVmR*( fEmR*( hEmR*( fBR*( + hBR ) ) + ) ) )
+shR6_19 = hBR fBR( hEmR( + hVmR( fVmR( mVmR sVmR + ) ) fEmR* ) )
+shR6_ProduceBEmVm = fVmR*( hVmR*( fEmR*( hEmR*( fBR* + ) ) mEmR sEmR + ) ) mVmR sVmR @initial 100 nM
+shR6_FluxEmB = hBR fBR hEmR
+shEm = hEmR fEmR mEmR sEmR @initial 0 nM
+shVm = hVmR fVmR mVmR sVmR @initial 0 nM
+shR6_BackBEm = mEmR sEmR fBR @initial 1000 nM
+
+EC_R6_7 = mVmR sVmR sVm( mVm( + fVm* ) ) sVmR*( mVmR*( fVmR*( + hVmR ) ) )
+EC_R6_4 = mVmR( sVmR( sVm( mVm( + fVm* ) ) ) ) fVmR*( + hVmR ) mVmR sVmR
+EC_R6_12 = fVm*( mVm*( sVm*( sVmR*( mVmR*( fVmR*( + hVmR ) ) ) + ) ) ) hVm
+R6_CancelVm = mVmR( sVmR( sVm( mVm( + fVm* ) ) ) ) fVmR* @initial 50 nM
+EC_R6_2 = fVm*( mVm*( sVm*( sVmR*( mVmR*( fVmR* + ) ) ) ) + sVm mVm ) hVm
+EC_R6_5 = fVm*( mVm*( sVm*( sVmR*( mVmR*( fVmR* + ) ) sVm mVm + ) ) ) hVm
+R6_dispVm = mVmR sVmR sVm mVm @initial 0 nM
+
+
+# Resting macrostates (12) 
 macrostate R6_HelperBEm = [R6_HelperBEm]
-macrostate R6_34 = [R6_34]
+macrostate R6_27 = [R6_27]
 macrostate R6_BackBEm = [R6_BackBEm]
 macrostate R6_ReactEmB = [R6_ReactEmB]
-macrostate R6_17 = [R6_17]
-macrostate R6_10 = [R6_10]
+macrostate R6_33 = [R6_33]
+macrostate R6_9 = [R6_9]
 macrostate R6_ProduceBEmVm = [R6_ProduceBEmVm]
-macrostate R6_25 = [R6_25]
+macrostate R6_19 = [R6_19]
 macrostate R6_HelperEmVm = [R6_HelperEmVm]
 macrostate R6_FluxEmB = [R6_FluxEmB]
+macrostate Em = [Em]
+macrostate Vm = [Vm]
+
+macrostate shR6_HelperBEm = [shR6_HelperBEm]
+macrostate shR6_34 = [shR6_34]
+macrostate shR6_9 = [shR6_9]
+macrostate shR6_ReactEmB = [shR6_ReactEmB]
+macrostate shR6_HelperEmVm = [shR6_HelperEmVm]
+macrostate shR6_24 = [shR6_24]
+macrostate shR6_19 = [shR6_19]
+macrostate shR6_ProduceBEmVm = [shR6_ProduceBEmVm]
+macrostate shR6_FluxEmB = [shR6_FluxEmB]
+macrostate shEm = [shEm]
+macrostate shVm = [shVm]
+macrostate shR6_BackBEm = [shR6_BackBEm]
+
+macrostate EC_R6_7 = [EC_R6_4, EC_R6_7]
+macrostate EC_R6_12 = [EC_R6_12]
+macrostate R6_CancelVm = [R6_CancelVm]
+macrostate EC_R6_2 = [EC_R6_2, EC_R6_5]
+macrostate shVm = [shVm]
+macrostate R6_dispVm = [R6_dispVm]
+macrostate Vm = [Vm]
+
+macrostate O1 = [O1]
+macrostate O2 = [O2]
 
 
 # Condensed reactions (6) 
-reaction [condensed    = 0.004 /nM/s ] R6_HelperBEm + R6_25 -> R6_34 + R6_FluxEmB
-reaction [condensed    = 0.001 /nM/s ] R6_BackBEm + R6_25 -> R6_ReactEmB + Em
-reaction [condensed    = 0.00001 /nM/s ] R6_ReactEmB + Em -> R6_BackBEm + R6_25
-reaction [condensed    =  0.002 /nM/s ] R6_10 + R6_HelperEmVm -> R6_17 + Vm
-reaction [condensed    = 0.001 /nM/s ] R6_10 + Em -> R6_ProduceBEmVm + R6_FluxEmB
-reaction [condensed    = 0.001 /nM/s ] R6_ProduceBEmVm + R6_FluxEmB -> R6_10 + Em
+reaction [condensed    = 0.002 /nM/s ] R6_HelperBEm + R6_19 -> R6_27 + R6_FluxEmB
+reaction [condensed    = 0.002 /nM/s ] R6_BackBEm + R6_19 -> R6_ReactEmB + Em
+reaction [condensed    = 0.0001 /nM/s ] R6_ReactEmB + Em -> R6_BackBEm + R6_19
+reaction [condensed    =  0.002 /nM/s ] R6_9 + R6_HelperEmVm -> R6_33 + Vm
+reaction [condensed    = 0.002 /nM/s ] R6_9 + Em -> R6_ProduceBEmVm + R6_FluxEmB
+reaction [condensed    = 0.002 /nM/s ] R6_ProduceBEmVm + R6_FluxEmB -> R6_9 + Em
+#Leak
+reaction [condensed    = 13e-8 /nM/s ] R6_ProduceBEmVm + R6_HelperEmVm -> Vm
+
+# Shadow
+reaction [condensed    = 0.002 /nM/s ] shR6_HelperBEm + shR6_9 -> shR6_34 + shR6_FluxEmB
+reaction [condensed    = 0.002 /nM/s ] shR6_9 + shR6_BackBEm -> shR6_ReactEmB + shEm
+reaction [condensed    = 0.0001 /nM/s ] shR6_ReactEmB + shEm -> shR6_9 + shR6_BackBEm
+reaction [condensed    =  0.002 /nM/s ] shR6_HelperEmVm + shR6_19 -> shR6_24 + shVm
+reaction [condensed    = 0.002 /nM/s ] shR6_19 + shEm -> shR6_ProduceBEmVm + shR6_FluxEmB
+reaction [condensed    = 0.002 /nM/s ] shR6_ProduceBEmVm + shR6_FluxEmB -> shR6_19 + shEm
+#Leak
+reaction [condensed    = 13e-8 /nM/s ] shR6_ProduceBEmVm + shR6_HelperEmVm -> shVm
+
+reaction [condensed    =  0.05 /s   ] EC_R6_7 -> R6_CancelVm + shVm
+reaction [condensed    =     0.002 /nM/s ] EC_R6_7 + Vm -> EC_R6_12 + R6_dispVm
+reaction [condensed    =     0.002 /nM/s ] R6_CancelVm + shVm -> EC_R6_7
+reaction [condensed    =     0.002 /nM/s ] R6_CancelVm + Vm -> EC_R6_2
+reaction [condensed    =  0.05 /s   ] EC_R6_2 -> R6_CancelVm + Vm
+reaction [condensed    =     0.002 /nM/s ] EC_R6_2 + shVm -> EC_R6_12 + R6_dispVm
+#Buffer
+reaction [condensed    = 2e-4 /s] O1 -> O1 + R6_CancelVm
 
 # --------
 ##R7: Vp -> W
@@ -504,143 +1002,443 @@ reaction [condensed    = 0.001 /nM/s ] R8_7 + R8_ProduceVmW -> R8_12 + W
 
 # ---
 # R9: Rp -> Rp + Ep
-# Resting complexes (14) 
-R9_HelperBRp = fB hB fB @initial 1000 nM # cat_help_1
-R9_34 = sRp( mRp( fRp( hRp + ) ) ) fB*( hB*( fB*( + ) ) )
-R9_BackBRp = fB sRp mRp @initial 10000 nM # cat_back
-R9_ReactRpB = hRp fB( hB( + fB( sRp( mRp( + fRp* ) ) ) ) ) @initial 300 nM # cat_react
-R9_17 = fEp( hEp( fRp( + hRp( fB( hB + ) ) ) ) )
-R9_10 = fB*( hRp*( fRp* hEp*( fEp*( + sEp mEp ) ) + ) ) hB
-R9_ProduceBRpEp = sEp mEp fEp( hEp( + sRp mRp fRp( hRp( + fB* ) ) ) ) @initial 1000 nM # cat_prod
-R9_25 = sRp( mRp( fRp( hRp + ) ) ) fB* hB*( fB*( + hRp ) )
-R9_HelperRpEp = fEp hEp fRp @initial 1000 nM # cat_help_2
+# Resting complexes (12) 
+R9_HelperBRp = fB hB fB @initial 100 nM
+R9_27 = sRp( mRp( fRp( hRp + ) ) ) fB*( hB*( fB*( + ) ) )
+R9_BackBRp = fB sRp mRp @initial 1000 nM
+R9_ReactRpB = hRp fB( hB( + fB( sRp( mRp( + fRp* ) ) ) ) ) @initial 100 nM
+R9_33 = fEp( hEp( fRp( + hRp( fB( hB + ) ) ) ) )
+R9_9 = fB*( hRp*( fRp* hEp*( fEp*( + sEp mEp ) ) + ) ) hB
+R9_ProduceBRpEp = sEp mEp fEp( hEp( + sRp mRp fRp( hRp( + fB* ) ) ) ) @initial 100 nM
+R9_19 = fRp*( mRp*( sRp*( fB* hB*( fB*( + hRp ) ) + ) ) ) hRp
+R9_HelperRpEp = fEp hEp fRp @initial 100 nM
 R9_FluxRpB = hRp fB hB
+# Rp = sRp mRp fRp hRp @initial 1 nM
+# Ep = sEp mEp fEp hEp @initial 1e-05 nM
 
-# Resting macrostates (14) 
+# O1 = sO1 mO1 fO1 hO1 @initial 1 nM
+# O2 = sO2 mO2 fO2 hO2 @initial 1e-5 nM
+
+# Resting complexes (12) 
+shR9_HelperBRp = fBR hBR fBR @initial 100 nM
+shR9_34 = fBR( hBR( fBR( + ) ) ) sRpR*( mRpR*( fRpR*( + hRpR ) ) )
+shR9_9 = hBR( fBR( hRpR + ) ) fBR* sRpR*( mRpR*( fRpR*( + hRpR ) ) )
+shR9_ReactRpB = fBR*( hBR*( fBR*( sRpR*( mRpR*( fRpR* + ) ) ) + ) ) hRpR @initial 100 nM
+shR9_HelperRpEp = fRpR hEpR fEpR @initial 100 nM
+shR9_24 = fEpR*( hEpR*( fRpR*( hRpR*( fBR*( + hBR ) ) + ) ) )
+shR9_19 = hBR fBR( hRpR( + hEpR( fEpR( mEpR sEpR + ) ) fRpR* ) )
+shR9_ProduceBRpEp = fEpR*( hEpR*( fRpR*( hRpR*( fBR* + ) ) mRpR sRpR + ) ) mEpR sEpR @initial 100 nM
+shR9_FluxRpB = hBR fBR hRpR
+shRp = hRpR fRpR mRpR sRpR @initial 0 nM
+shEp = hEpR fEpR mEpR sEpR @initial 0 nM
+shR9_BackBRp = mRpR sRpR fBR @initial 1000 nM
+
+EC_R9_7 = mEpR sEpR sEp( mEp( + fEp* ) ) sEpR*( mEpR*( fEpR*( + hEpR ) ) )
+EC_R9_4 = mEpR( sEpR( sEp( mEp( + fEp* ) ) ) ) fEpR*( + hEpR ) mEpR sEpR
+EC_R9_12 = fEp*( mEp*( sEp*( sEpR*( mEpR*( fEpR*( + hEpR ) ) ) + ) ) ) hEp
+R9_CancelEp = mEpR( sEpR( sEp( mEp( + fEp* ) ) ) ) fEpR* @initial 10 nM
+EC_R9_2 = fEp*( mEp*( sEp*( sEpR*( mEpR*( fEpR* + ) ) ) ) + sEp mEp ) hEp
+EC_R9_5 = fEp*( mEp*( sEp*( sEpR*( mEpR*( fEpR* + ) ) sEp mEp + ) ) ) hEp
+R9_dispEp = mEpR sEpR sEp mEp @initial 0 nM
+
+
+# Resting macrostates (12) 
 macrostate R9_HelperBRp = [R9_HelperBRp]
-macrostate R9_34 = [R9_34]
+macrostate R9_27 = [R9_27]
 macrostate R9_BackBRp = [R9_BackBRp]
 macrostate R9_ReactRpB = [R9_ReactRpB]
-macrostate R9_17 = [R9_17]
-macrostate R9_10 = [R9_10]
+macrostate R9_33 = [R9_33]
+macrostate R9_9 = [R9_9]
 macrostate R9_ProduceBRpEp = [R9_ProduceBRpEp]
-macrostate R9_25 = [R9_25]
+macrostate R9_19 = [R9_19]
 macrostate R9_HelperRpEp = [R9_HelperRpEp]
 macrostate R9_FluxRpB = [R9_FluxRpB]
+macrostate Rp = [Rp]
+macrostate Ep = [Ep]
+
+macrostate shR9_HelperBRp = [shR9_HelperBRp]
+macrostate shR9_34 = [shR9_34]
+macrostate shR9_9 = [shR9_9]
+macrostate shR9_ReactRpB = [shR9_ReactRpB]
+macrostate shR9_HelperRpEp = [shR9_HelperRpEp]
+macrostate shR9_24 = [shR9_24]
+macrostate shR9_19 = [shR9_19]
+macrostate shR9_ProduceBRpEp = [shR9_ProduceBRpEp]
+macrostate shR9_FluxRpB = [shR9_FluxRpB]
+macrostate shRp = [shRp]
+macrostate shEp = [shEp]
+macrostate shR9_BackBRp = [shR9_BackBRp]
+
+macrostate EC_R9_7 = [EC_R9_4, EC_R9_7]
+macrostate EC_R9_12 = [EC_R9_12]
+macrostate R9_CancelEp = [R9_CancelEp]
+macrostate EC_R9_2 = [EC_R9_2, EC_R9_5]
+macrostate shEp = [shEp]
+macrostate R9_dispEp = [R9_dispEp]
+macrostate Ep = [Ep]
+
+macrostate O1 = [O1]
+macrostate O2 = [O2]
+
 
 # Condensed reactions (6) 
-reaction [condensed    = 0.004 /nM/s ] R9_HelperBRp + R9_25 -> R9_34 + R9_FluxRpB
-reaction [condensed    = 0.001 /nM/s ] R9_BackBRp + R9_25 -> R9_ReactRpB + Rp
-reaction [condensed    = 0.00001 /nM/s ] R9_ReactRpB + Rp -> R9_BackBRp + R9_25
-reaction [condensed    = 0.002 /nM/s ] R9_10 + R9_HelperRpEp -> R9_17 + Ep
-reaction [condensed    = 0.001 /nM/s ] R9_10 + Rp -> R9_ProduceBRpEp + R9_FluxRpB
-reaction [condensed    = 0.001 /nM/s ] R9_ProduceBRpEp + R9_FluxRpB -> R9_10 + Rp
+reaction [condensed    = 0.002 /nM/s ] R9_HelperBRp + R9_19 -> R9_27 + R9_FluxRpB
+reaction [condensed    = 0.002 /nM/s ] R9_BackBRp + R9_19 -> R9_ReactRpB + Rp
+reaction [condensed    = 0.0001 /nM/s ] R9_ReactRpB + Rp -> R9_BackBRp + R9_19
+reaction [condensed    =  0.002 /nM/s ] R9_9 + R9_HelperRpEp -> R9_33 + Ep
+reaction [condensed    = 0.002 /nM/s ] R9_9 + Rp -> R9_ProduceBRpEp + R9_FluxRpB
+reaction [condensed    = 0.002 /nM/s ] R9_ProduceBRpEp + R9_FluxRpB -> R9_9 + Rp
+#Leak
+# reaction [condensed    = 13e-9 /nM/s ] R9_ProduceBRpEp + R9_HelperRpEp -> Ep
 
+# Shadow
+reaction [condensed    = 0.002 /nM/s ] shR9_HelperBRp + shR9_9 -> shR9_34 + shR9_FluxRpB
+reaction [condensed    = 0.002 /nM/s ] shR9_9 + shR9_BackBRp -> shR9_ReactRpB + shRp
+reaction [condensed    = 0.0001 /nM/s ] shR9_ReactRpB + shRp -> shR9_9 + shR9_BackBRp
+reaction [condensed    =  0.002 /nM/s ] shR9_HelperRpEp + shR9_19 -> shR9_24 + shEp
+reaction [condensed    = 0.002 /nM/s ] shR9_19 + shRp -> shR9_ProduceBRpEp + shR9_FluxRpB
+reaction [condensed    = 0.002 /nM/s ] shR9_ProduceBRpEp + shR9_FluxRpB -> shR9_19 + shRp
+#Leak
+# reaction [condensed    = 13e-9 /nM/s ] shR9_ProduceBRpEp + shR9_HelperRpEp -> shEp
+
+reaction [condensed    =  0.05 /s   ] EC_R9_7 -> R9_CancelEp + shEp
+reaction [condensed    =     0.002 /nM/s ] EC_R9_7 + Ep -> EC_R9_12 + R9_dispEp
+reaction [condensed    =     0.002 /nM/s ] R9_CancelEp + shEp -> EC_R9_7
+reaction [condensed    =     0.002 /nM/s ] R9_CancelEp + Ep -> EC_R9_2
+reaction [condensed    =  0.05 /s   ] EC_R9_2 -> R9_CancelEp + Ep
+reaction [condensed    =     0.002 /nM/s ] EC_R9_2 + shEp -> EC_R9_12 + R9_dispEp
+#Buffer
+reaction [condensed    = 2e-4 /s] O1 -> O1 + R9_CancelEp
 # ---
 # R10: Rm -> Rm + Em
-# Resting complexes (14) 
-R10_HelperBRm = fB hB fB @initial 1000 nM # cat_help_1
-R10_34 = sRm( mRm( fRm( hRm + ) ) ) fB*( hB*( fB*( + ) ) )
-R10_BackBRm = fB sRm mRm @initial 10000 nM # cat_back
-R10_ReactRmB = hRm fB( hB( + fB( sRm( mRm( + fRm* ) ) ) ) ) @initial 300 nM # cat_react
-R10_17 = fEm( hEm( fRm( + hRm( fB( hB + ) ) ) ) )
-R10_10 = fB*( hRm*( fRm* hEm*( fEm*( + sEm mEm ) ) + ) ) hB
-R10_ProduceBRmEm = sEm mEm fEm( hEm( + sRm mRm fRm( hRm( + fB* ) ) ) ) @initial 1000 nM # cat_prod
-R10_25 = sRm( mRm( fRm( hRm + ) ) ) fB* hB*( fB*( + hRm ) )
-R10_HelperRmEm = fEm hEm fRm @initial 1000 nM # cat_help_2
+# Resting complexes (12) 
+R10_HelperBRm = fB hB fB @initial 100 nM
+R10_27 = sRm( mRm( fRm( hRm + ) ) ) fB*( hB*( fB*( + ) ) )
+R10_BackBRm = fB sRm mRm @initial 1000 nM
+R10_ReactRmB = hRm fB( hB( + fB( sRm( mRm( + fRm* ) ) ) ) ) @initial 100 nM
+R10_33 = fEm( hEm( fRm( + hRm( fB( hB + ) ) ) ) )
+R10_9 = fB*( hRm*( fRm* hEm*( fEm*( + sEm mEm ) ) + ) ) hB
+R10_ProduceBRmEm = sEm mEm fEm( hEm( + sRm mRm fRm( hRm( + fB* ) ) ) ) @initial 100 nM
+R10_19 = fRm*( mRm*( sRm*( fB* hB*( fB*( + hRm ) ) + ) ) ) hRm
+R10_HelperRmEm = fEm hEm fRm @initial 100 nM
 R10_FluxRmB = hRm fB hB
+# Rm = sRm mRm fRm hRm @initial 1 nM
+# Em = sEm mEm fEm hEm @initial 1e-05 nM
 
-# Resting macrostates (14) 
+# O1 = sO1 mO1 fO1 hO1 @initial 1 nM
+# O2 = sO2 mO2 fO2 hO2 @initial 1e-5 nM
+
+# Resting complexes (12) 
+shR10_HelperBRm = fBR hBR fBR @initial 100 nM
+shR10_34 = fBR( hBR( fBR( + ) ) ) sRmR*( mRmR*( fRmR*( + hRmR ) ) )
+shR10_9 = hBR( fBR( hRmR + ) ) fBR* sRmR*( mRmR*( fRmR*( + hRmR ) ) )
+shR10_ReactRmB = fBR*( hBR*( fBR*( sRmR*( mRmR*( fRmR* + ) ) ) + ) ) hRmR @initial 100 nM
+shR10_HelperRmEm = fRmR hEmR fEmR @initial 100 nM
+shR10_24 = fEmR*( hEmR*( fRmR*( hRmR*( fBR*( + hBR ) ) + ) ) )
+shR10_19 = hBR fBR( hRmR( + hEmR( fEmR( mEmR sEmR + ) ) fRmR* ) )
+shR10_ProduceBRmEm = fEmR*( hEmR*( fRmR*( hRmR*( fBR* + ) ) mRmR sRmR + ) ) mEmR sEmR @initial 100 nM
+shR10_FluxRmB = hBR fBR hRmR
+shRm = hRmR fRmR mRmR sRmR @initial 0 nM
+shEm = hEmR fEmR mEmR sEmR @initial 0 nM
+shR10_BackBRm = mRmR sRmR fBR @initial 1000 nM
+
+EC_R10_7 = mEmR sEmR sEm( mEm( + fEm* ) ) sEmR*( mEmR*( fEmR*( + hEmR ) ) )
+EC_R10_4 = mEmR( sEmR( sEm( mEm( + fEm* ) ) ) ) fEmR*( + hEmR ) mEmR sEmR
+EC_R10_12 = fEm*( mEm*( sEm*( sEmR*( mEmR*( fEmR*( + hEmR ) ) ) + ) ) ) hEm
+R10_CancelEm = mEmR( sEmR( sEm( mEm( + fEm* ) ) ) ) fEmR* @initial 10 nM
+EC_R10_2 = fEm*( mEm*( sEm*( sEmR*( mEmR*( fEmR* + ) ) ) ) + sEm mEm ) hEm
+EC_R10_5 = fEm*( mEm*( sEm*( sEmR*( mEmR*( fEmR* + ) ) sEm mEm + ) ) ) hEm
+R10_dispEm = mEmR sEmR sEm mEm @initial 0 nM
+
+
+# Resting macrostates (12) 
 macrostate R10_HelperBRm = [R10_HelperBRm]
-macrostate R10_34 = [R10_34]
+macrostate R10_27 = [R10_27]
 macrostate R10_BackBRm = [R10_BackBRm]
 macrostate R10_ReactRmB = [R10_ReactRmB]
-macrostate R10_17 = [R10_17]
-macrostate R10_10 = [R10_10]
+macrostate R10_33 = [R10_33]
+macrostate R10_9 = [R10_9]
 macrostate R10_ProduceBRmEm = [R10_ProduceBRmEm]
-macrostate R10_25 = [R10_25]
+macrostate R10_19 = [R10_19]
 macrostate R10_HelperRmEm = [R10_HelperRmEm]
 macrostate R10_FluxRmB = [R10_FluxRmB]
+macrostate Rm = [Rm]
+macrostate Em = [Em]
+
+macrostate shR10_HelperBRm = [shR10_HelperBRm]
+macrostate shR10_34 = [shR10_34]
+macrostate shR10_9 = [shR10_9]
+macrostate shR10_ReactRmB = [shR10_ReactRmB]
+macrostate shR10_HelperRmEm = [shR10_HelperRmEm]
+macrostate shR10_24 = [shR10_24]
+macrostate shR10_19 = [shR10_19]
+macrostate shR10_ProduceBRmEm = [shR10_ProduceBRmEm]
+macrostate shR10_FluxRmB = [shR10_FluxRmB]
+macrostate shRm = [shRm]
+macrostate shEm = [shEm]
+macrostate shR10_BackBRm = [shR10_BackBRm]
+
+macrostate EC_R10_7 = [EC_R10_4, EC_R10_7]
+macrostate EC_R10_12 = [EC_R10_12]
+macrostate R10_CancelEm = [R10_CancelEm]
+macrostate EC_R10_2 = [EC_R10_2, EC_R10_5]
+macrostate shEm = [shEm]
+macrostate R10_dispEm = [R10_dispEm]
+macrostate Em = [Em]
+
+macrostate O1 = [O1]
+macrostate O2 = [O2]
+
 
 # Condensed reactions (6) 
-reaction [condensed    = 0.004 /nM/s ] R10_HelperBRm + R10_25 -> R10_34 + R10_FluxRmB
-reaction [condensed    = 0.001 /nM/s ] R10_BackBRm + R10_25 -> R10_ReactRmB + Rm
-reaction [condensed    = 0.00001 /nM/s ] R10_ReactRmB + Rm -> R10_BackBRm + R10_25
-reaction [condensed    = 0.002 /nM/s ] R10_10 + R10_HelperRmEm -> R10_17 + Em
-reaction [condensed    = 0.001 /nM/s ] R10_10 + Rm -> R10_ProduceBRmEm + R10_FluxRmB
-reaction [condensed    = 0.001 /nM/s ] R10_ProduceBRmEm + R10_FluxRmB -> R10_10 + Rm
+reaction [condensed    = 0.002 /nM/s ] R10_HelperBRm + R10_19 -> R10_27 + R10_FluxRmB
+reaction [condensed    = 0.002 /nM/s ] R10_BackBRm + R10_19 -> R10_ReactRmB + Rm
+reaction [condensed    = 0.0001 /nM/s ] R10_ReactRmB + Rm -> R10_BackBRm + R10_19
+reaction [condensed    =  0.002 /nM/s ] R10_9 + R10_HelperRmEm -> R10_33 + Em
+reaction [condensed    = 0.002 /nM/s ] R10_9 + Rm -> R10_ProduceBRmEm + R10_FluxRmB
+reaction [condensed    = 0.002 /nM/s ] R10_ProduceBRmEm + R10_FluxRmB -> R10_9 + Rm
+#Leak
+# reaction [condensed    = 13e-9 /nM/s ] R10_ProduceBRmEm + R10_HelperRmEm -> Em
 
+# Shadow
+reaction [condensed    = 0.002 /nM/s ] shR10_HelperBRm + shR10_9 -> shR10_34 + shR10_FluxRmB
+reaction [condensed    = 0.002 /nM/s ] shR10_9 + shR10_BackBRm -> shR10_ReactRmB + shRm
+reaction [condensed    = 0.0001 /nM/s ] shR10_ReactRmB + shRm -> shR10_9 + shR10_BackBRm
+reaction [condensed    =  0.002 /nM/s ] shR10_HelperRmEm + shR10_19 -> shR10_24 + shEm
+reaction [condensed    = 0.002 /nM/s ] shR10_19 + shRm -> shR10_ProduceBRmEm + shR10_FluxRmB
+reaction [condensed    = 0.002 /nM/s ] shR10_ProduceBRmEm + shR10_FluxRmB -> shR10_19 + shRm
+#Leak
+# reaction [condensed    = 13e-9 /nM/s ] shR10_ProduceBRmEm + shR10_HelperRmEm -> shEm
+
+reaction [condensed    =  0.05 /s   ] EC_R10_7 -> R10_CancelEm + shEm
+reaction [condensed    =     0.002 /nM/s ] EC_R10_7 + Em -> EC_R10_12 + R10_dispEm
+reaction [condensed    =     0.002 /nM/s ] R10_CancelEm + shEm -> EC_R10_7
+reaction [condensed    =     0.002 /nM/s ] R10_CancelEm + Em -> EC_R10_2
+reaction [condensed    =  0.05 /s   ] EC_R10_2 -> R10_CancelEm + Em
+reaction [condensed    =     0.002 /nM/s ] EC_R10_2 + shEm -> EC_R10_12 + R10_dispEm
+#Buffer
+reaction [condensed    = 2e-4 /s] O1 -> O1 + R10_CancelEm
 #-----
 
-## R12: Yp -> Yp + Em
-# Resting complexes (14) 
-R11_HelperBYp = fB hB fB @initial 1000 nM
-R11_34 = sYp( mYp( fYp( hYp + ) ) ) fB*( hB*( fB*( + ) ) )
-R11_BackBYp = fB sYp mYp @initial 10000 nM
-R11_ReactYpB = hYp fB( hB( + fB( sYp( mYp( + fYp* ) ) ) ) ) @initial 300 nM
-R11_17 = fEm( hEm( fYp( + hYp( fB( hB + ) ) ) ) )
-R11_10 = fB*( hYp*( fYp* hEm*( fEm*( + sEm mEm ) ) + ) ) hB
-R11_ProduceBYpEm = sEm mEm fEm( hEm( + sYp mYp fYp( hYp( + fB* ) ) ) ) @initial 1000 nM
-R11_25 = sYp( mYp( fYp( hYp + ) ) ) fB* hB*( fB*( + hYp ) )
-R11_HelperYpEm = fEm hEm fYp @initial 1000 nM
+## R11: Yp -> Yp + Em
+# Resting complexes (12) 
+R11_HelperBYp = fB hB fB @initial 100 nM
+R11_27 = sYp( mYp( fYp( hYp + ) ) ) fB*( hB*( fB*( + ) ) )
+R11_BackBYp = fB sYp mYp @initial 1000 nM
+R11_ReactYpB = hYp fB( hB( + fB( sYp( mYp( + fYp* ) ) ) ) ) @initial 100 nM
+R11_33 = fEm( hEm( fYp( + hYp( fB( hB + ) ) ) ) )
+R11_9 = fB*( hYp*( fYp* hEm*( fEm*( + sEm mEm ) ) + ) ) hB
+R11_ProduceBYpEm = sEm mEm fEm( hEm( + sYp mYp fYp( hYp( + fB* ) ) ) ) @initial 100 nM
+R11_19 = fYp*( mYp*( sYp*( fB* hB*( fB*( + hYp ) ) + ) ) ) hYp
+R11_HelperYpEm = fEm hEm fYp @initial 100 nM
 R11_FluxYpB = hYp fB hB
+# Yp = sYp mYp fYp hYp @initial 1 nM
+# Em = sEm mEm fEm hEm @initial 1e-05 nM
 
-# Resting macrostates (14) 
+# O1 = sO1 mO1 fO1 hO1 @initial 1 nM
+# O2 = sO2 mO2 fO2 hO2 @initial 1e-5 nM
+
+# Resting complexes (12) 
+shR11_HelperBYp = fBR hBR fBR @initial 100 nM
+shR11_34 = fBR( hBR( fBR( + ) ) ) sYpR*( mYpR*( fYpR*( + hYpR ) ) )
+shR11_9 = hBR( fBR( hYpR + ) ) fBR* sYpR*( mYpR*( fYpR*( + hYpR ) ) )
+shR11_ReactYpB = fBR*( hBR*( fBR*( sYpR*( mYpR*( fYpR* + ) ) ) + ) ) hYpR @initial 100 nM
+shR11_HelperYpEm = fYpR hEmR fEmR @initial 100 nM
+shR11_24 = fEmR*( hEmR*( fYpR*( hYpR*( fBR*( + hBR ) ) + ) ) )
+shR11_19 = hBR fBR( hYpR( + hEmR( fEmR( mEmR sEmR + ) ) fYpR* ) )
+shR11_ProduceBYpEm = fEmR*( hEmR*( fYpR*( hYpR*( fBR* + ) ) mYpR sYpR + ) ) mEmR sEmR @initial 100 nM
+shR11_FluxYpB = hBR fBR hYpR
+shYp = hYpR fYpR mYpR sYpR @initial 0 nM
+shEm = hEmR fEmR mEmR sEmR @initial 0 nM
+shR11_BackBYp = mYpR sYpR fBR @initial 1000 nM
+
+EC_R11_7 = mEmR sEmR sEm( mEm( + fEm* ) ) sEmR*( mEmR*( fEmR*( + hEmR ) ) )
+EC_R11_4 = mEmR( sEmR( sEm( mEm( + fEm* ) ) ) ) fEmR*( + hEmR ) mEmR sEmR
+EC_R11_12 = fEm*( mEm*( sEm*( sEmR*( mEmR*( fEmR*( + hEmR ) ) ) + ) ) ) hEm
+R11_CancelEm = mEmR( sEmR( sEm( mEm( + fEm* ) ) ) ) fEmR* @initial 10 nM
+EC_R11_2 = fEm*( mEm*( sEm*( sEmR*( mEmR*( fEmR* + ) ) ) ) + sEm mEm ) hEm
+EC_R11_5 = fEm*( mEm*( sEm*( sEmR*( mEmR*( fEmR* + ) ) sEm mEm + ) ) ) hEm
+R11_dispEm = mEmR sEmR sEm mEm @initial 0 nM
+
+
+# Resting macrostates (12) 
 macrostate R11_HelperBYp = [R11_HelperBYp]
-macrostate R11_34 = [R11_34]
+macrostate R11_27 = [R11_27]
 macrostate R11_BackBYp = [R11_BackBYp]
 macrostate R11_ReactYpB = [R11_ReactYpB]
-macrostate R11_17 = [R11_17]
-macrostate R11_10 = [R11_10]
+macrostate R11_33 = [R11_33]
+macrostate R11_9 = [R11_9]
 macrostate R11_ProduceBYpEm = [R11_ProduceBYpEm]
-macrostate R11_25 = [R11_25]
+macrostate R11_19 = [R11_19]
 macrostate R11_HelperYpEm = [R11_HelperYpEm]
 macrostate R11_FluxYpB = [R11_FluxYpB]
+macrostate Yp = [Yp]
+macrostate Em = [Em]
+
+macrostate shR11_HelperBYp = [shR11_HelperBYp]
+macrostate shR11_34 = [shR11_34]
+macrostate shR11_9 = [shR11_9]
+macrostate shR11_ReactYpB = [shR11_ReactYpB]
+macrostate shR11_HelperYpEm = [shR11_HelperYpEm]
+macrostate shR11_24 = [shR11_24]
+macrostate shR11_19 = [shR11_19]
+macrostate shR11_ProduceBYpEm = [shR11_ProduceBYpEm]
+macrostate shR11_FluxYpB = [shR11_FluxYpB]
+macrostate shYp = [shYp]
+macrostate shEm = [shEm]
+macrostate shR11_BackBYp = [shR11_BackBYp]
+
+macrostate EC_R11_7 = [EC_R11_4, EC_R11_7]
+macrostate EC_R11_12 = [EC_R11_12]
+macrostate R11_CancelEm = [R11_CancelEm]
+macrostate EC_R11_2 = [EC_R11_2, EC_R11_5]
+macrostate shEm = [shEm]
+macrostate R11_dispEm = [R11_dispEm]
+macrostate Em = [Em]
+
+macrostate O1 = [O1]
+macrostate O2 = [O2]
 
 
 # Condensed reactions (6) 
-reaction [condensed    = 0.004 /nM/s ] R11_HelperBYp + R11_25 -> R11_34 + R11_FluxYpB
-reaction [condensed    = 0.001 /nM/s ] R11_BackBYp + R11_25 -> R11_ReactYpB + Yp
-reaction [condensed    = 0.00001 /nM/s ] R11_ReactYpB + Yp -> R11_BackBYp + R11_25
-reaction [condensed    =  0.002 /nM/s ] R11_10 + R11_HelperYpEm -> R11_17 + Em
-reaction [condensed    = 0.001 /nM/s ] R11_10 + Yp -> R11_ProduceBYpEm + R11_FluxYpB
-reaction [condensed    = 0.001 /nM/s ] R11_ProduceBYpEm + R11_FluxYpB -> R11_10 + Yp
+reaction [condensed    = 0.002 /nM/s ] R11_HelperBYp + R11_19 -> R11_27 + R11_FluxYpB
+reaction [condensed    = 0.002 /nM/s ] R11_BackBYp + R11_19 -> R11_ReactYpB + Yp
+reaction [condensed    = 0.0001 /nM/s ] R11_ReactYpB + Yp -> R11_BackBYp + R11_19
+reaction [condensed    =  0.002 /nM/s ] R11_9 + R11_HelperYpEm -> R11_33 + Em
+reaction [condensed    = 0.002 /nM/s ] R11_9 + Yp -> R11_ProduceBYpEm + R11_FluxYpB
+reaction [condensed    = 0.002 /nM/s ] R11_ProduceBYpEm + R11_FluxYpB -> R11_9 + Yp
+#Leak
+# reaction [condensed    = 13e-9 /nM/s ] R11_ProduceBYpEm + R11_HelperYpEm -> Em
+
+# Shadow
+reaction [condensed    = 0.002 /nM/s ] shR11_HelperBYp + shR11_9 -> shR11_34 + shR11_FluxYpB
+reaction [condensed    = 0.002 /nM/s ] shR11_9 + shR11_BackBYp -> shR11_ReactYpB + shYp
+reaction [condensed    = 0.0001 /nM/s ] shR11_ReactYpB + shYp -> shR11_9 + shR11_BackBYp
+reaction [condensed    =  0.002 /nM/s ] shR11_HelperYpEm + shR11_19 -> shR11_24 + shEm
+reaction [condensed    = 0.002 /nM/s ] shR11_19 + shYp -> shR11_ProduceBYpEm + shR11_FluxYpB
+reaction [condensed    = 0.002 /nM/s ] shR11_ProduceBYpEm + shR11_FluxYpB -> shR11_19 + shYp
+#Leak
+# reaction [condensed    = 13e-9 /nM/s ] shR11_ProduceBYpEm + shR11_HelperYpEm -> shEm
+
+reaction [condensed    =  0.05 /s   ] EC_R11_7 -> R11_CancelEm + shEm
+reaction [condensed    =     0.002 /nM/s ] EC_R11_7 + Em -> EC_R11_12 + R11_dispEm
+reaction [condensed    =     0.002 /nM/s ] R11_CancelEm + shEm -> EC_R11_7
+reaction [condensed    =     0.002 /nM/s ] R11_CancelEm + Em -> EC_R11_2
+reaction [condensed    =  0.05 /s   ] EC_R11_2 -> R11_CancelEm + Em
+reaction [condensed    =     0.002 /nM/s ] EC_R11_2 + shEm -> EC_R11_12 + R11_dispEm
+#Buffer
+reaction [condensed    = 2e-4 /s] O1 -> O1 + R11_CancelEm
 
 #----
 
 ## R12: Ym -> Ym + Ep
-# Resting complexes (14) 
-R12_HelperBYm = fB hB fB @initial 1000 nM
-R12_34 = sYm( mYm( fYm( hYm + ) ) ) fB*( hB*( fB*( + ) ) )
-R12_BackBYm = fB sYm mYm @initial 10000 nM
-R12_ReactYmB = hYm fB( hB( + fB( sYm( mYm( + fYm* ) ) ) ) ) @initial 300 nM
-R12_17 = fEp( hEp( fYm( + hYm( fB( hB + ) ) ) ) )
-R12_10 = fB*( hYm*( fYm* hEp*( fEp*( + sEp mEp ) ) + ) ) hB
-R12_ProduceBYmEp = sEp mEp fEp( hEp( + sYm mYm fYm( hYm( + fB* ) ) ) ) @initial 1000 nM
-R12_25 = sYm( mYm( fYm( hYm + ) ) ) fB* hB*( fB*( + hYm ) )
-R12_HelperYmEp = fEp hEp fYm @initial 1000 nM
+# Resting complexes (12) 
+R12_HelperBYm = fB hB fB @initial 100 nM
+R12_27 = sYm( mYm( fYm( hYm + ) ) ) fB*( hB*( fB*( + ) ) )
+R12_BackBYm = fB sYm mYm @initial 1000 nM
+R12_ReactYmB = hYm fB( hB( + fB( sYm( mYm( + fYm* ) ) ) ) ) @initial 100 nM
+R12_33 = fEp( hEp( fYm( + hYm( fB( hB + ) ) ) ) )
+R12_9 = fB*( hYm*( fYm* hEp*( fEp*( + sEp mEp ) ) + ) ) hB
+R12_ProduceBYmEp = sEp mEp fEp( hEp( + sYm mYm fYm( hYm( + fB* ) ) ) ) @initial 100 nM
+R12_19 = fYm*( mYm*( sYm*( fB* hB*( fB*( + hYm ) ) + ) ) ) hYm
+R12_HelperYmEp = fEp hEp fYm @initial 100 nM
 R12_FluxYmB = hYm fB hB
+# Ym = sYm mYm fYm hYm @initial 1 nM
+# Ep = sEp mEp fEp hEp @initial 1e-05 nM
 
-# Resting macrostates (14) 
+# O1 = sO1 mO1 fO1 hO1 @initial 1 nM
+# O2 = sO2 mO2 fO2 hO2 @initial 1e-5 nM
+
+# Resting complexes (12) 
+shR12_HelperBYm = fBR hBR fBR @initial 100 nM
+shR12_34 = fBR( hBR( fBR( + ) ) ) sYmR*( mYmR*( fYmR*( + hYmR ) ) )
+shR12_9 = hBR( fBR( hYmR + ) ) fBR* sYmR*( mYmR*( fYmR*( + hYmR ) ) )
+shR12_ReactYmB = fBR*( hBR*( fBR*( sYmR*( mYmR*( fYmR* + ) ) ) + ) ) hYmR @initial 100 nM
+shR12_HelperYmEp = fYmR hEpR fEpR @initial 100 nM
+shR12_24 = fEpR*( hEpR*( fYmR*( hYmR*( fBR*( + hBR ) ) + ) ) )
+shR12_19 = hBR fBR( hYmR( + hEpR( fEpR( mEpR sEpR + ) ) fYmR* ) )
+shR12_ProduceBYmEp = fEpR*( hEpR*( fYmR*( hYmR*( fBR* + ) ) mYmR sYmR + ) ) mEpR sEpR @initial 100 nM
+shR12_FluxYmB = hBR fBR hYmR
+shYm = hYmR fYmR mYmR sYmR @initial 0 nM
+shEp = hEpR fEpR mEpR sEpR @initial 0 nM
+shR12_BackBYm = mYmR sYmR fBR @initial 1000 nM
+
+EC_R12_7 = mEpR sEpR sEp( mEp( + fEp* ) ) sEpR*( mEpR*( fEpR*( + hEpR ) ) )
+EC_R12_4 = mEpR( sEpR( sEp( mEp( + fEp* ) ) ) ) fEpR*( + hEpR ) mEpR sEpR
+EC_R12_12 = fEp*( mEp*( sEp*( sEpR*( mEpR*( fEpR*( + hEpR ) ) ) + ) ) ) hEp
+R12_CancelEp = mEpR( sEpR( sEp( mEp( + fEp* ) ) ) ) fEpR* @initial 10 nM
+EC_R12_2 = fEp*( mEp*( sEp*( sEpR*( mEpR*( fEpR* + ) ) ) ) + sEp mEp ) hEp
+EC_R12_5 = fEp*( mEp*( sEp*( sEpR*( mEpR*( fEpR* + ) ) sEp mEp + ) ) ) hEp
+R12_dispEp = mEpR sEpR sEp mEp @initial 0 nM
+
+
+# Resting macrostates (12) 
 macrostate R12_HelperBYm = [R12_HelperBYm]
-macrostate R12_34 = [R12_34]
+macrostate R12_27 = [R12_27]
 macrostate R12_BackBYm = [R12_BackBYm]
 macrostate R12_ReactYmB = [R12_ReactYmB]
-macrostate R12_17 = [R12_17]
-macrostate R12_10 = [R12_10]
+macrostate R12_33 = [R12_33]
+macrostate R12_9 = [R12_9]
 macrostate R12_ProduceBYmEp = [R12_ProduceBYmEp]
-macrostate R12_25 = [R12_25]
+macrostate R12_19 = [R12_19]
 macrostate R12_HelperYmEp = [R12_HelperYmEp]
 macrostate R12_FluxYmB = [R12_FluxYmB]
+macrostate Ym = [Ym]
+macrostate Ep = [Ep]
+
+macrostate shR12_HelperBYm = [shR12_HelperBYm]
+macrostate shR12_34 = [shR12_34]
+macrostate shR12_9 = [shR12_9]
+macrostate shR12_ReactYmB = [shR12_ReactYmB]
+macrostate shR12_HelperYmEp = [shR12_HelperYmEp]
+macrostate shR12_24 = [shR12_24]
+macrostate shR12_19 = [shR12_19]
+macrostate shR12_ProduceBYmEp = [shR12_ProduceBYmEp]
+macrostate shR12_FluxYmB = [shR12_FluxYmB]
+macrostate shYm = [shYm]
+macrostate shEp = [shEp]
+macrostate shR12_BackBYm = [shR12_BackBYm]
+
+macrostate EC_R12_7 = [EC_R12_4, EC_R12_7]
+macrostate EC_R12_12 = [EC_R12_12]
+macrostate R12_CancelEp = [R12_CancelEp]
+macrostate EC_R12_2 = [EC_R12_2, EC_R12_5]
+macrostate shEp = [shEp]
+macrostate R12_dispEp = [R12_dispEp]
+macrostate Ep = [Ep]
+
+macrostate O1 = [O1]
+macrostate O2 = [O2]
+
 
 # Condensed reactions (6) 
-reaction [condensed    = 0.004 /nM/s ] R12_HelperBYm + R12_25 -> R12_34 + R12_FluxYmB
-reaction [condensed    = 0.001 /nM/s ] R12_BackBYm + R12_25 -> R12_ReactYmB + Ym
-reaction [condensed    = 0.00001 /nM/s ] R12_ReactYmB + Ym -> R12_BackBYm + R12_25
-reaction [condensed    =  0.002 /nM/s ] R12_10 + R12_HelperYmEp -> R12_17 + Ep
-reaction [condensed    = 0.001 /nM/s ] R12_10 + Ym -> R12_ProduceBYmEp + R12_FluxYmB
-reaction [condensed    = 0.001 /nM/s ] R12_ProduceBYmEp + R12_FluxYmB -> R12_10 + Ym
+reaction [condensed    = 0.002 /nM/s ] R12_HelperBYm + R12_19 -> R12_27 + R12_FluxYmB
+reaction [condensed    = 0.002 /nM/s ] R12_BackBYm + R12_19 -> R12_ReactYmB + Ym
+reaction [condensed    = 0.0001 /nM/s ] R12_ReactYmB + Ym -> R12_BackBYm + R12_19
+reaction [condensed    =  0.002 /nM/s ] R12_9 + R12_HelperYmEp -> R12_33 + Ep
+reaction [condensed    = 0.002 /nM/s ] R12_9 + Ym -> R12_ProduceBYmEp + R12_FluxYmB
+reaction [condensed    = 0.002 /nM/s ] R12_ProduceBYmEp + R12_FluxYmB -> R12_9 + Ym
+#Leak
+# reaction [condensed    = 13e-9 /nM/s ] R12_ProduceBYmEp + R12_HelperYmEp -> Ep
 
+# Shadow
+reaction [condensed    = 0.002 /nM/s ] shR12_HelperBYm + shR12_9 -> shR12_34 + shR12_FluxYmB
+reaction [condensed    = 0.002 /nM/s ] shR12_9 + shR12_BackBYm -> shR12_ReactYmB + shYm
+reaction [condensed    = 0.0001 /nM/s ] shR12_ReactYmB + shYm -> shR12_9 + shR12_BackBYm
+reaction [condensed    =  0.002 /nM/s ] shR12_HelperYmEp + shR12_19 -> shR12_24 + shEp
+reaction [condensed    = 0.002 /nM/s ] shR12_19 + shYm -> shR12_ProduceBYmEp + shR12_FluxYmB
+reaction [condensed    = 0.002 /nM/s ] shR12_ProduceBYmEp + shR12_FluxYmB -> shR12_19 + shYm
+#Leak
+# reaction [condensed    = 13e-9 /nM/s ] shR12_ProduceBYmEp + shR12_HelperYmEp -> shEp
+
+reaction [condensed    =  0.05 /s   ] EC_R12_7 -> R12_CancelEp + shEp
+reaction [condensed    =     0.002 /nM/s ] EC_R12_7 + Ep -> EC_R12_12 + R12_dispEp
+reaction [condensed    =     0.002 /nM/s ] R12_CancelEp + shEp -> EC_R12_7
+reaction [condensed    =     0.002 /nM/s ] R12_CancelEp + Ep -> EC_R12_2
+reaction [condensed    =  0.05 /s   ] EC_R12_2 -> R12_CancelEp + Ep
+reaction [condensed    =     0.002 /nM/s ] EC_R12_2 + shEp -> EC_R12_12 + R12_dispEp
+#Buffer
+reaction [condensed    = 2e-4 /s] O1 -> O1 + R12_CancelEp
 
 ##-------
 ##R13: Ep -> W
@@ -763,10 +1561,10 @@ reaction [condensed    = 0.0001 /nM/s ] R16_React + Vm -> R16_Back + R16_9
 reaction [condensed    =  0.001 /nM/s ] R16_23 + R16_Helper_2 -> R16_34 + Ym
 reaction [condensed    = 0.0001 /nM/s ] R16_23 + Vm -> R16_ProduceBVmYm + R16_14
 reaction [condensed    = 0.0004 /nM/s ] R16_ProduceBVmYm + R16_14 -> R16_23 + Vm
-reaction [condensed    = 0.05 /s ] Rm -> Rm + R16_ProduceBVmYm
-reaction [condensed    = 0.05 /s ] Rm -> Rm + R16_React
-reaction [condensed    = 0.05 /s ] Rm -> Rm + R16_Helper_1
-reaction [condensed    = 0.05 /s ] Rm -> Rm + R16_Helper_2
+reaction [condensed    = 0.1 /s ] Rm -> Rm + R16_ProduceBVmYm
+reaction [condensed    = 0.1 /s ] Rm -> Rm + R16_React
+reaction [condensed    = 0.1 /s ] Rm -> Rm + R16_Helper_1
+reaction [condensed    = 0.1 /s ] Rm -> Rm + R16_Helper_2
 
 
 #------

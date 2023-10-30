@@ -1,44 +1,40 @@
-length hC = 15
-length fC = 7
-length sC = 7
-length mC = 15
-length hCR = 15
+length hCjR = 15
+length hCkR = 15
 length fCR = 7
 length sCR = 7
 length mCR = 15
-length hB = 15
-length fB = 7
-length sB = 7
-length mB = 15
-length hBR = 15
+length hBrR = 15
+length hBsR = 15
 length fBR = 7
 length sBR = 7
 length mBR = 15
-length hA = 15
-length fA = 7
-length sA = 7
-length mA = 15
-length hAR = 15
+length hApR = 15
+length hAqR = 15
 length fAR = 7
 length sAR = 7
 length mAR = 15
 
 
-shA = hAR fAR mAR sAR @initial 11 nM
-shB = hBR fBR mBR sBR @initial 10 nM
-shC = hCR fCR mCR sCR @initial 3 nM
+shAp = hApR fAR mAR sAR @initial 11 nM
+shBr = hBrR fBR mBR sBR @initial 10 nM
+shCj = hCjR fCR mCR sCR @initial 3 nM
+shAq = hAqR fAR mAR sAR @initial 1e-5 nM
+shBs = hBsR fBR mBR sBR @initial 1e-5 nM
+shCk = hCkR fCR mCR sCR @initial 1e-5 nM
 
-shReactCBC = mBR( sBR( hCR + ) ) fBR*( sCR*( mCR*( fCR* + ) ) ) @initial 200 nM
-shProduceBCC = hCR( fCR( mCR sCR + hCR( fCR( mCR sCR + ) ) ) ) sBR* @initial 200 nM
-shBackCB = mCR sCR fBR @initial 200 nM
-shHelperCC = fCR hCR fCR @initial 150 nM
 
-shReactBAB = mAR( sAR( hBR + ) ) fAR*( sBR*( mBR*( fBR* + ) ) ) @initial 200 nM
-shProduceABB = hBR( fBR( mBR sBR + hBR( fBR( mBR sBR + ) ) ) ) sAR* @initial 200 nM
-shBackBA = mBR sBR fAR @initial 200 nM
-shHelperBB = fBR hBR fBR @initial 150 nM
+shReactCBCj = mCR( sCR( fBR( + mBR( sBR( hCjR + ) ) ) ) ) fCR* @initial 300 nM
+shProduceBCjCk = hCjR( fCR( mCR sCR + hCkR( fCR( mCR sCR + ) ) ) ) sBR* @initial 300 nM
+shBackCB = mCR sCR fBR @initial 2000 nM
+shHelperCCk = fCR hCkR fCR @initial 200 nM
 
-shReactACA = mCR( sCR( hAR + ) ) fCR*( sAR*( mAR*( fAR* + ) ) ) @initial 200 nM
-shProduceCAA = hAR( fAR( mAR sAR + hAR( fAR( mAR sAR + ) ) ) ) sCR* @initial 200 nM
-shBackAC = mAR sAR fCR @initial 200 nM
-shHelperAA = fAR hAR fAR @initial 150 nM
+shReactBABr = mBR( sBR( fAR( + mAR( sAR( hBrR + ) ) ) ) ) fBR* @initial 300 nM
+shProduceABrBs = hBrR( fBR( mBR sBR + hBsR( fBR( mBR sBR + ) ) ) ) sAR* @initial 300 nM
+shBackBA = mBR sBR fAR @initial 2000 nM
+shHelperBBs = fBR hBsR fBR @initial 200 nM
+
+shReactACAp = mAR( sAR( fCR( + mCR( sCR( hApR + ) ) ) ) ) fAR* @initial 300 nM
+shProduceCApAq = hApR( fAR( mAR sAR + hAqR( fAR( mAR sAR + ) ) ) ) sCR* @initial 300 nM
+shBackAC = mAR sAR fCR @initial 2000 nM
+shHelperAAq = fAR hAqR fAR @initial 200 nM
+

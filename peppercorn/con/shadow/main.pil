@@ -15,20 +15,20 @@ shA = sAR mAR fAR hAR @initial 3 nM
 shB = sBR mBR fBR hBR @initial 8 nM
 shY = sYR mYR fYR hYR @initial 5 nM
 
-shReactABY = hYR sBR( mBR( + fBR( sAR( mAR( + fAR* ) ) ) ) ) @initial 20 nM
-shProduceBYY = sYR mYR fYR( hYR( + sYR mYR fYR( hYR( + sBR* ) ) ) ) @initial 30 nM
-shBackBA = fBR sAR mAR @initial 30 nM
-shHelperYY = fYR hYR fYR @initial 20 nM
+shReactABY = hYR sBR( mBR( + fBR( sAR( mAR( + fAR* ) ) ) ) ) @initial 100 nM
+shProduceBYY = sYR mYR fYR( hYR( + sYR mYR fYR( hYR( + sBR* ) ) ) ) @initial 100 nM
+shBackBA = fBR sAR mAR @initial 1000 nM
+shHelperYY = fYR hYR fYR @initial 100 nM
 
 
-shReactAYA = hAR sYR( mYR( + fYR( sAR( mAR( + fAR* ) ) ) ) ) @initial 20 nM
-shProduceYAA = sAR mAR fAR( hAR( + sAR mAR fAR( hAR( + sYR* ) ) ) ) @initial 30 nM
-shBackAY = fYR sAR mAR @initial 30 nM
-shHelperAA = fAR hAR fAR @initial 20 nM
+shReactAYA = hAR sYR( mYR( + fYR( sAR( mAR( + fAR* ) ) ) ) ) @initial 100 nM
+shProduceYAA = sAR mAR fAR( hAR( + sAR mAR fAR( hAR( + sYR* ) ) ) ) @initial 100 nM
+shBackAY = fYR sAR mAR @initial 1000 nM
+shHelperAA = fAR hAR fAR @initial 100 nM
 
 
-shReactBYB = hBR sYR( mYR( + fYR( sBR( mBR( + fBR* ) ) ) ) ) @initial 20 nM
-shProduceYBB = sBR mBR fBR( hBR( + sBR mBR fBR( hBR( + sYR* ) ) ) ) @initial 30 nM
-shBackBY = fYR sBR mBR @initial 30 nM
-shHelperBB = fBR hBR fBR @initial 20 nM
+shReactBYB = hBR sYR( mYR( + fYR( sBR( mBR( + fBR* ) ) ) ) ) @initial 100 nM
+shProduceYBB = sBR mBR fBR( hBR( + sBR mBR fBR( hBR( + sYR* ) ) ) ) @initial 100 nM
+shBackBY = fYR sBR mBR @initial 1000 nM
+shHelperBB = fBR hBR fBR @initial 100 nM
 

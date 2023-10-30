@@ -1,17 +1,18 @@
-length hCR = 15
+length hCjR = 15
+length hCjR = 15
 length fCR = 7
 length sCR = 7
 length mCR = 15
-length hBR = 15
+length hBrR = 15
 length fBR = 7
 length sBR = 7
 length mBR = 15
-length hCR = 15
 
-shC = hCR fCR mCR sCR @initial 4 nM
-shB = hBR fBR mBR sBR @initial 4 nM
+shCj = hCjR fCR mCR sCR @initial 4 nM
+shCj = hCjR fCR mCR sCR @initial 1e-5 nM
+shBr = hBrR fBR mBR sBR @initial 4 nM
 
-shReactCBC = mCR( sCR( fBR( + mBR( sBR( hCR + ) ) ) ) ) fCR* @initial 100 nM
-shProduceBCC = hCR( fCR( mCR sCR + hCR( fCR( mCR sCR + ) ) ) ) sBR* @initial 100 nM
-shBackCB = mCR sCR fBR @initial 100 nM
-shHelperCC = fCR hCR fCR @initial 75 nM
+shReactCBCj = mCR( sCR( fBR( + mBR( sBR( hCjR + ) ) ) ) ) fCR* @initial 300 nM
+shProduceBCjCj = hCjR( fCR( mCR sCR + hCjR( fCR( mCR sCR + ) ) ) ) sBR* @initial 300 nM
+shBackCB = mCR sCR fBR @initial 6000 nM
+shHelperCCj = fCR hCjR fCR @initial 200 nM

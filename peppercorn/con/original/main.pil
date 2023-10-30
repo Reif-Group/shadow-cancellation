@@ -11,24 +11,40 @@ length mY = 15
 length fY = 7
 length sY = 7
 
+length hOA = 15
+length fOA = 7
+length sOA = 7
+length mOA = 15
+length hOB = 15
+length fOB = 7
+length sOB = 7
+length mOB = 15
+length hOY = 15
+length mOY = 15
+length fOY = 7
+length sOY = 7
+
+OA = sOA mOA fOA hOA @initial 3 nM
+OB = sOB mOB fOB hOB @initial 8 nM
+OY = sOY mOY fOY hOY @initial 5 nM
+
 A = sA mA fA hA @initial 3 nM
 B = sB mB fB hB @initial 8 nM
 Y = sY mY fY hY @initial 5 nM
 
-ReactABY = hY sB( mB( + fB( sA( mA( + fA* ) ) ) ) ) @initial 20 nM
-ProduceBYY = sY mY fY( hY( + sY mY fY( hY( + sB* ) ) ) ) @initial 30 nM
-BackBA = fB sA mA @initial 30 nM
-HelperYY = fY hY fY @initial 20 nM
+ReactABY = hY sB( mB( + fB( sA( mA( + fA* ) ) ) ) ) @initial 100 nM
+ProduceBYY = sY mY fY( hY( + sY mY fY( hY( + sB* ) ) ) ) @initial 100 nM
+BackBA = fB sA mA @initial 1000 nM
+HelperYY = fY hY fY @initial 80 nM
 
 
-ReactAYA = hA sY( mY( + fY( sA( mA( + fA* ) ) ) ) ) @initial 20 nM
-ProduceYAA = sA mA fA( hA( + sA mA fA( hA( + sY* ) ) ) ) @initial 30 nM
-BackAY = fY sA mA @initial 30 nM
-HelperAA = fA hA fA @initial 20 nM
+ReactAYA = hA sY( mY( + fY( sA( mA( + fA* ) ) ) ) ) @initial 100 nM
+ProduceYAA = sA mA fA( hA( + sA mA fA( hA( + sY* ) ) ) ) @initial 100 nM
+BackAY = fY sA mA @initial 1000 nM
+HelperAA = fA hA fA @initial 80 nM
 
 
-ReactBYB = hB sY( mY( + fY( sB( mB( + fB* ) ) ) ) ) @initial 20 nM
-ProduceYBB = sB mB fB( hB( + sB mB fB( hB( + sY* ) ) ) ) @initial 30 nM
-BackBY = fY sB mB @initial 30 nM
-HelperBB = fB hB fB @initial 20 nM
-
+ReactBYB = hB sY( mY( + fY( sB( mB( + fB* ) ) ) ) ) @initial 100 nM
+ProduceYBB = sB mB fB( hB( + sB mB fB( hB( + sY* ) ) ) ) @initial 100 nM
+BackBY = fY sB mB @initial 1000 nM
+HelperBB = fB hB fB @initial 80 nM
