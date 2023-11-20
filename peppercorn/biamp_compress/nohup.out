@@ -1,0 +1,230 @@
+Traceback (most recent call last):
+  File "/usr/local/bin/pilsimulator", line 8, in <module>
+    sys.exit(main())
+  File "/usr/local/lib/python3.8/site-packages/peppercornenumerator/pilsimulator.py", line 156, in main
+    integrate = get_integrator(filename)
+  File "/usr/local/lib/python3.8/site-packages/crnsimulator/solver.py", line 38, in get_integrator
+    return getattr(mod, function)
+AttributeError: module 'my_loader' has no attribute 'integrate'
+Traceback (most recent call last):
+  File "/usr/local/bin/pilsimulator", line 8, in <module>
+    sys.exit(main())
+  File "/usr/local/lib/python3.8/site-packages/peppercornenumerator/pilsimulator.py", line 156, in main
+    integrate = get_integrator(filename)
+  File "/usr/local/lib/python3.8/site-packages/crnsimulator/solver.py", line 38, in get_integrator
+    return getattr(mod, function)
+AttributeError: module 'my_loader' has no attribute 'integrate'
+Traceback (most recent call last):
+  File "/usr/local/bin/pilsimulator", line 8, in <module>
+    sys.exit(main())
+  File "/usr/local/lib/python3.8/site-packages/peppercornenumerator/pilsimulator.py", line 156, in main
+    integrate = get_integrator(filename)
+  File "/usr/local/lib/python3.8/site-packages/crnsimulator/solver.py", line 34, in get_integrator
+    loader.exec_module(mod)
+  File "<frozen importlib._bootstrap_external>", line 839, in exec_module
+  File "<frozen importlib._bootstrap_external>", line 976, in get_code
+  File "<frozen importlib._bootstrap_external>", line 906, in source_to_code
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "odesystem.py", line 1124
+    integrate(args, setlogger = True)
+    ^
+IndentationError: unexpected indent
+Traceback (most recent call last):
+  File "/usr/local/bin/pilsimulator", line 8, in <module>
+    sys.exit(main())
+  File "/usr/local/lib/python3.8/site-packages/peppercornenumerator/pilsimulator.py", line 156, in main
+    integrate = get_integrator(filename)
+  File "/usr/local/lib/python3.8/site-packages/crnsimulator/solver.py", line 34, in get_integrator
+    loader.exec_module(mod)
+  File "<frozen importlib._bootstrap_external>", line 839, in exec_module
+  File "<frozen importlib._bootstrap_external>", line 976, in get_code
+  File "<frozen importlib._bootstrap_external>", line 906, in source_to_code
+  File "<frozen importlib._bootstrap>", line 219, in _call_with_frames_removed
+  File "odesystem.py", line 1124
+    integrate(args, setlogger = True)
+    ^
+IndentationError: unexpected indent
+Traceback (most recent call last):
+  File "/usr/local/bin/pilsimulator", line 8, in <module>
+    sys.exit(main())
+  File "/usr/local/lib/python3.8/site-packages/peppercornenumerator/pilsimulator.py", line 98, in main
+    const.append(False if species[s][0][0] == 'i' else True)
+KeyError: 'HelperCCk'
+Traceback (most recent call last):
+  File "/usr/local/bin/pilsimulator", line 8, in <module>
+    sys.exit(main())
+  File "/usr/local/lib/python3.8/site-packages/peppercornenumerator/pilsimulator.py", line 98, in main
+    const.append(False if species[s][0][0] == 'i' else True)
+KeyError: 'HelperCCk'
+Traceback (most recent call last):
+  File "/usr/local/bin/pilsimulator", line 8, in <module>
+    sys.exit(main())
+  File "/usr/local/lib/python3.8/site-packages/peppercornenumerator/pilsimulator.py", line 98, in main
+    const.append(False if species[s][0][0] == 'i' else True)
+KeyError: 'HelperCCk'
+Traceback (most recent call last):
+  File "/usr/local/bin/pilsimulator", line 8, in <module>
+    sys.exit(main())
+  File "/usr/local/lib/python3.8/site-packages/peppercornenumerator/pilsimulator.py", line 98, in main
+    const.append(False if species[s][0][0] == 'i' else True)
+KeyError: 'HelperCCk'
+Traceback (most recent call last):
+  File "/usr/local/bin/pilsimulator", line 8, in <module>
+    sys.exit(main())
+  File "/usr/local/lib/python3.8/site-packages/peppercornenumerator/pilsimulator.py", line 98, in main
+    const.append(False if species[s][0][0] == 'i' else True)
+KeyError: 'HelperCCk'
+Traceback (most recent call last):
+  File "/usr/local/bin/pilsimulator", line 8, in <module>
+    sys.exit(main())
+  File "/usr/local/lib/python3.8/site-packages/peppercornenumerator/pilsimulator.py", line 98, in main
+    const.append(False if species[s][0][0] == 'i' else True)
+KeyError: 'HelperCCk'
+Traceback (most recent call last):
+  File "/usr/local/bin/pilsimulator", line 8, in <module>
+    sys.exit(main())
+  File "/usr/local/lib/python3.8/site-packages/peppercornenumerator/pilsimulator.py", line 98, in main
+    const.append(False if species[s][0][0] == 'i' else True)
+KeyError: 'HelperCCk'
+Traceback (most recent call last):
+  File "/usr/local/bin/pilsimulator", line 8, in <module>
+    sys.exit(main())
+  File "/usr/local/lib/python3.8/site-packages/peppercornenumerator/pilsimulator.py", line 98, in main
+    const.append(False if species[s][0][0] == 'i' else True)
+KeyError: 'HelperCCk'
+Traceback (most recent call last):
+  File "/usr/local/bin/pilsimulator", line 8, in <module>
+    sys.exit(main())
+  File "/usr/local/lib/python3.8/site-packages/peppercornenumerator/pilsimulator.py", line 98, in main
+    const.append(False if species[s][0][0] == 'i' else True)
+KeyError: 'HelperCCk'
+Traceback (most recent call last):
+  File "/usr/local/bin/pilsimulator", line 8, in <module>
+    sys.exit(main())
+  File "/usr/local/lib/python3.8/site-packages/peppercornenumerator/pilsimulator.py", line 98, in main
+    const.append(False if species[s][0][0] == 'i' else True)
+KeyError: 'HelperCCk'
+Traceback (most recent call last):
+  File "/usr/local/bin/pilsimulator", line 8, in <module>
+    sys.exit(main())
+  File "/usr/local/lib/python3.8/site-packages/peppercornenumerator/pilsimulator.py", line 98, in main
+    const.append(False if species[s][0][0] == 'i' else True)
+KeyError: 'HelperCCk'
+Traceback (most recent call last):
+  File "/usr/local/bin/pilsimulator", line 8, in <module>
+    sys.exit(main())
+  File "/usr/local/lib/python3.8/site-packages/peppercornenumerator/pilsimulator.py", line 98, in main
+    const.append(False if species[s][0][0] == 'i' else True)
+KeyError: 'HelperCCk'
+Traceback (most recent call last):
+  File "/usr/local/bin/pilsimulator", line 8, in <module>
+    sys.exit(main())
+  File "/usr/local/lib/python3.8/site-packages/peppercornenumerator/pilsimulator.py", line 98, in main
+    const.append(False if species[s][0][0] == 'i' else True)
+KeyError: 'HelperCCk'
+Traceback (most recent call last):
+  File "/usr/local/bin/pilsimulator", line 8, in <module>
+    sys.exit(main())
+  File "/usr/local/lib/python3.8/site-packages/peppercornenumerator/pilsimulator.py", line 98, in main
+    const.append(False if species[s][0][0] == 'i' else True)
+KeyError: 'HelperCCk'
+Traceback (most recent call last):
+  File "/usr/local/bin/pilsimulator", line 8, in <module>
+    sys.exit(main())
+  File "/usr/local/lib/python3.8/site-packages/peppercornenumerator/pilsimulator.py", line 98, in main
+    const.append(False if species[s][0][0] == 'i' else True)
+KeyError: 'HelperCCk'
+Traceback (most recent call last):
+  File "/usr/local/bin/pilsimulator", line 8, in <module>
+    sys.exit(main())
+  File "/usr/local/lib/python3.8/site-packages/peppercornenumerator/pilsimulator.py", line 98, in main
+    const.append(False if species[s][0][0] == 'i' else True)
+KeyError: 'HelperCCk'
+Traceback (most recent call last):
+  File "/usr/local/bin/pilsimulator", line 8, in <module>
+    sys.exit(main())
+  File "/usr/local/lib/python3.8/site-packages/peppercornenumerator/pilsimulator.py", line 98, in main
+    const.append(False if species[s][0][0] == 'i' else True)
+KeyError: 'HelperCCk'
+Traceback (most recent call last):
+  File "/usr/local/bin/pilsimulator", line 8, in <module>
+    sys.exit(main())
+  File "/usr/local/lib/python3.8/site-packages/peppercornenumerator/pilsimulator.py", line 98, in main
+    const.append(False if species[s][0][0] == 'i' else True)
+KeyError: 'HelperCCk'
+Traceback (most recent call last):
+  File "/usr/local/bin/pilsimulator", line 8, in <module>
+    sys.exit(main())
+  File "/usr/local/lib/python3.8/site-packages/peppercornenumerator/pilsimulator.py", line 98, in main
+    const.append(False if species[s][0][0] == 'i' else True)
+KeyError: 'HelperCCk'
+Traceback (most recent call last):
+  File "/usr/local/bin/pilsimulator", line 8, in <module>
+    sys.exit(main())
+  File "/usr/local/lib/python3.8/site-packages/peppercornenumerator/pilsimulator.py", line 98, in main
+    const.append(False if species[s][0][0] == 'i' else True)
+KeyError: 'HelperCCk'
+Traceback (most recent call last):
+  File "/usr/local/bin/pilsimulator", line 8, in <module>
+    sys.exit(main())
+  File "/usr/local/lib/python3.8/site-packages/peppercornenumerator/pilsimulator.py", line 98, in main
+    const.append(False if species[s][0][0] == 'i' else True)
+KeyError: 'HelperCCk'
+Traceback (most recent call last):
+  File "/usr/local/bin/pilsimulator", line 8, in <module>
+    sys.exit(main())
+  File "/usr/local/lib/python3.8/site-packages/peppercornenumerator/pilsimulator.py", line 98, in main
+    const.append(False if species[s][0][0] == 'i' else True)
+KeyError: 'HelperCCk'
+Traceback (most recent call last):
+  File "/usr/local/bin/pilsimulator", line 8, in <module>
+    sys.exit(main())
+  File "/usr/local/lib/python3.8/site-packages/peppercornenumerator/pilsimulator.py", line 98, in main
+    const.append(False if species[s][0][0] == 'i' else True)
+KeyError: 'HelperCCk'
+Traceback (most recent call last):
+  File "/usr/local/bin/pilsimulator", line 8, in <module>
+    sys.exit(main())
+  File "/usr/local/lib/python3.8/site-packages/peppercornenumerator/pilsimulator.py", line 98, in main
+    const.append(False if species[s][0][0] == 'i' else True)
+KeyError: 'HelperCCk'
+Traceback (most recent call last):
+  File "/usr/local/bin/pilsimulator", line 8, in <module>
+    sys.exit(main())
+  File "/usr/local/lib/python3.8/site-packages/peppercornenumerator/pilsimulator.py", line 98, in main
+    const.append(False if species[s][0][0] == 'i' else True)
+KeyError: 'HelperCCk'
+Traceback (most recent call last):
+  File "/usr/local/bin/pilsimulator", line 8, in <module>
+    sys.exit(main())
+  File "/usr/local/lib/python3.8/site-packages/peppercornenumerator/pilsimulator.py", line 98, in main
+    const.append(False if species[s][0][0] == 'i' else True)
+KeyError: 'HelperCCk'
+Traceback (most recent call last):
+  File "/usr/local/bin/pilsimulator", line 8, in <module>
+    sys.exit(main())
+  File "/usr/local/lib/python3.8/site-packages/peppercornenumerator/pilsimulator.py", line 98, in main
+    const.append(False if species[s][0][0] == 'i' else True)
+KeyError: 'HelperCCk'
+Traceback (most recent call last):
+  File "/usr/local/bin/pilsimulator", line 8, in <module>
+    sys.exit(main())
+  File "/usr/local/lib/python3.8/site-packages/peppercornenumerator/pilsimulator.py", line 98, in main
+    const.append(False if species[s][0][0] == 'i' else True)
+KeyError: 'HelperCCk'
+Traceback (most recent call last):
+  File "/usr/local/bin/pilsimulator", line 8, in <module>
+    sys.exit(main())
+  File "/usr/local/lib/python3.8/site-packages/peppercornenumerator/pilsimulator.py", line 98, in main
+    const.append(False if species[s][0][0] == 'i' else True)
+KeyError: 'HelperCCk'
+Traceback (most recent call last):
+  File "/usr/local/bin/pilsimulator", line 8, in <module>
+    sys.exit(main())
+  File "/usr/local/lib/python3.8/site-packages/peppercornenumerator/pilsimulator.py", line 98, in main
+    const.append(False if species[s][0][0] == 'i' else True)
+KeyError: 'HelperCCk'
+2023-11-13 00:25:39.525 Python[58791:69030507] *** CFMessagePort: bootstrap_register(): failed 1100 (0x44c) 'Permission denied', port = 0xb80f, name = 'org.python.python.ServiceProvider'
+See /usr/include/servers/bootstrap_defs.h for the error codes.
+2023-11-13 00:25:39.525 Python[58696:69029957] *** CFMessagePort: bootstrap_register(): failed 1100 (0x44c) 'Permission denied', port = 0xb30f, name = 'org.python.python.ServiceProvider'
+See /usr/include/servers/bootstrap_defs.h for the error codes.
