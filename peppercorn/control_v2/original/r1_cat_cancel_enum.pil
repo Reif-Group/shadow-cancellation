@@ -11,29 +11,29 @@ length sX2 = 7
 length sX2R = 7
 
 # Resting complexes (9) 
-EC_R_NUM_7 = mX2R sX2R sX2( mX2( + fX2* ) ) sX2R*( mX2R*( fX2R*( + hX2R ) ) )
-EC_R_NUM_4 = mX2R( sX2R( sX2( mX2( + fX2* ) ) ) ) fX2R*( + hX2R ) mX2R sX2R
-EC_R_NUM_12 = fX2*( mX2*( sX2*( sX2R*( mX2R*( fX2R*( + hX2R ) ) ) + ) ) ) hX2
+shR_NUM_10 = hX2R fX2R( mX2R( sX2R( + mX2R sX2R sX2( mX2( + fX2* ) ) ) ) )
+shR_NUM_5 = hX2R fX2R( mX2R sX2R + mX2R( sX2R( sX2( mX2( + fX2* ) ) ) ) )
+shR_NUM_12 = hX2R fX2R( mX2R( sX2R( + sX2( mX2( fX2( hX2 + ) ) ) ) ) )
 R_NUM_CancelX2 = mX2R( sX2R( sX2( mX2( + fX2* ) ) ) ) fX2R* @initial 300 nM
-EC_R_NUM_2 = fX2*( mX2*( sX2*( sX2R*( mX2R*( fX2R* + ) ) ) ) + sX2 mX2 ) hX2
-EC_R_NUM_5 = fX2*( mX2*( sX2*( sX2R*( mX2R*( fX2R* + ) ) sX2 mX2 + ) ) ) hX2
+shR_NUM_2 = fX2*( mX2*( sX2*( sX2R*( mX2R*( fX2R* + ) ) ) ) + sX2 mX2 ) hX2
+shR_NUM_3 = fX2*( mX2*( sX2*( sX2R*( mX2R*( fX2R* + ) ) sX2 mX2 + ) ) ) hX2
 shX2 = hX2R fX2R mX2R sX2R @initial 2 nM
 R_NUM_dispX2 = mX2R sX2R sX2 mX2 @initial 0 nM
 X2 = sX2 mX2 fX2 hX2 @initial 2 nM
 
 # Resting macrostates (7) 
-macrostate EC_R_NUM_7 = [EC_R_NUM_4, EC_R_NUM_7]
-macrostate EC_R_NUM_12 = [EC_R_NUM_12]
+macrostate shR_NUM_10 = [shR_NUM_10, shR_NUM_5]
+macrostate shR_NUM_12 = [shR_NUM_12]
 macrostate R_NUM_CancelX2 = [R_NUM_CancelX2]
-macrostate EC_R_NUM_2 = [EC_R_NUM_2, EC_R_NUM_5]
+macrostate shR_NUM_2 = [shR_NUM_3, shR_NUM_2]
 macrostate shX2 = [shX2]
 macrostate R_NUM_dispX2 = [R_NUM_dispX2]
 macrostate X2 = [X2]
 
 # Condensed reactions (6) 
-reaction [condensed    =  0.0490213 /s   ] EC_R_NUM_7 -> R_NUM_CancelX2 + shX2
-reaction [condensed    =     0.0021 /nM/s ] EC_R_NUM_7 + X2 -> EC_R_NUM_12 + R_NUM_dispX2
-reaction [condensed    =     0.0021 /nM/s ] R_NUM_CancelX2 + shX2 -> EC_R_NUM_7
-reaction [condensed    =     0.0021 /nM/s ] R_NUM_CancelX2 + X2 -> EC_R_NUM_2
-reaction [condensed    =  0.0490213 /s   ] EC_R_NUM_2 -> R_NUM_CancelX2 + X2
-reaction [condensed    =     0.0021 /nM/s ] EC_R_NUM_2 + shX2 -> EC_R_NUM_12 + R_NUM_dispX2
+reaction [condensed    =  0.0490213 /s   ] shR_NUM_10 -> R_NUM_CancelX2 + shX2
+reaction [condensed    =     0.0021 /nM/s ] shR_NUM_10 + X2 -> shR_NUM_12 + R_NUM_dispX2
+reaction [condensed    =     0.0021 /nM/s ] R_NUM_CancelX2 + shX2 -> shR_NUM_10
+reaction [condensed    =     0.0021 /nM/s ] R_NUM_CancelX2 + X2 -> shR_NUM_2
+reaction [condensed    =  0.0490213 /s   ] shR_NUM_2 -> R_NUM_CancelX2 + X2
+reaction [condensed    =     0.0021 /nM/s ] shR_NUM_2 + shX2 -> shR_NUM_12 + R_NUM_dispX2

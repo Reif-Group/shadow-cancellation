@@ -13,37 +13,37 @@ length sX1R = 7
 length sX2R = 7
 
 # Resting complexes (12) 
-sh_R_NUM_HelperBX1 = fBR hBR fBR @initial 1000. nM
-shR_NUM_34 = fBR( hBR( fBR( + ) ) ) sX1R*( mX1R*( fX1R*( + hX1R ) ) )
-shR_NUM_9 = hBR( fBR( hX1R + ) ) fBR* sX1R*( mX1R*( fX1R*( + hX1R ) ) )
-sh_R_NUM_ReactX1B = fBR*( hBR*( fBR*( sX1R*( mX1R*( fX1R* + ) ) ) + ) ) hX1R @initial 300 nM
-sh_R_NUM_HelperX1X2 = fX1R hX2R fX2R @initial 1000. nM
-shR_NUM_24 = fX2R*( hX2R*( fX1R*( hX1R*( fBR*( + hBR ) ) + ) ) )
-shR_NUM_19 = hBR fBR( hX1R( + hX2R( fX2R( mX2R sX2R + ) ) fX1R* ) )
-sh_R_NUM_ProduceBX1X2 = fX2R*( hX2R*( fX1R*( hX1R*( fBR* + ) ) mX1R sX1R + ) ) mX2R sX2R @initial 1000. nM
-sh_R_NUM_FluxX1B = hBR fBR hX1R
+shR_NUM_HelperBX1 = fBR hBR fBR @initial 1000 nM
+shR_NUM_15 = fBR*( hBR*( fBR*( sX1R*( mX1R*( fX1R*( + hX1R ) ) ) + ) ) )
+shR_NUM_7 = hX1R fX1R( mX1R( sX1R( + hBR( fBR( hX1R + ) ) fBR* ) ) )
+shR_NUM_ReactX1B = fBR*( hBR*( fBR*( sX1R*( mX1R*( fX1R* + ) ) ) + ) ) hX1R @initial 300 nM
+shR_NUM_HelperX1X2 = fX1R hX2R fX2R @initial 1000 nM
+shR_NUM_33 = fX2R*( hX2R*( fX1R*( hX1R*( fBR*( + hBR ) ) + ) ) )
+shR_NUM_27 = hX2R( fX2R( mX2R sX2R + ) ) fX1R* hX1R*( fBR*( + hBR ) )
+shR_NUM_ProduceBX1X2 = fX2R*( hX2R*( fX1R*( hX1R*( fBR* + ) ) mX1R sX1R + ) ) mX2R sX2R @initial 1000 nM
+shR_NUM_FluxX1B = hBR fBR hX1R
 shX1 = hX1R fX1R mX1R sX1R @initial 1 nM
 shX2 = hX2R fX2R mX2R sX2R @initial 1e-05 nM
-sh_R_NUM_BackBX1 = mX1R sX1R fBR @initial 1000. nM
+shR_NUM_BackBX1 = mX1R sX1R fBR @initial 1000 nM
 
 # Resting macrostates (12) 
-macrostate sh_R_NUM_HelperBX1 = [sh_R_NUM_HelperBX1]
-macrostate shR_NUM_34 = [shR_NUM_34]
-macrostate shR_NUM_9 = [shR_NUM_9]
-macrostate sh_R_NUM_ReactX1B = [sh_R_NUM_ReactX1B]
-macrostate sh_R_NUM_HelperX1X2 = [sh_R_NUM_HelperX1X2]
-macrostate shR_NUM_24 = [shR_NUM_24]
-macrostate shR_NUM_19 = [shR_NUM_19]
-macrostate sh_R_NUM_ProduceBX1X2 = [sh_R_NUM_ProduceBX1X2]
-macrostate sh_R_NUM_FluxX1B = [sh_R_NUM_FluxX1B]
+macrostate shR_NUM_HelperBX1 = [shR_NUM_HelperBX1]
+macrostate shR_NUM_15 = [shR_NUM_15]
+macrostate shR_NUM_7 = [shR_NUM_7]
+macrostate shR_NUM_ReactX1B = [shR_NUM_ReactX1B]
+macrostate shR_NUM_HelperX1X2 = [shR_NUM_HelperX1X2]
+macrostate shR_NUM_33 = [shR_NUM_33]
+macrostate shR_NUM_27 = [shR_NUM_27]
+macrostate shR_NUM_ProduceBX1X2 = [shR_NUM_ProduceBX1X2]
+macrostate shR_NUM_FluxX1B = [shR_NUM_FluxX1B]
 macrostate shX1 = [shX1]
 macrostate shX2 = [shX2]
-macrostate sh_R_NUM_BackBX1 = [sh_R_NUM_BackBX1]
+macrostate shR_NUM_BackBX1 = [shR_NUM_BackBX1]
 
 # Condensed reactions (6) 
-reaction [condensed    = 0.00384254 /nM/s ] sh_R_NUM_HelperBX1 + shR_NUM_9 -> shR_NUM_34 + sh_R_NUM_FluxX1B
-reaction [condensed    = 0.00104661 /nM/s ] shR_NUM_9 + sh_R_NUM_BackBX1 -> sh_R_NUM_ReactX1B + shX1
-reaction [condensed    = 0.00104661 /nM/s ] sh_R_NUM_ReactX1B + shX1 -> shR_NUM_9 + sh_R_NUM_BackBX1
-reaction [condensed    =  0.0020865 /nM/s ] sh_R_NUM_HelperX1X2 + shR_NUM_19 -> shR_NUM_24 + shX2
-reaction [condensed    = 0.00104769 /nM/s ] shR_NUM_19 + shX1 -> sh_R_NUM_ProduceBX1X2 + sh_R_NUM_FluxX1B
-reaction [condensed    = 0.00104769 /nM/s ] sh_R_NUM_ProduceBX1X2 + sh_R_NUM_FluxX1B -> shR_NUM_19 + shX1
+reaction [condensed    = 0.001 /nM/s ] shR_NUM_HelperBX1 + shR_NUM_7 -> shR_NUM_15 + shR_NUM_FluxX1B
+reaction [condensed    = 0.001 /nM/s ] shR_NUM_7 + shR_NUM_BackBX1 -> shR_NUM_ReactX1B + shX1
+reaction [condensed    = 0.0001 /nM/s ] shR_NUM_ReactX1B + shX1 -> shR_NUM_7 + shR_NUM_BackBX1
+reaction [condensed    =  0.001 /nM/s ] shR_NUM_HelperX1X2 + shR_NUM_27 -> shR_NUM_33 + shX2
+reaction [condensed    = 0.001 /nM/s ] shR_NUM_27 + shX1 -> shR_NUM_ProduceBX1X2 + shR_NUM_FluxX1B
+reaction [condensed    = 0.001 /nM/s ] shR_NUM_ProduceBX1X2 + shR_NUM_FluxX1B -> shR_NUM_27 + shX1

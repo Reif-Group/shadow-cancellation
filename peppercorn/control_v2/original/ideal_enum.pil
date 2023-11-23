@@ -731,23 +731,19 @@ macrostate R14_ProduceEmW = [R14_ProduceEmW]
 reaction [condensed    =  0.00001 /nM/s ] R14_ReactEmW + Em -> R14_6 + R14_7
 reaction [condensed    = 0.001 /nM/s ] R14_7 + R14_ProduceEmW -> R14_12 + W
 
-## R15: Vp -> Vp + Yp
+## R15: Vp -> Vp + Yp ## MANIPULATE THIS FOR BETTE
 # Resting complexes (14) 
-R15_Helper_1 = fB hB fB @initial 4000 nM
+R15_Helper_1 = fB hB fB @initial 3500 nM
 R15_15 = sVp( mVp( fVp( hVp + ) ) ) fB*( hB*( fB*( + ) ) )
 R15_Back = fB sVp mVp @initial 0 nM
-R15_React = hVp fB( hB( + fB( sVp( mVp( + fVp* ) ) ) ) ) @initial 4000 nM
+R15_React = hVp fB( hB( + fB( sVp( mVp( + fVp* ) ) ) ) ) @initial 3500 nM
 R15_34 = fYp( hYp( fVp( + hVp( fB( hB + ) ) ) ) )
 R15_23 = hVp( fB( hB + ) ) fVp* hYp*( fYp*( + sYp mYp ) )
-R15_ProduceBVpYp = sYp mYp fYp( hYp( + sVp mVp fVp( hVp( + fB* ) ) ) ) @initial 4000 nM
+R15_ProduceBVpYp = sYp mYp fYp( hYp( + sVp mVp fVp( hVp( + fB* ) ) ) ) @initial 3500 nM
 R15_9 = fVp*( mVp*( sVp*( fB* hB*( fB*( + hVp ) ) + ) ) ) hVp
-R15_Helper_2 = fYp hYp fVp @initial 4000 nM
+R15_Helper_2 = fYp hYp fVp @initial 3500 nM
 R15_14 = hVp fB hB
 R15_Buffer = buff @initial 1 nM
-Vp = sVp mVp fVp hVp @initial 1 nM # This doesn't matter.  
-Yp = sYp mYp fYp hYp @initial 0 nM
-O1 = sO1 mO1 fO1 hO1 @initial 19 nM
-O2 = sO2 mO2 fO2 hO2 @initial 0 nM
 
 # Resting macrostates (14) 
 macrostate R15_Helper_1 = [R15_Helper_1]
@@ -760,10 +756,6 @@ macrostate R15_ProduceBVpYp = [R15_ProduceBVpYp]
 macrostate R15_9 = [R15_9]
 macrostate R15_Helper_2 = [R15_Helper_2]
 macrostate R15_14 = [R15_14]
-macrostate O1 = [O1]
-macrostate O2 = [O2]
-macrostate Vp = [Vp]
-macrostate Yp = [Yp]
 macrostate R15_Buffer = [R15_Buffer]
 
 # Condensed reactions (6) 
@@ -772,10 +764,10 @@ reaction [condensed    = 0.0001 /nM/s ] R15_React + Vp -> R15_Back + R15_9
 reaction [condensed    =  0.001 /nM/s ] R15_23 + R15_Helper_2 -> R15_34 + Yp
 reaction [condensed    = 0.0001 /nM/s ] R15_23 + Vp -> R15_ProduceBVpYp + R15_14
 reaction [condensed    = 0.0001 /nM/s ] R15_ProduceBVpYp + R15_14 -> R15_23 + Vp
-reaction [condensed    = 0.42 /s ] R15_Buffer -> R15_Buffer + R15_ProduceBVpYp
-reaction [condensed    = 0.42 /s ] R15_Buffer -> R15_Buffer + R15_React
-reaction [condensed    = 0.42 /s ] R15_Buffer -> R15_Buffer + R15_Helper_1
-reaction [condensed    = 0.42 /s ] R15_Buffer -> R15_Buffer + R15_Helper_2
+reaction [condensed    = 0.46 /s ] R15_Buffer -> R15_Buffer + R15_ProduceBVpYp
+reaction [condensed    = 0.46 /s ] R15_Buffer -> R15_Buffer + R15_React
+reaction [condensed    = 0.46 /s ] R15_Buffer -> R15_Buffer + R15_Helper_1
+reaction [condensed    = 0.46 /s ] R15_Buffer -> R15_Buffer + R15_Helper_2
 
 
 # #-----
@@ -946,13 +938,9 @@ macrostate R21_BackYmYp = [R21_BackYmYp]
 macrostate R21_35 = [R21_35]
 macrostate R21_BackYpYm = [R21_BackYpYm]
 macrostate R21_25 = [R21_25]
-macrostate O1 = [O1]
-macrostate O2 = [O2]
 macrostate W = [W]
 macrostate R21_ProduceYpW = [R21_ProduceYpW]
 macrostate R21_ProduceYmW = [R21_ProduceYmW]
-macrostate Yp = [Yp]
-macrostate Ym = [Ym]
 
 # Condensed reactions (8) 
 reaction [condensed    =  0.001 /nM/s ] R21_26 + R21_ProduceYpW -> R21_43 + W
@@ -998,13 +986,9 @@ macrostate R22_BackXmXp = [R22_BackXmXp]
 macrostate R22_35 = [R22_35]
 macrostate R22_BackXpXm = [R22_BackXpXm]
 macrostate R22_25 = [R22_25]
-macrostate O1 = [O1]
-macrostate O2 = [O2]
 macrostate W = [W]
 macrostate R22_ProduceXpW = [R22_ProduceXpW]
 macrostate R22_ProduceXmW = [R22_ProduceXmW]
-macrostate Xp = [Xp]
-macrostate Xm = [Xm]
 
 # Condensed reactions (8) 
 reaction [condensed    =  0.001 /nM/s ] R22_26 + R22_ProduceXpW -> R22_43 + W
@@ -1073,9 +1057,9 @@ R24_34 = fW hW sVm mVm
 R24_ReactVpVmW = fW hW sVm( mVm( + fVm( sVp( mVp( + fVp* ) ) ) ) ) @initial 300 nM
 R24_29 = sVp( mVp( fVp( hVp + ) ) ) fVm* mVm*( sVm*( + fW hW ) )
 R24_39 = fW( hW( sVm( mVm + ) ) )
-R24_BackVmVp = fVp sVm mVm @initial 2000 nM
+R24_BackVmVp = fVp sVm mVm @initial 3000 nM
 R24_35 = sVp( mVp( fVp( hVp + ) ) ) fVm*( mVm*( sVm*( + ) ) ) hVm
-R24_BackVpVm = fVm sVp mVp @initial 2000 nM
+R24_BackVpVm = fVm sVp mVp @initial 3000 nM
 R24_25 = sVp( mVp( fVp( hVp + sVm( mVm( fVm( hVm + ) ) ) ) ) )
 W = sW mW fW hW @initial 1e-05 nM
 R24_ProduceVpW = sW mW fW( hW( + sVp* ) ) @initial 1000 nM
@@ -1153,51 +1137,51 @@ reaction [condensed    = 0.0001 /nM/s ] R25_ReactLpLmW + Lp -> R25_29 + R25_Back
 reaction [condensed    = 0.00001 /nM/s ] R25_29 + R25_BackLpLm -> R25_ReactLpLmW + Lp
 reaction [condensed    =  0.001 /nM/s ] R25_29 + Lm -> R25_34 + R25_35
 
-# # ----
-## R26: Rp + Rm -> W
-# # Resting complexes (19) 
-# R26_26 = fW hW sRp mRp
-# R26_ReactRmRpW = fW hW sRp( mRp( + fRp( sRm( mRm( + fRm* ) ) ) ) ) @initial 10 nM
-# R26_43 = fW( hW( sRp( mRp + ) ) )
-# R26_16 = sRm( mRm( fRm( hRm + ) ) ) fRp* mRp*( sRp*( + fW hW ) )
-# R26_34 = fW hW sRm mRm
-# R26_ReactRpRmW = fW hW sRm( mRm( + fRm( sRp( mRp( + fRp* ) ) ) ) ) @initial 10 nM
-# R26_29 = sRp( mRp( fRp( hRp + ) ) ) fRm* mRm*( sRm*( + fW hW ) )
-# R26_39 = fW( hW( sRm( mRm + ) ) )
-# R26_BackRmRp = fRp sRm mRm @initial 1000 nM
-# R26_35 = sRp( mRp( fRp( hRp + ) ) ) fRm*( mRm*( sRm*( + ) ) ) hRm
-# R26_BackRpRm = fRm sRp mRp @initial 1000 nM
-# R26_25 = sRp( mRp( fRp( hRp + sRm( mRm( fRm( hRm + ) ) ) ) ) )
-# W = sW mW fW hW @initial 1e-05 nM
-# R26_ProduceRpW = sW mW fW( hW( + sRp* ) ) @initial 1000 nM
-# R26_ProduceRmW = sW mW fW( hW( + sRm* ) ) @initial 1000 nM
+# ----
+# R26: Rp + Rm -> W
+# Resting complexes (19) 
+R26_26 = fW hW sRp mRp
+R26_ReactRmRpW = fW hW sRp( mRp( + fRp( sRm( mRm( + fRm* ) ) ) ) ) @initial 10 nM
+R26_43 = fW( hW( sRp( mRp + ) ) )
+R26_16 = sRm( mRm( fRm( hRm + ) ) ) fRp* mRp*( sRp*( + fW hW ) )
+R26_34 = fW hW sRm mRm
+R26_ReactRpRmW = fW hW sRm( mRm( + fRm( sRp( mRp( + fRp* ) ) ) ) ) @initial 10 nM
+R26_29 = sRp( mRp( fRp( hRp + ) ) ) fRm* mRm*( sRm*( + fW hW ) )
+R26_39 = fW( hW( sRm( mRm + ) ) )
+R26_BackRmRp = fRp sRm mRm @initial 1000 nM
+R26_35 = sRp( mRp( fRp( hRp + ) ) ) fRm*( mRm*( sRm*( + ) ) ) hRm
+R26_BackRpRm = fRm sRp mRp @initial 1000 nM
+R26_25 = sRp( mRp( fRp( hRp + sRm( mRm( fRm( hRm + ) ) ) ) ) )
+W = sW mW fW hW @initial 1e-05 nM
+R26_ProduceRpW = sW mW fW( hW( + sRp* ) ) @initial 1000 nM
+R26_ProduceRmW = sW mW fW( hW( + sRm* ) ) @initial 1000 nM
 
-# # Resting macrostates (19) 
-# macrostate R26_26 = [R26_26]
-# macrostate R26_ReactRmRpW = [R26_ReactRmRpW]
-# macrostate R26_43 = [R26_43]
-# macrostate R26_16 = [R26_16]
-# macrostate R26_34 = [R26_34]
-# macrostate R26_ReactRpRmW = [R26_ReactRpRmW]
-# macrostate R26_29 = [R26_29]
-# macrostate R26_39 = [R26_39]
-# macrostate R26_BackRmRp = [R26_BackRmRp]
-# macrostate R26_35 = [R26_35]
-# macrostate R26_BackRpRm = [R26_BackRpRm]
-# macrostate R26_25 = [R26_25]
-# macrostate W = [W]
-# macrostate R26_ProduceRpW = [R26_ProduceRpW]
-# macrostate R26_ProduceRmW = [R26_ProduceRmW]
+# Resting macrostates (19) 
+macrostate R26_26 = [R26_26]
+macrostate R26_ReactRmRpW = [R26_ReactRmRpW]
+macrostate R26_43 = [R26_43]
+macrostate R26_16 = [R26_16]
+macrostate R26_34 = [R26_34]
+macrostate R26_ReactRpRmW = [R26_ReactRpRmW]
+macrostate R26_29 = [R26_29]
+macrostate R26_39 = [R26_39]
+macrostate R26_BackRmRp = [R26_BackRmRp]
+macrostate R26_35 = [R26_35]
+macrostate R26_BackRpRm = [R26_BackRpRm]
+macrostate R26_25 = [R26_25]
+macrostate W = [W]
+macrostate R26_ProduceRpW = [R26_ProduceRpW]
+macrostate R26_ProduceRmW = [R26_ProduceRmW]
 
-# # Condensed reactions (8) 
-# reaction [condensed    =  0.001 /nM/s ] R26_26 + R26_ProduceRpW -> R26_43 + W
-# reaction [condensed    = 0.0001 /nM/s ] R26_ReactRmRpW + Rm -> R26_16 + R26_BackRmRp
-# reaction [condensed    = 0.00001 /nM/s ] R26_16 + R26_BackRmRp -> R26_ReactRmRpW + Rm
-# reaction [condensed    =  0.0001 /nM/s ] R26_16 + Rp -> R26_26 + R26_25
-# reaction [condensed    =  0.001 /nM/s ] R26_34 + R26_ProduceRmW -> R26_39 + W
-# reaction [condensed    = 0.0001 /nM/s ] R26_ReactRpRmW + Rp -> R26_29 + R26_BackRpRm
-# reaction [condensed    = 0.00001 /nM/s ] R26_29 + R26_BackRpRm -> R26_ReactRpRmW + Rp
-# reaction [condensed    =  0.0001 /nM/s ] R26_29 + Rm -> R26_34 + R26_35
+# Condensed reactions (8) 
+reaction [condensed    =  0.001 /nM/s ] R26_26 + R26_ProduceRpW -> R26_43 + W
+reaction [condensed    = 0.0001 /nM/s ] R26_ReactRmRpW + Rm -> R26_16 + R26_BackRmRp
+reaction [condensed    = 0.00001 /nM/s ] R26_16 + R26_BackRmRp -> R26_ReactRmRpW + Rm
+reaction [condensed    =  0.0001 /nM/s ] R26_16 + Rp -> R26_26 + R26_25
+reaction [condensed    =  0.001 /nM/s ] R26_34 + R26_ProduceRmW -> R26_39 + W
+reaction [condensed    = 0.0001 /nM/s ] R26_ReactRpRmW + Rp -> R26_29 + R26_BackRpRm
+reaction [condensed    = 0.00001 /nM/s ] R26_29 + R26_BackRpRm -> R26_ReactRpRmW + Rp
+reaction [condensed    =  0.0001 /nM/s ] R26_29 + Rm -> R26_34 + R26_35
 
 ###############################################################
 ###############################################################
@@ -1236,7 +1220,7 @@ reaction [condensed    =  0.001 /nM/s ] R25_29 + Lm -> R25_34 + R25_35
 # reaction [condensed   = 0.01 /nM/s] Ep + Em -> W  # R23
 # reaction [condensed   = 0.01 /nM/s] Vp + Vm -> W  # R24
 # reaction [condensed   = 0.01 /nM/s] Lp + Lm -> W  # R25
-reaction [condensed   = 0.01 /nM/s] Rp + Rm -> W  # R26
+# reaction [condensed   = 0.01 /nM/s] Rp + Rm -> W  # R26
 
 ##########################################
 ##########################################
