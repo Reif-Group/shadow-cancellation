@@ -27,15 +27,15 @@ M111 = sA( mA( fA( hA + ) ) ) fY*( mY*( sY*( + ) ) ) hY
 HelperBB = fB hB fB @initial 80 nM
 M199 = hB( sY( mY + ) ) fB*( hB*( fB*( + ) ) )
 M202 = sY* hB*( fB*( hB*( fB*( + sB mB ) ) + ) ) fB
-BackBA = fB sA mA @initial 1000.0000000000001 nM
+BackBA = fB sA mA @initial 100.0000000000001 nM
 ReactBYB = hB sY( mY( + fY( sB( mB( + fB* ) ) ) ) ) @initial 100 nM
 M165 = fB*( mB*( sB*( fY* mY*( sY*( + hB ) ) + ) ) ) hB
 M178 = sB( mB( fB( hB + ) ) ) fY*( mY*( sY*( + ) ) ) hY
 HelperYY = fY hY fY @initial 80 nM
 M43 = hY( sB( mB + ) ) fY*( hY*( fY*( + ) ) )
 M40 = sB* hY*( fY*( hY*( fY*( + sY mY ) ) + ) ) fY
-BackAY = fY sA mA @initial 1000.0000000000001 nM
-BackBY = fY sB mB @initial 1000.0000000000001 nM
+BackAY = fY sA mA @initial 100.0000000000001 nM
+BackBY = fY sB mB @initial 100.0000000000001 nM
 M110 = hA sY mY
 M121 = hA( sY( mY + ) ) fA* hA*( fA*( + sA mA ) )
 M177 = hB sY mY
@@ -114,9 +114,9 @@ reaction [condensed    = 0.00104769 /nM/s ] M9 + ProduceBYY -> M26 + Y
 reaction [condensed    = 0.00104769 /nM/s ] M26 + Y -> M9 + ProduceBYY
 
 
-reaction [condensed    = 7e-8 /nM/s ] ProduceBYY + HelperYY -> Y
-reaction [condensed    = 7e-8 /nM/s ] ProduceYBB + HelperBB -> B
-reaction [condensed    = 7e-8 /nM/s ] ProduceYAA + HelperAA -> A
+reaction [condensed    = 2e-8 /nM/s ] ProduceBYY + HelperYY -> Y
+reaction [condensed    = 2e-8 /nM/s ] ProduceYBB + HelperBB -> B
+reaction [condensed    = 2e-8 /nM/s ] ProduceYAA + HelperAA -> A
 
 length hOA = 15
 length fOA = 7

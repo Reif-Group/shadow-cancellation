@@ -22,8 +22,8 @@ length hO2 = 15
 # Signal strands
 Ep = sEp mEp fEp hEp @initial 0 nM
 Em = sEm mEm fEm hEm @initial 0 nM
-Xp = sXp mXp fXp hXp @initial 2 nM
-Xm = sXm mXm fXm hXm @initial 1 nM
+Xp = sXp mXp fXp hXp @initial 1 nM
+Xm = sXm mXm fXm hXm @initial 0 nM
 Yp = sYp mYp fYp hYp @initial 0 nM
 Ym = sYm mYm fYm hYm @initial 0 nM
 Vp = sVp mVp fVp hVp @initial 0 nM
@@ -39,8 +39,8 @@ O2 = sO2 mO2 fO2 hO2 @initial 1 nM
 # Signal strands
 Ideal_Ep = sEp mEp fEp hEp @initial 0 nM
 Ideal_Em = sEm mEm fEm hEm @initial 0 nM
-Ideal_Xp = sXp mXp fXp hXp @initial 2 nM
-Ideal_Xm = sXm mXm fXm hXm @initial 1 nM
+Ideal_Xp = sXp mXp fXp hXp @initial 1 nM
+Ideal_Xm = sXm mXm fXm hXm @initial 0 nM
 Ideal_Yp = sYp mYp fYp hYp @initial 0 nM
 Ideal_Ym = sYm mYm fYm hYm @initial 0 nM
 Ideal_Vp = sVp mVp fVp hVp @initial 0 nM

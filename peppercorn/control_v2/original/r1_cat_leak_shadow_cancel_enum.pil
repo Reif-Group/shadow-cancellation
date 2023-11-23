@@ -43,11 +43,11 @@ R_NUM_ProduceBX1X2 = sX2 mX2 fX2( hX2( + sX1 mX1 fX1( hX1( + fB* ) ) ) ) @initia
 R_NUM_19 = fX1*( mX1*( sX1*( fB* hB*( fB*( + hX1 ) ) + ) ) ) hX1
 R_NUM_HelperX1X2 = fX2 hX2 fX1 @initial 100 nM
 R_NUM_FluxX1B = hX1 fB hB
-# X1 = sX1 mX1 fX1 hX1 @initial 1 nM
-# X2 = sX2 mX2 fX2 hX2 @initial 1e-05 nM
+X1 = sX1 mX1 fX1 hX1 @initial 1 nM
+X2 = sX2 mX2 fX2 hX2 @initial 1e-05 nM
 
-# O1 = sO1 mO1 fO1 hO1 @initial 1 nM
-# O2 = sO2 mO2 fO2 hO2 @initial 1e-5 nM
+O1 = sO1 mO1 fO1 hO1 @initial 1 nM
+O2 = sO2 mO2 fO2 hO2 @initial 1e-5 nM
 
 # Resting complexes (12) 
 shR_NUM_HelperBX1 = fBR hBR fBR @initial 100 nM
@@ -118,8 +118,9 @@ reaction [condensed    = 0.0001 /nM/s ] R_NUM_ReactX1B + X1 -> R_NUM_BackBX1 + R
 reaction [condensed    =  0.002 /nM/s ] R_NUM_9 + R_NUM_HelperX1X2 -> R_NUM_33 + X2
 reaction [condensed    = 0.002 /nM/s ] R_NUM_9 + X1 -> R_NUM_ProduceBX1X2 + R_NUM_FluxX1B
 reaction [condensed    = 0.002 /nM/s ] R_NUM_ProduceBX1X2 + R_NUM_FluxX1B -> R_NUM_9 + X1
+
 #Leak
-# reaction [condensed    = 13e-9 /nM/s ] R_NUM_ProduceBX1X2 + R_NUM_HelperX1X2 -> X2
+reaction [condensed    = 2e-8 /nM/s ] R_NUM_ProduceBX1X2 + R_NUM_HelperX1X2 -> X2
 
 # Shadow
 reaction [condensed    = 0.002 /nM/s ] shR_NUM_HelperBX1 + shR_NUM_9 -> shR_NUM_34 + shR_NUM_FluxX1B
@@ -128,14 +129,15 @@ reaction [condensed    = 0.0001 /nM/s ] shR_NUM_ReactX1B + shX1 -> shR_NUM_9 + s
 reaction [condensed    =  0.002 /nM/s ] shR_NUM_HelperX1X2 + shR_NUM_19 -> shR_NUM_24 + shX2
 reaction [condensed    = 0.002 /nM/s ] shR_NUM_19 + shX1 -> shR_NUM_ProduceBX1X2 + shR_NUM_FluxX1B
 reaction [condensed    = 0.002 /nM/s ] shR_NUM_ProduceBX1X2 + shR_NUM_FluxX1B -> shR_NUM_19 + shX1
-#Leak
-# reaction [condensed    = 13e-9 /nM/s ] shR_NUM_ProduceBX1X2 + shR_NUM_HelperX1X2 -> shX2
 
-reaction [condensed    =  0.05 /s   ] EC_R_NUM_7 -> R_NUM_CancelX2 + shX2
+#Leak
+reaction [condensed    = 2e-8 /nM/s ] shR_NUM_ProduceBX1X2 + shR_NUM_HelperX1X2 -> shX2
+
+reaction [condensed    =  0.5 /s   ] EC_R_NUM_7 -> R_NUM_CancelX2 + shX2
 reaction [condensed    =     0.002 /nM/s ] EC_R_NUM_7 + X2 -> EC_R_NUM_12 + R_NUM_dispX2
 reaction [condensed    =     0.002 /nM/s ] R_NUM_CancelX2 + shX2 -> EC_R_NUM_7
 reaction [condensed    =     0.002 /nM/s ] R_NUM_CancelX2 + X2 -> EC_R_NUM_2
-reaction [condensed    =  0.05 /s   ] EC_R_NUM_2 -> R_NUM_CancelX2 + X2
+reaction [condensed    =  0.5 /s   ] EC_R_NUM_2 -> R_NUM_CancelX2 + X2
 reaction [condensed    =     0.002 /nM/s ] EC_R_NUM_2 + shX2 -> EC_R_NUM_12 + R_NUM_dispX2
 #Buffer
 reaction [condensed    = 2e-4 /s] O1 -> O1 + R_NUM_CancelX2
