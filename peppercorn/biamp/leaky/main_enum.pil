@@ -71,5 +71,3 @@ reaction [condensed    = 0.000022 /nM/s ] O1 + O2 -> O1 + O1
 
 
 reaction [condensed    = 2e-8 /nM/s ] ProduceBCjCk + HelperCCk -> Ck
-
-reaction [condensed    = 0.000022 /nM/s ] O1 + O2 -> O1 + O1

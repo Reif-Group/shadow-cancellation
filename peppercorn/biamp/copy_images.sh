@@ -1,4 +1,4 @@
-arr="0_0 0_5 1 4 9"
+arr="original leaky leaky_shadow occluded"
 
 rm images/*
 for i in $arr; do

@@ -113,9 +113,7 @@ reaction [condensed    = 0.00383326 /nM/s ] HelperYY + M171 -> M194 + Y
 reaction [condensed    = 0.000330858 /nM/s ] M197 + M76 -> HelperYY + M171
 reaction [condensed    = 0.00175818 /nM/s ] M197 + M76 -> M194 + Y
 
-#  
-
-
+# A + Y --> A + A  
 reaction [condensed    = 0.00383326 /nM/s ] HelperAA + M96 -> M103 + A
 reaction [condensed    = 1.10286e-05 /nM/s ] HelperAA + M96 -> M107 + M86
 reaction [condensed    = 0.000330858 /nM/s ] M107 + M86 -> HelperAA + M96

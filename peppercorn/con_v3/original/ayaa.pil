@@ -1,0 +1,30 @@
+# Domains (25) 
+length fA = 7
+length fO1 = 7
+length fO2 = 7
+length fY = 7
+length hAp = 15
+length hAq = 15
+length hO1 = 15
+length hO2 = 15
+length hYi = 15
+length hYj = 15
+length mA = 15
+length mO1 = 15
+length mO2 = 15
+length mY = 15
+length sA = 7
+length sO1 = 7
+length sO2 = 7
+length sY = 7
+
+Yi = sY mY fY hYi @initial 5 nM
+Yj = sY mY fY hYj @initial 1e-5 nM
+Ap = sA mA fA hAp @initial 3 nM
+Aq = sA mA fA hAq @initial 1e-5 nM
+
+HelperAAq = fA hAq fA @initial 75 nM
+ReactAYAp = hAp sY( mY( + fY( sA( mA( + fA* ) ) ) ) ) @initial 100 nM
+BackAY = fY sA mA @initial 1000 nM
+ProduceYApAq = sA mA fA( hAq( + sA mA fA( hAp( + sY* ) ) ) ) @initial 100 nM
+
