@@ -310,7 +310,7 @@ reaction [condensed    =  3e-4 /nM/s ] R220 + Ck -> R234 + R161 # k_fwd2
 reaction [condensed    =  3e-4 /nM/s ] R147 + Cj -> R164 + R161 # k_fwd2 
 reaction [condensed    =  3e-4 /nM/s ] R147 + Ck -> R162 + R161 # k_fwd2
 reaction [condensed    = 1.6e-3 /nM/s ] R161 + ProduceCApAq -> R171 + Ap # k_fwd1
-reaction [condensed    = 2.4e-3 /nM/s ] R171 + Ap -> R161 + ProduceCApAq # k_back
+reaction [condensed    = 2.4e-4 /nM/s ] R171 + Ap -> R161 + ProduceCApAq # k_back
 reaction [condensed    = 2.6e-3 /nM/s ] HelperAAq + R171 -> R184 + Aq # k_fwd2
 
 reaction [condensed    = 8.6e-5 /nM/s ] ReactBABr + Br -> BackBA + R122
@@ -322,7 +322,7 @@ reaction [condensed    =  3e-4 /nM/s ] R122 + Aq -> R151 + R144
 reaction [condensed    =  3e-4  /nM/s ] R24 + Ap -> R217 + R144
 reaction [condensed    =  3e-4  /nM/s ] R24 + Aq -> R143 + R144
 reaction [condensed    = 1.6e-3 /nM/s ] R144 + ProduceABrBs -> R191 + Br
-reaction [condensed    = 2.4e-3 /nM/s ] R191 + Br -> R144 + ProduceABrBs
+reaction [condensed    = 2.4e-4 /nM/s ] R191 + Br -> R144 + ProduceABrBs
 reaction [condensed    = 2.6e-3  /nM/s ] HelperBBs + R191 -> R203 + Bs
 
 reaction [condensed    = 8.6e-5/nM/s ] ReactCBCj + Cj -> BackCB + R14
@@ -334,7 +334,7 @@ reaction [condensed    = 3e-4 /nM/s ] R14 + Bs -> R26 + R27
 reaction [condensed    = 3e-4 /nM/s ] R67 + Br -> R129 + R27
 reaction [condensed    = 3e-4 /nM/s ] R67 + Bs -> R72 + R27
 reaction [condensed    = 1.6e-3  /nM/s ] R27 + ProduceBCjCk -> R33 + Cj
-reaction [condensed    = 2.4e-3 /nM/s ] R33 + Cj -> R27 + ProduceBCjCk
+reaction [condensed    = 2.4e-4 /nM/s ] R33 + Cj -> R27 + ProduceBCjCk
 reaction [condensed    = 2.6e-3 /nM/s ] HelperCCk + R33 -> R39 + Ck
 
 
@@ -355,7 +355,7 @@ reaction [condensed    =  3e-4 /nM/s ] RS23 + shCk -> RS33 + RS30
 reaction [condensed    =  3e-4 /nM/s ] RS38 + shCj -> RS45 + RS30
 reaction [condensed    =  3e-4 /nM/s ] RS38 + shCk -> RS48 + RS30
 reaction [condensed    = 1.6e-3 /nM/s ] shProduceCApAq + RS30 -> RS61 + shAp
-reaction [condensed    = 2.4e-3 /nM/s ] RS61 + shAp -> shProduceCApAq + RS30
+reaction [condensed    = 2.4e-4 /nM/s ] RS61 + shAp -> shProduceCApAq + RS30
 reaction [condensed    = 2.6e-3 /nM/s ] shHelperAAq + RS61 -> RS110 + shAq
 
 
@@ -368,7 +368,7 @@ reaction [condensed    =  3e-4 /nM/s ] shAp + RS180 -> RS235 + RS198
 reaction [condensed    =  3e-4 /nM/s ] shAq + RS184 -> RS199 + RS198
 reaction [condensed    =  3e-4 /nM/s ] shAq + RS180 -> RS232 + RS198
 reaction [condensed    = 1.6e-3 /nM/s ] shProduceABrBs + RS198 -> RS207 + shBr
-reaction [condensed    = 2.4e-3 /nM/s ] RS207 + shBr -> shProduceABrBs + RS198
+reaction [condensed    = 2.4e-4 /nM/s ] RS207 + shBr -> shProduceABrBs + RS198
 reaction [condensed    = 2.6e-3 /nM/s ] shHelperBBs + RS207 -> RS219 + shBs
 
 reaction [condensed    = 8.6e-5 /nM/s ] shCj + shReactCBCj -> RS7 + shBackCB
@@ -380,7 +380,7 @@ reaction [condensed    =  3e-4 /nM/s ] shBr + RS15 -> RS118 + RS75
 reaction [condensed    =  3e-4 /nM/s ] shBs + RS7 -> RS79 + RS75
 reaction [condensed    =  3e-4 /nM/s ] shBs + RS15 -> RS76 + RS75
 reaction [condensed    = 1.6e-3 /nM/s ] shProduceBCjCk + RS75 -> RS85 + shCj
-reaction [condensed    = 2.4e-3 /nM/s ] RS85 + shCj -> shProduceBCjCk + RS75
+reaction [condensed    = 2.4e-4 /nM/s ] RS85 + shCj -> shProduceBCjCk + RS75
 reaction [condensed    = 2.6e-3 /nM/s ] shHelperCCk + RS85 -> RS142 + shCk
 
 reaction [condensed    = 2e-8 /nM/s ] shProduceBCjCk + shHelperCCk -> shCk 

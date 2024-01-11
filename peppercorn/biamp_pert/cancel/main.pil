@@ -18,7 +18,9 @@ length sBR = 7
 length mBR = 15
 
 Cj = sC mC fC hCj @initial 4 nM
+Ck = sC mC fC hCk @initial 4 nM
 shCj = hCjR fCR mCR sCR @initial 4 nM
+shCk = hCkR fCR mCR sCR @initial 4 nM
 
 CancelC = mCR( sCR( sC( mC( + fC* ) ) ) ) fCR* @initial 30 nM
 dispC = mCR sCR sC mC @initial 0 nM

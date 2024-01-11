@@ -20,9 +20,9 @@ length sO1 = 7
 length sO2 = 7
 
 # Resting complexes (16) 
-BackCB = fB sC mC @initial 100 nM
-ReactCBCj = hCj sB( mB( + fB( sC( mC( + fC* ) ) ) ) ) @initial 100 nM
-HelperCCk = fC hCk fC @initial 75 nM
+BackCB = fB sC mC @initial 200 nM
+ReactCBCj = hCj sB( mB( + fB( sC( mC( + fC* ) ) ) ) ) @initial 200 nM
+HelperCCk = fC hCk fC @initial 150 nM
 B35 = hCj( sB( mB + ) ) fC*( hCk*( fC*( + ) ) )
 B12 = fC*( mC*( sC*( fB* mB*( sB*( + hCj ) ) + ) ) ) hCj
 B16 = fC*( mC*( sC*( fB* mB*( sB*( + hCj ) ) + ) ) ) hCk
@@ -30,12 +30,12 @@ B41 = sC( mC( fC( hCj + ) ) ) fB*( mB*( sB*( + ) ) ) hBr
 B22 = sC( mC( fC( hCk + ) ) ) fB*( mB*( sB*( + ) ) ) hBr
 B21 = hCj sB mB
 B27 = hCj( sB( mB + ) ) fC* hCk*( fC*( + sC mC ) )
-Br = sB mB fB hBr @initial 4 nM
-ProduceBCjCk = sC mC fC( hCk( + sC mC fC( hCj( + sB* ) ) ) ) @initial 100 nM
-Cj = sC mC fC hCj @initial 4 nM
+Br = sB mB fB hBr @initial 10 nM
+ProduceBCjCk = sC mC fC( hCk( + sC mC fC( hCj( + sB* ) ) ) ) @initial 200 nM
+Cj = sC mC fC hCj @initial 10 nM
 Ck = sC mC fC hCk @initial 1e-05 nM
-O1 = sO1 mO1 fO1 hO1 @initial 4 nM
-O2 = sO2 mO2 fO2 hO2 @initial 4 nM
+O1 = sO1 mO1 fO1 hO1 @initial 10 nM
+O2 = sO2 mO2 fO2 hO2 @initial 10 nM
 
 # Resting macrostates (16) 
 macrostate BackCB = [BackCB]

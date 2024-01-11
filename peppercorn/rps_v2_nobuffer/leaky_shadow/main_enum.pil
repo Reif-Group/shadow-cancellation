@@ -325,8 +325,8 @@ reaction [condensed    = 1.6e-3 /nM/s ] R144 + ProduceABrBs -> R191 + Br
 reaction [condensed    = 2.4e-4 /nM/s ] R191 + Br -> R144 + ProduceABrBs
 reaction [condensed    = 2.6e-3  /nM/s ] HelperBBs + R191 -> R203 + Bs
 
-reaction [condensed    = 8.6e-5/nM/s ] ReactCBCj + Cj -> BackCB + R14
-reaction [condensed    = 8.6e-5/nM/s ] ReactCBCj + Ck -> BackCB + R67
+reaction [condensed    = 8.6e-5 /nM/s ] ReactCBCj + Cj -> BackCB + R14
+reaction [condensed    = 8.6e-5 /nM/s ] ReactCBCj + Ck -> BackCB + R67
 reaction [condensed    = 1e-3 /nM/s ] BackCB + R14 -> ReactCBCj + Cj
 reaction [condensed    = 1e-3 /nM/s ] BackCB + R67 -> ReactCBCj + Ck
 reaction [condensed    = 3e-4 /nM/s ] R14 + Br -> R125 + R27
