@@ -18,14 +18,14 @@ length sO1 = 7
 length sO2 = 7
 
 # Resting complexes (16) 
-HelperB = fB hB fB @initial  100 nM
+HelperB = fB hB fB @initial  80 nM
 U20 = sC( mC( fC( hCj + ) ) ) fB*( hB*( fB*( + ) ) )
 U30 = sC( mC( fC( hCk + ) ) ) fB*( hB*( fB*( + ) ) )
-BackBC = fB sC mC @initial  2000 nM
-ReactCBCj = hCj fB( hB( + fB( sC( mC( + fC* ) ) ) ) ) @initial  100 nM
+BackBC = fB sC mC @initial  2700 nM
+ReactCBCj = hCj fB( hB( + fB( sC( mC( + fC* ) ) ) ) ) @initial  150 nM
 U52 = fC( hCk( fC( + hCj( fB( hB + ) ) ) ) )
 U41 = fB*( hCj*( fC* hCk*( fC*( + sC mC ) ) + ) ) hB
-ProduceBCjCk = sC mC fC( hCk( + sC mC fC( hCj( + fB* ) ) ) ) @initial  100 nM
+ProduceBCjCk = sC mC fC( hCk( + sC mC fC( hCj( + fB* ) ) ) ) @initial  150 nM
 HelperCCk = fC hCk fC @initial 75 nM
 U12 = fC*( mC*( sC*( fB* hB*( fB*( + hCj ) ) + ) ) ) hCj
 U8 = fC*( mC*( sC*( fB* hB*( fB*( + hCj ) ) + ) ) ) hCk
