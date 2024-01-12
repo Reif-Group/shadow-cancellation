@@ -16,12 +16,13 @@ length mO2 = 15
 length sC = 7
 length sO1 = 7
 length sO2 = 7
+length buffer = 30
 
 # Resting complexes (16) 
 HelperB = fB hB fB @initial 100 nM
 U20 = sC( mC( fC( hCj + ) ) ) fB*( hB*( fB*( + ) ) )
 U30 = sC( mC( fC( hCk + ) ) ) fB*( hB*( fB*( + ) ) )
-BackBC = fB sC mC @initial 1000 nM
+BackBC = fB sC mC @initial 2000 nM
 ReactCBCj = hCj fB( hB( + fB( sC( mC( + fC* ) ) ) ) ) @initial 100 nM
 U52 = fC( hCk( fC( + hCj( fB( hB + ) ) ) ) )
 U41 = fB*( hCj*( fC* hCk*( fC*( + sC mC ) ) + ) ) hB
@@ -34,6 +35,7 @@ Cj = sC mC fC hCj @initial 1 nM
 Ck = sC mC fC hCk @initial 0 nM
 O1 = sO1 mO1 fO1 hO1 @initial 1 nM
 O2 = sO2 mO2 fO2 hO2 @initial 1 nM
+CancelBuffer = buffer @initial 1 nM
 
 # Resting macrostates (16) 
 macrostate HelperB = [HelperB]
@@ -59,7 +61,7 @@ reaction [condensed    = 8.6e-5 /nM/s ] ReactCBCj + Ck -> BackBC + U8
 reaction [condensed    = 1e-3 /nM/s ] BackBC + U12 -> ReactCBCj + Cj
 reaction [condensed    = 1e-3 /nM/s ] BackBC + U8 -> ReactCBCj + Ck
 reaction [condensed    = 3e-4 /nM/s ] HelperB + U12 -> U20 + U19
-reaction [condensed    = 3e-4/nM/s ] HelperB + U8 -> U30 + U19
+reaction [condensed    = 3e-4 /nM/s ] HelperB + U8 -> U30 + U19
 reaction [condensed    = 1.6e-3 /nM/s ] ProduceBCjCk + U19 -> U41 + Cj
 reaction [condensed    = 2.4e-4 /nM/s ] U41 + Cj -> ProduceBCjCk + U19
 reaction [condensed    = 2.6e-3 /nM/s ] U41 + HelperCCk -> U52 + Ck
@@ -91,16 +93,16 @@ US23 = fBR( hBR( fBR( + ) ) ) sCR*( mCR*( fCR*( + hCkR ) ) )
 US5 = hBR( fBR( hCjR + ) ) fBR* sCR*( mCR*( fCR*( + hCjR ) ) )
 US10 = hCkR fCR( mCR( sCR( + hBR( fBR( hCjR + ) ) fBR* ) ) )
 shReactCBCj = fBR*( hBR*( fBR*( sCR*( mCR*( fCR* + ) ) ) + ) ) hCjR @initial 100 nM
-shHelperCCk = fCR hCkR fCR @initial 75 nM
+shHelperCCk = fCR hCkR fCR @initial 40 nM
 US45 = fCR*( hCkR*( fCR*( hCjR*( fBR*( + hBR ) ) + ) ) )
 US37 = hCkR( fCR( mCR sCR + ) ) fCR* hCjR*( fBR*( + hBR ) )
-shProduceBCjCk = fCR*( hCkR*( fCR*( hCjR*( fBR* + ) ) mCR sCR + ) ) mCR sCR @initial 100 nM
+shProduceBCjCk = fCR*( hCkR*( fCR*( hCjR*( fBR* + ) ) mCR sCR + ) ) mCR sCR @initial 40 nM
 US22 = hBR fBR hCjR
 shCj = hCjR fCR mCR sCR @initial 0 nM
 shCk = hCkR fCR mCR sCR @initial 0 nM
 shO1 = hO1 fO1 mO1 sO1 @initial 1 nM
 shO2 = hO1 fO1 mO1 sO2 @initial 1e-05 nM
-shBackBC = mCR sCR fBR @initial 1000 nM
+shBackBC = mCR sCR fBR @initial 2000 nM
 
 # Resting macrostates (16) 
 macrostate shHelperB = [shHelperB]
@@ -157,7 +159,7 @@ EC8 = mCR sCR sC( mC( + fC* ) ) sCR*( mCR*( fCR*( + hCkR ) ) )
 EC6 = mCR( sCR( sC( mC( + fC* ) ) ) ) fCR*( + hCkR ) mCR sCR
 EC55 = sC( mC( fC( hCj + ) ) ) sCR*( mCR*( fCR*( + hCkR ) ) )
 EC30 = sC( mC( fC( hCk + ) ) ) sCR*( mCR*( fCR*( + hCkR ) ) )
-CancelC = mCR( sCR( sC( mC( + fC* ) ) ) ) fCR* @initial 40 nM
+CancelC = mCR( sCR( sC( mC( + fC* ) ) ) ) fCR* @initial 20 nM
 EC43 = sC mC fC( hCj + ) mC*( sC*( sCR*( mCR*( fCR* + ) ) ) )
 EC53 = sC( mC( fC( hCj + ) ) ) sCR*( mCR*( fCR* + ) ) sC mC
 EC4 = fC*( mC*( sC*( sCR*( mCR*( fCR* + ) ) ) ) + sC mC ) hCk
@@ -175,6 +177,7 @@ macrostate CancelC = [CancelC]
 macrostate EC43 = [EC43, EC53]
 macrostate EC4 = [EC4, EC10]
 macrostate dispC = [dispC]
+macrostate CancelBuffer = [CancelBuffer]
 
 # Condensed reactions (16) 
 reaction [condensed    =  0.3 /s   ] EC12 -> CancelC + shCj
@@ -185,11 +188,13 @@ reaction [condensed    =     0.004 /nM/s ] EC8 + Cj -> EC55 + dispC
 reaction [condensed    =     0.004 /nM/s ] EC8 + Ck -> EC30 + dispC
 reaction [condensed    =     0.004 /nM/s ] CancelC + shCj -> EC12
 reaction [condensed    =     0.004 /nM/s ] CancelC + shCk -> EC8
-reaction [condensed    =     0.004 /nM/s ] CancelC + Cj -> EC43
-reaction [condensed    =     0.004 /nM/s ] CancelC + Ck -> EC4
+reaction [condensed    =     0.0002 /nM/s ] CancelC + Cj -> EC43
+reaction [condensed    =     0.0002 /nM/s ] CancelC + Ck -> EC4
 reaction [condensed    =  0.3 /s   ] EC43 -> CancelC + Cj
 reaction [condensed    =     0.004 /nM/s ] EC43 + shCj -> EC61 + dispC
 reaction [condensed    =     0.004 /nM/s ] EC43 + shCk -> EC55 + dispC
 reaction [condensed    =  0.3 /s   ] EC4 -> CancelC + Ck
 reaction [condensed    =     0.004 /nM/s ] EC4 + shCj -> EC21 + dispC
 reaction [condensed    =     0.004 /nM/s ] EC4 + shCk -> EC30 + dispC
+
+reaction [condensed    =  0.0003 /s ] CancelBuffer -> CancelBuffer + CancelC
