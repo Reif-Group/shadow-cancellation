@@ -35,14 +35,14 @@ def odesystem(p0, t0, r):
     if not r : r = rates
 
 
-    dCjdt = 0.0001*B12*BackCB + 0.0001*B21*ProduceBCjCk - 0.0001*B27*Cj - 8.6e-5*Cj*ReactCBCj
-    dCkdt = 0.0001*B16*BackCB + 0.0001*B27*HelperCCk - 8.6e-5*Ck*ReactCBCj + 2.0e-8*HelperCCk*ProduceBCjCk
+    dCjdt = 0.0001*B12*BackCB + 0.0001*B21*ProduceBCjCk - 0.0001*B27*Cj - 8.0e-5*Cj*ReactCBCj
+    dCkdt = 0.0001*B16*BackCB + 0.0001*B27*HelperCCk - 8.0e-5*Ck*ReactCBCj + 2.0e-8*HelperCCk*ProduceBCjCk
     dBrdt = -0.0001*B12*Br - 0.0001*B16*Br
-    dshCjdt = 0.001*BS18*shProduceBCjCk - 0.001*BS24*shCj + 0.001*BS39*shBackCB - 0.00086*shCj*shReactCBCj
-    dshCkdt = 0.001*BS24*shHelperCCk + 0.001*BS9*shBackCB - 0.00086*shCk*shReactCBCj + 2.0e-8*shHelperCCk*shProduceBCjCk
+    dshCjdt = 0.001*BS18*shProduceBCjCk - 0.001*BS24*shCj + 0.001*BS39*shBackCB - 0.0008*shCj*shReactCBCj
+    dshCkdt = 0.001*BS24*shHelperCCk + 0.001*BS9*shBackCB - 0.0008*shCk*shReactCBCj + 2.0e-8*shHelperCCk*shProduceBCjCk
     dshBrdt = -0.001*BS39*shBr - 0.001*BS9*shBr
-    dB12dt = -0.0001*B12*BackCB - 0.0001*B12*Br + 8.6e-5*Cj*ReactCBCj
-    dB16dt = -0.0001*B16*BackCB - 0.0001*B16*Br + 8.6e-5*Ck*ReactCBCj
+    dB12dt = -0.0001*B12*BackCB - 0.0001*B12*Br + 8.0e-5*Cj*ReactCBCj
+    dB16dt = -0.0001*B16*BackCB - 0.0001*B16*Br + 8.0e-5*Ck*ReactCBCj
     dB21dt = 0.0001*B12*Br + 0.0001*B16*Br - 0.0001*B21*ProduceBCjCk + 0.0001*B27*Cj
     dB22dt = 0.0001*B16*Br
     dB27dt = 0.0001*B21*ProduceBCjCk - 0.0001*B27*Cj - 0.0001*B27*HelperCCk
@@ -52,19 +52,19 @@ def odesystem(p0, t0, r):
     dBS19dt = 0.001*BS9*shBr
     dBS24dt = 0.001*BS18*shProduceBCjCk - 0.001*BS24*shCj - 0.001*BS24*shHelperCCk
     dBS32dt = 0.001*BS24*shHelperCCk
-    dBS39dt = -0.001*BS39*shBackCB - 0.001*BS39*shBr + 0.00086*shCj*shReactCBCj
+    dBS39dt = -0.001*BS39*shBackCB - 0.001*BS39*shBr + 0.0008*shCj*shReactCBCj
     dBS44dt = 0.001*BS39*shBr
-    dBS9dt = -0.001*BS9*shBackCB - 0.001*BS9*shBr + 0.00086*shCk*shReactCBCj
-    dBackCBdt = -0.0001*B12*BackCB - 0.0001*B16*BackCB + 8.6e-5*Cj*ReactCBCj + 8.6e-5*Ck*ReactCBCj
+    dBS9dt = -0.001*BS9*shBackCB - 0.001*BS9*shBr + 0.0008*shCk*shReactCBCj
+    dBackCBdt = -0.0001*B12*BackCB - 0.0001*B16*BackCB + 8.0e-5*Cj*ReactCBCj + 8.0e-5*Ck*ReactCBCj
     dHelperCCkdt = -0.0001*B27*HelperCCk - 2.0e-8*HelperCCk*ProduceBCjCk
     dO1dt = 2.2e-5*O1*O2
     dO2dt = -2.2e-5*O1*O2
     dProduceBCjCkdt = -0.0001*B21*ProduceBCjCk + 0.0001*B27*Cj - 2.0e-8*HelperCCk*ProduceBCjCk
-    dReactCBCjdt = 0.0001*B12*BackCB + 0.0001*B16*BackCB - 8.6e-5*Cj*ReactCBCj - 8.6e-5*Ck*ReactCBCj
-    dshBackCBdt = -0.001*BS39*shBackCB - 0.001*BS9*shBackCB + 0.00086*shCj*shReactCBCj + 0.00086*shCk*shReactCBCj
+    dReactCBCjdt = 0.0001*B12*BackCB + 0.0001*B16*BackCB - 8.0e-5*Cj*ReactCBCj - 8.0e-5*Ck*ReactCBCj
+    dshBackCBdt = -0.001*BS39*shBackCB - 0.001*BS9*shBackCB + 0.0008*shCj*shReactCBCj + 0.0008*shCk*shReactCBCj
     dshHelperCCkdt = -0.001*BS24*shHelperCCk - 2.0e-8*shHelperCCk*shProduceBCjCk
     dshProduceBCjCkdt = -0.001*BS18*shProduceBCjCk + 0.001*BS24*shCj - 2.0e-8*shHelperCCk*shProduceBCjCk
-    dshReactCBCjdt = 0.001*BS39*shBackCB + 0.001*BS9*shBackCB - 0.00086*shCj*shReactCBCj - 0.00086*shCk*shReactCBCj
+    dshReactCBCjdt = 0.001*BS39*shBackCB + 0.001*BS9*shBackCB - 0.0008*shCj*shReactCBCj - 0.0008*shCk*shReactCBCj
     return np.array([dCjdt, dCkdt, dBrdt, dshCjdt, dshCkdt, dshBrdt, dB12dt, dB16dt, dB21dt, dB22dt, dB27dt, dB35dt, dB41dt, dBS18dt, dBS19dt, dBS24dt, dBS32dt, dBS39dt, dBS44dt, dBS9dt, dBackCBdt, dHelperCCkdt, dO1dt, dO2dt, dProduceBCjCkdt, dReactCBCjdt, dshBackCBdt, dshHelperCCkdt, dshProduceBCjCkdt, dshReactCBCjdt])
 
 def jacobian(p0, t0, r):
@@ -73,7 +73,7 @@ def jacobian(p0, t0, r):
 
 
     J = [[[] for i in range(len(p0))] for j in range(len(p0))]
-    J[0][0] = -0.0001*B27 - 8.6e-5*ReactCBCj
+    J[0][0] = -0.0001*B27 - 8.0e-5*ReactCBCj
     J[0][1] = 0
     J[0][2] = 0
     J[0][3] = 0
@@ -98,13 +98,13 @@ def jacobian(p0, t0, r):
     J[0][22] = 0
     J[0][23] = 0
     J[0][24] = 0.0001*B21
-    J[0][25] = -8.6e-5*Cj
+    J[0][25] = -8.0e-5*Cj
     J[0][26] = 0
     J[0][27] = 0
     J[0][28] = 0
     J[0][29] = 0
     J[1][0] = 0
-    J[1][1] = -8.6e-5*ReactCBCj
+    J[1][1] = -8.0e-5*ReactCBCj
     J[1][2] = 0
     J[1][3] = 0
     J[1][4] = 0
@@ -128,7 +128,7 @@ def jacobian(p0, t0, r):
     J[1][22] = 0
     J[1][23] = 0
     J[1][24] = 2.0e-8*HelperCCk
-    J[1][25] = -8.6e-5*Ck
+    J[1][25] = -8.0e-5*Ck
     J[1][26] = 0
     J[1][27] = 0
     J[1][28] = 0
@@ -166,7 +166,7 @@ def jacobian(p0, t0, r):
     J[3][0] = 0
     J[3][1] = 0
     J[3][2] = 0
-    J[3][3] = -0.001*BS24 - 0.00086*shReactCBCj
+    J[3][3] = -0.001*BS24 - 0.0008*shReactCBCj
     J[3][4] = 0
     J[3][5] = 0
     J[3][6] = 0
@@ -192,12 +192,12 @@ def jacobian(p0, t0, r):
     J[3][26] = 0.001*BS39
     J[3][27] = 0
     J[3][28] = 0.001*BS18
-    J[3][29] = -0.00086*shCj
+    J[3][29] = -0.0008*shCj
     J[4][0] = 0
     J[4][1] = 0
     J[4][2] = 0
     J[4][3] = 0
-    J[4][4] = -0.00086*shReactCBCj
+    J[4][4] = -0.0008*shReactCBCj
     J[4][5] = 0
     J[4][6] = 0
     J[4][7] = 0
@@ -222,7 +222,7 @@ def jacobian(p0, t0, r):
     J[4][26] = 0.001*BS9
     J[4][27] = 0.001*BS24 + 2.0e-8*shProduceBCjCk
     J[4][28] = 2.0e-8*shHelperCCk
-    J[4][29] = -0.00086*shCk
+    J[4][29] = -0.0008*shCk
     J[5][0] = 0
     J[5][1] = 0
     J[5][2] = 0
@@ -253,7 +253,7 @@ def jacobian(p0, t0, r):
     J[5][27] = 0
     J[5][28] = 0
     J[5][29] = 0
-    J[6][0] = 8.6e-5*ReactCBCj
+    J[6][0] = 8.0e-5*ReactCBCj
     J[6][1] = 0
     J[6][2] = -0.0001*B12
     J[6][3] = 0
@@ -278,13 +278,13 @@ def jacobian(p0, t0, r):
     J[6][22] = 0
     J[6][23] = 0
     J[6][24] = 0
-    J[6][25] = 8.6e-5*Cj
+    J[6][25] = 8.0e-5*Cj
     J[6][26] = 0
     J[6][27] = 0
     J[6][28] = 0
     J[6][29] = 0
     J[7][0] = 0
-    J[7][1] = 8.6e-5*ReactCBCj
+    J[7][1] = 8.0e-5*ReactCBCj
     J[7][2] = -0.0001*B16
     J[7][3] = 0
     J[7][4] = 0
@@ -308,7 +308,7 @@ def jacobian(p0, t0, r):
     J[7][22] = 0
     J[7][23] = 0
     J[7][24] = 0
-    J[7][25] = 8.6e-5*Ck
+    J[7][25] = 8.0e-5*Ck
     J[7][26] = 0
     J[7][27] = 0
     J[7][28] = 0
@@ -586,7 +586,7 @@ def jacobian(p0, t0, r):
     J[17][0] = 0
     J[17][1] = 0
     J[17][2] = 0
-    J[17][3] = 0.00086*shReactCBCj
+    J[17][3] = 0.0008*shReactCBCj
     J[17][4] = 0
     J[17][5] = -0.001*BS39
     J[17][6] = 0
@@ -612,7 +612,7 @@ def jacobian(p0, t0, r):
     J[17][26] = -0.001*BS39
     J[17][27] = 0
     J[17][28] = 0
-    J[17][29] = 0.00086*shCj
+    J[17][29] = 0.0008*shCj
     J[18][0] = 0
     J[18][1] = 0
     J[18][2] = 0
@@ -647,7 +647,7 @@ def jacobian(p0, t0, r):
     J[19][1] = 0
     J[19][2] = 0
     J[19][3] = 0
-    J[19][4] = 0.00086*shReactCBCj
+    J[19][4] = 0.0008*shReactCBCj
     J[19][5] = -0.001*BS9
     J[19][6] = 0
     J[19][7] = 0
@@ -672,9 +672,9 @@ def jacobian(p0, t0, r):
     J[19][26] = -0.001*BS9
     J[19][27] = 0
     J[19][28] = 0
-    J[19][29] = 0.00086*shCk
-    J[20][0] = 8.6e-5*ReactCBCj
-    J[20][1] = 8.6e-5*ReactCBCj
+    J[19][29] = 0.0008*shCk
+    J[20][0] = 8.0e-5*ReactCBCj
+    J[20][1] = 8.0e-5*ReactCBCj
     J[20][2] = 0
     J[20][3] = 0
     J[20][4] = 0
@@ -698,7 +698,7 @@ def jacobian(p0, t0, r):
     J[20][22] = 0
     J[20][23] = 0
     J[20][24] = 0
-    J[20][25] = 8.6e-5*Cj + 8.6e-5*Ck
+    J[20][25] = 8.0e-5*Cj + 8.0e-5*Ck
     J[20][26] = 0
     J[20][27] = 0
     J[20][28] = 0
@@ -823,8 +823,8 @@ def jacobian(p0, t0, r):
     J[24][27] = 0
     J[24][28] = 0
     J[24][29] = 0
-    J[25][0] = -8.6e-5*ReactCBCj
-    J[25][1] = -8.6e-5*ReactCBCj
+    J[25][0] = -8.0e-5*ReactCBCj
+    J[25][1] = -8.0e-5*ReactCBCj
     J[25][2] = 0
     J[25][3] = 0
     J[25][4] = 0
@@ -848,7 +848,7 @@ def jacobian(p0, t0, r):
     J[25][22] = 0
     J[25][23] = 0
     J[25][24] = 0
-    J[25][25] = -8.6e-5*Cj - 8.6e-5*Ck
+    J[25][25] = -8.0e-5*Cj - 8.0e-5*Ck
     J[25][26] = 0
     J[25][27] = 0
     J[25][28] = 0
@@ -856,8 +856,8 @@ def jacobian(p0, t0, r):
     J[26][0] = 0
     J[26][1] = 0
     J[26][2] = 0
-    J[26][3] = 0.00086*shReactCBCj
-    J[26][4] = 0.00086*shReactCBCj
+    J[26][3] = 0.0008*shReactCBCj
+    J[26][4] = 0.0008*shReactCBCj
     J[26][5] = 0
     J[26][6] = 0
     J[26][7] = 0
@@ -882,7 +882,7 @@ def jacobian(p0, t0, r):
     J[26][26] = -0.001*BS39 - 0.001*BS9
     J[26][27] = 0
     J[26][28] = 0
-    J[26][29] = 0.00086*shCj + 0.00086*shCk
+    J[26][29] = 0.0008*shCj + 0.0008*shCk
     J[27][0] = 0
     J[27][1] = 0
     J[27][2] = 0
@@ -946,8 +946,8 @@ def jacobian(p0, t0, r):
     J[29][0] = 0
     J[29][1] = 0
     J[29][2] = 0
-    J[29][3] = -0.00086*shReactCBCj
-    J[29][4] = -0.00086*shReactCBCj
+    J[29][3] = -0.0008*shReactCBCj
+    J[29][4] = -0.0008*shReactCBCj
     J[29][5] = 0
     J[29][6] = 0
     J[29][7] = 0
@@ -972,7 +972,7 @@ def jacobian(p0, t0, r):
     J[29][26] = 0.001*BS39 + 0.001*BS9
     J[29][27] = 0
     J[29][28] = 0
-    J[29][29] = -0.00086*shCj - 0.00086*shCk
+    J[29][29] = -0.0008*shCj - 0.0008*shCk
     return J
 
 
@@ -1078,14 +1078,14 @@ def integrate(args, setlogger = False):
     p0[0] = 10.0
     p0[1] = 1e-05
     p0[2] = 10.0
-    p0[4] = 1e-05
-    p0[20] = 200.0
+    p0[5] = 10.0
+    p0[20] = 800.0
     p0[21] = 150.0
     p0[22] = 10.0
     p0[23] = 10.0
     p0[24] = 200.0
     p0[25] = 200.0
-    p0[26] = 200.0
+    p0[26] = 800.0
     p0[27] = 150.0
     p0[28] = 200.0
     p0[29] = 200.0

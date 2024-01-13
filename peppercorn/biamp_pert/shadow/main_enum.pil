@@ -25,7 +25,7 @@ shCk = hCkR fCR mCR sCR @initial 1e-05 nM
 BS9 = hCkR fCR( mCR( sCR( + mBR( sBR( hCjR + ) ) fBR* ) ) )
 BS18 = mBR sBR hCjR
 shReactCBCj = mCR( sCR( fBR( + mBR( sBR( hCjR + ) ) ) ) ) fCR* @initial 200 nM
-shBackCB = mCR sCR fBR @initial 200 nM
+shBackCB = mCR sCR fBR @initial 800 nM
 
 # Resting macrostates (14) 
 macrostate shHelperCCk = [shHelperCCk]
@@ -44,8 +44,8 @@ macrostate shReactCBCj = [shReactCBCj]
 macrostate shBackCB = [shBackCB]
 
 # Condensed reactions (9) 
-reaction [condensed    = 8.6e-5 /nM/s ] shCj + shReactCBCj -> BS39 + shBackCB
-reaction [condensed    = 8.6e-5 /nM/s ] shCk + shReactCBCj -> BS9 + shBackCB
+reaction [condensed    = 8e-5 /nM/s ] shCj + shReactCBCj -> BS39 + shBackCB
+reaction [condensed    = 8e-5 /nM/s ] shCk + shReactCBCj -> BS9 + shBackCB
 reaction [condensed    = 1e-4 /nM/s ] BS39 + shBackCB -> shCj + shReactCBCj
 reaction [condensed    = 1e-4 /nM/s ] BS9 + shBackCB -> shCk + shReactCBCj
 reaction [condensed    = 1e-4 /nM/s ] shBr + BS39 -> BS44 + BS18

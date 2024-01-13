@@ -44,8 +44,8 @@ macrostate shReactCBCj = [shReactCBCj]
 macrostate shBackCB = [shBackCB]
 
 # Condensed reactions (9)
-reaction [condensed    = 0.000129 /nM/s ] shCj + shReactCBCj -> BS39 + shBackCB
-reaction [condensed    = 0.000129 /nM/s ] shCk + shReactCBCj -> BS9 + shBackCB
+reaction [condensed    = 0.00015 /nM/s ] shCj + shReactCBCj -> BS39 + shBackCB
+reaction [condensed    = 0.00015 /nM/s ] shCk + shReactCBCj -> BS9 + shBackCB
 reaction [condensed    = 0.00015 /nM/s ] BS39 + shBackCB -> shCj + shReactCBCj
 reaction [condensed    = 0.00015 /nM/s ] BS9 + shBackCB -> shCk + shReactCBCj
 reaction [condensed    = 0.00015 /nM/s ] shBr + BS39 -> BS44 + BS18

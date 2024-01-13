@@ -39,7 +39,7 @@ def odesystem(p0, t0, r):
     dCkdt = 0.001*B16*BackCB + 0.0026*B27*HelperCCk - 0.0041*CancelC*Ck - 0.0041*Ck*EC3 - 0.0041*Ck*EC6 - 8.6e-5*Ck*ReactCBCj + 0.3*EC8 + 1.0e-8*HelperCCk*ProduceBCjCk
     dBrdt = -0.0003*B12*Br - 0.0003*B16*Br
     dshCjdt = 0.0016*BS18*shProduceBCjCk - 0.00024*BS24*shCj + 0.001*BS39*shBackCB - 0.0041*CancelC*shCj - 0.0041*EC42*shCj + 0.2*EC6 - 0.0041*EC8*shCj - 8.6e-5*shCj*shReactCBCj
-    dshCkdt = 0.0026*BS24*shHelperCCk + 0.001*BS9*shBackCB - 0.0041*CancelC*shCk + 0.2*EC3 - 0.0041*EC42*shCk - 0.0041*EC8*shCk - 8.6e-5*shCk*shReactCBCj + 8.0e-8*shHelperCCk*shProduceBCjCk
+    dshCkdt = 0.0026*BS24*shHelperCCk + 0.001*BS9*shBackCB - 0.0041*CancelC*shCk + 0.2*EC3 - 0.0041*EC42*shCk - 0.0041*EC8*shCk - 8.6e-5*shCk*shReactCBCj + 7.0e-8*shHelperCCk*shProduceBCjCk
     dshBrdt = -0.0003*BS39*shBr - 0.0003*BS9*shBr
     dCancelCdt = -0.0041*CancelC*Cj - 0.0041*CancelC*Ck - 0.0041*CancelC*shCj - 0.0041*CancelC*shCk + 0.2*EC3 + 0.3*EC42 + 0.2*EC6 + 0.3*EC8
     dB12dt = -0.001*B12*BackCB - 0.0003*B12*Br + 8.6e-5*Cj*ReactCBCj
@@ -72,8 +72,8 @@ def odesystem(p0, t0, r):
     dReactCBCjdt = 0.001*B12*BackCB + 0.001*B16*BackCB - 8.6e-5*Cj*ReactCBCj - 8.6e-5*Ck*ReactCBCj
     ddispCdt = 0.0041*Cj*EC3 + 0.0041*Cj*EC6 + 0.0041*Ck*EC3 + 0.0041*Ck*EC6 + 0.0041*EC42*shCj + 0.0041*EC42*shCk + 0.0041*EC8*shCj + 0.0041*EC8*shCk
     dshBackCBdt = -0.001*BS39*shBackCB - 0.001*BS9*shBackCB + 8.6e-5*shCj*shReactCBCj + 8.6e-5*shCk*shReactCBCj
-    dshHelperCCkdt = -0.0026*BS24*shHelperCCk - 8.0e-8*shHelperCCk*shProduceBCjCk
-    dshProduceBCjCkdt = -0.0016*BS18*shProduceBCjCk + 0.00024*BS24*shCj - 8.0e-8*shHelperCCk*shProduceBCjCk
+    dshHelperCCkdt = -0.0026*BS24*shHelperCCk - 7.0e-8*shHelperCCk*shProduceBCjCk
+    dshProduceBCjCkdt = -0.0016*BS18*shProduceBCjCk + 0.00024*BS24*shCj - 7.0e-8*shHelperCCk*shProduceBCjCk
     dshReactCBCjdt = 0.001*BS39*shBackCB + 0.001*BS9*shBackCB - 8.6e-5*shCj*shReactCBCj - 8.6e-5*shCk*shReactCBCj
     return np.array([dCjdt, dCkdt, dBrdt, dshCjdt, dshCkdt, dshBrdt, dCancelCdt, dB12dt, dB16dt, dB21dt, dB22dt, dB27dt, dB35dt, dB41dt, dBS18dt, dBS19dt, dBS24dt, dBS32dt, dBS39dt, dBS44dt, dBS9dt, dBackCBdt, dEC19dt, dEC28dt, dEC3dt, dEC42dt, dEC52dt, dEC6dt, dEC64dt, dEC8dt, dHelperCCkdt, dO1dt, dO2dt, dProduceBCjCkdt, dReactCBCjdt, ddispCdt, dshBackCBdt, dshHelperCCkdt, dshProduceBCjCkdt, dshReactCBCjdt])
 
@@ -280,8 +280,8 @@ def jacobian(p0, t0, r):
     J[4][34] = 0
     J[4][35] = 0
     J[4][36] = 0.001*BS9
-    J[4][37] = 0.0026*BS24 + 8.0e-8*shProduceBCjCk
-    J[4][38] = 8.0e-8*shHelperCCk
+    J[4][37] = 0.0026*BS24 + 7.0e-8*shProduceBCjCk
+    J[4][38] = 7.0e-8*shHelperCCk
     J[4][39] = -8.6e-5*shCk
     J[5][0] = 0
     J[5][1] = 0
@@ -1600,8 +1600,8 @@ def jacobian(p0, t0, r):
     J[37][34] = 0
     J[37][35] = 0
     J[37][36] = 0
-    J[37][37] = -0.0026*BS24 - 8.0e-8*shProduceBCjCk
-    J[37][38] = -8.0e-8*shHelperCCk
+    J[37][37] = -0.0026*BS24 - 7.0e-8*shProduceBCjCk
+    J[37][38] = -7.0e-8*shHelperCCk
     J[37][39] = 0
     J[38][0] = 0
     J[38][1] = 0
@@ -1640,8 +1640,8 @@ def jacobian(p0, t0, r):
     J[38][34] = 0
     J[38][35] = 0
     J[38][36] = 0
-    J[38][37] = -8.0e-8*shProduceBCjCk
-    J[38][38] = -0.0016*BS18 - 8.0e-8*shHelperCCk
+    J[38][37] = -7.0e-8*shProduceBCjCk
+    J[38][38] = -0.0016*BS18 - 7.0e-8*shHelperCCk
     J[38][39] = 0
     J[39][0] = 0
     J[39][1] = 0
@@ -1796,10 +1796,10 @@ def integrate(args, setlogger = False):
     p0[32] = 10.0
     p0[33] = 200.0
     p0[34] = 200.0
-    p0[36] = 78.0
-    p0[37] = 59.0
-    p0[38] = 78.0
-    p0[39] = 78.0
+    p0[36] = 91.0
+    p0[37] = 68.0
+    p0[38] = 91.0
+    p0[39] = 91.0
     
     const = None
     #<&>CONSTANT_SPECIES_INFO<&>#

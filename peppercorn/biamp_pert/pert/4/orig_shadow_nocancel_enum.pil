@@ -31,7 +31,7 @@ length sBR = 7
 length sCR = 7
 
 # Resting complexes (16)
-BackCB = fB sC mC @initial 200 nM
+BackCB = fB sC mC @initial 800 nM
 ReactCBCj = hCj sB( mB( + fB( sC( mC( + fC* ) ) ) ) ) @initial 200 nM
 HelperCCk = fC hCk fC @initial 150 nM
 B35 = hCj( sB( mB + ) ) fC*( hCk*( fC*( + ) ) )
@@ -48,20 +48,20 @@ Ck = sC mC fC hCk @initial 1e-05 nM
 O1 = sO1 mO1 fO1 hO1 @initial 10 nM
 O2 = sO2 mO2 fO2 hO2 @initial 10 nM
 
-shHelperCCk = fCR hCkR fCR @initial 150 nM
+shHelperCCk = fCR hCkR fCR @initial 150nM
 BS32 = fCR*( hCkR*( fCR*( hCjR*( sBR*( + mBR ) ) + ) ) )
-shProduceBCjCk = hCjR( fCR( mCR sCR + hCkR( fCR( mCR sCR + ) ) ) ) sBR* @initial 200 nM
+shProduceBCjCk = hCjR( fCR( mCR sCR + hCkR( fCR( mCR sCR + ) ) ) ) sBR* @initial 200nM
 BS24 = mBR sBR( hCjR( + hCkR( fCR( mCR sCR + ) ) fCR* ) )
-shBr = hBrR fBR mBR sBR @initial 0.0 nM
+shBr = hBrR fBR mBR sBR @initial 0 nM
 BS44 = sBR*( mBR*( fBR*( sCR*( mCR*( fCR*( + hCjR ) ) ) + hBrR ) ) )
 BS19 = hBrR fBR( mBR( sBR( + ) ) ) sCR*( mCR*( fCR*( + hCkR ) ) )
-shCj = hCjR fCR mCR sCR @initial 0.0 nM
+shCj = hCjR fCR mCR sCR @initial 0 nM
 BS39 = hCjR fCR( mCR( sCR( + mBR( sBR( hCjR + ) ) fBR* ) ) )
-shCk = hCkR fCR mCR sCR @initial 1e-05 nM
+shCk = hCkR fCR mCR sCR @initial 0 nM
 BS9 = hCkR fCR( mCR( sCR( + mBR( sBR( hCjR + ) ) fBR* ) ) )
 BS18 = mBR sBR hCjR
-shReactCBCj = mCR( sCR( fBR( + mBR( sBR( hCjR + ) ) ) ) ) fCR* @initial 200 nM
-shBackCB = mCR sCR fBR @initial 200 nM
+shReactCBCj = mCR( sCR( fBR( + mBR( sBR( hCjR + ) ) ) ) ) fCR* @initial 200nM
+shBackCB = mCR sCR fBR @initial 800nM
 
 # Resting macrostates (16)
 macrostate BackCB = [BackCB]
@@ -97,8 +97,8 @@ macrostate shReactCBCj = [shReactCBCj]
 macrostate shBackCB = [shBackCB]
 
 # Condensed reactions (9)
-reaction [condensed    = 8.6e-5 /nM/s ] ReactCBCj + Cj -> BackCB + B12
-reaction [condensed    = 8.6e-5 /nM/s ] ReactCBCj + Ck -> BackCB + B16
+reaction [condensed    = 8e-5 /nM/s ] ReactCBCj + Cj -> BackCB + B12
+reaction [condensed    = 8e-5 /nM/s ] ReactCBCj + Ck -> BackCB + B16
 reaction [condensed    = 1e-4 /nM/s ] BackCB + B12 -> ReactCBCj + Cj
 reaction [condensed    = 1e-4 /nM/s ] BackCB + B16 -> ReactCBCj + Ck
 reaction [condensed    = 1e-4 /nM/s ] B12 + Br -> B41 + B21
@@ -108,8 +108,8 @@ reaction [condensed    = 1e-4 /nM/s ] B27 + Cj -> B21 + ProduceBCjCk
 reaction [condensed    = 1e-4 /nM/s ] HelperCCk + B27 -> B35 + Ck
 
 reaction [condensed    = 0.000022 /nM/s ] O1 + O2 -> O1 + O1
-reaction [condensed    = 8.6e-5 /nM/s ] shCj + shReactCBCj -> BS39 + shBackCB
-reaction [condensed    = 8.6e-5 /nM/s ] shCk + shReactCBCj -> BS9 + shBackCB
+reaction [condensed    = 8e-5 /nM/s ] shCj + shReactCBCj -> BS39 + shBackCB
+reaction [condensed    = 8e-5 /nM/s ] shCk + shReactCBCj -> BS9 + shBackCB
 reaction [condensed    = 1e-4 /nM/s ] BS39 + shBackCB -> shCj + shReactCBCj
 reaction [condensed    = 1e-4 /nM/s ] BS9 + shBackCB -> shCk + shReactCBCj
 reaction [condensed    = 1e-4 /nM/s ] shBr + BS39 -> BS44 + BS18
