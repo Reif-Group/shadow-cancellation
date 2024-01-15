@@ -6,7 +6,7 @@ mkdir -p images/
 rm images/*
 for i in $arr; do
     for j in $names; do
-        ../pil.sh `pwd`/pert/$i $TIME $j "$LABELS" $j
+        nohup ../pil.sh `pwd`/pert/$i $TIME $j "$LABELS" $j &
     done
 done
 

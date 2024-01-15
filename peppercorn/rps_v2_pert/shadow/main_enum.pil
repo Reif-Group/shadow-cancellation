@@ -54,14 +54,14 @@ shCj = hCjR fCR mCR sCR @initial 3 nM
 RS7 = mBR( sBR( hCjR + ) ) fBR* sCR*( mCR*( fCR*( + hCjR ) ) )
 shCk = hCkR fCR mCR sCR @initial 1e-05 nM
 RS15 = hCkR fCR( mCR( sCR( + mBR( sBR( hCjR + ) ) fBR* ) ) )
-shBackAC = mAR sAR fCR @initial 800 nM
+shBackAC = mAR sAR fCR @initial 600 nM
 shReactACAp = mAR( sAR( fCR( + mCR( sCR( hApR + ) ) ) ) ) fAR* @initial 200 nM
 RS198 = mAR sAR hBrR
 shReactBABr = mBR( sBR( fAR( + mAR( sAR( hBrR + ) ) ) ) ) fBR* @initial 200 nM
-shBackBA = mBR sBR fAR @initial 800 nM
+shBackBA = mBR sBR fAR @initial 600 nM
 RS75 = mBR sBR hCjR
 shReactCBCj = mCR( sCR( fBR( + mBR( sBR( hCjR + ) ) ) ) ) fCR* @initial 200 nM
-shBackCB = mCR sCR fBR @initial 800 nM
+shBackCB = mCR sCR fBR @initial 600 nM
 RS30 = mCR sCR hApR
 
 # Resting macrostates (45) 

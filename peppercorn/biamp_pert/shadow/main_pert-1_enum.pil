@@ -25,7 +25,7 @@ shCk = hCkR fCR mCR sCR @initial 1e-05 nM
 BS9 = hCkR fCR( mCR( sCR( + mBR( sBR( hCjR + ) ) fBR* ) ) )
 BS18 = mBR sBR hCjR
 shReactCBCj = mCR( sCR( fBR( + mBR( sBR( hCjR + ) ) ) ) ) fCR* @initial 200 nM
-shBackCB = mCR sCR fBR @initial 800 nM
+shBackCB = mCR sCR fBR @initial 600 nM
 
 # Resting macrostates (14)
 macrostate shHelperCCk = [shHelperCCk]
