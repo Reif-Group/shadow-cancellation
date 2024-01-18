@@ -15,5 +15,28 @@ Python3.10 might not work, due to the tkinter issue. Use 3.8. It works.
 sLeakWaste = hcjr( fcr mcr scr + fcr( hckr( fcr( + ) ) ) ) sbr* @initial 0 nM
 LeakWaste = sc mc fc hcj( + sb* ) fc*( hck*( fc*( + ) ) ) @initial 0 nM
 
-reaction [condensed    = 0.000001 /nM/s ] ProduceBCjCk + HelperCCk -> LeakWaste + Ck
-reaction [condensed    = 0.000001 /nM/s ] sProduceBCjCk + sHelperCCk -> sLeakWaste + sCk
+This leak rate constant corresponds to 150 /M/s which is the highest leak that was observed.
+
+reaction [condensed    = 2e-7 /nM/s ] ProduceBCjCk + HelperCCk -> LeakWaste + Ck
+reaction [condensed    = 2e-7 /nM/s ] sProduceBCjCk + sHelperCCk -> sLeakWaste + sCk
+
+
+
+##### Updated Instructions as of May 21, 2023
+
+# Compile the main into main_enum
+
+./sim.sh rps2/vanilla 10200 main "Ak Br Cj" M
+
+# Compile the shadow circuit
+
+./sim.sh rps2/shadow_vanilla 10200 main "sAk sBr sCj" MS
+
+# Perturb the rate constants of the shadow circuit. 
+
+1. Jupyter notebook. Run the perturb section
+2. Check
+ 
+# Check the performance
+./results_gen.sh rps/0_7 102000
+

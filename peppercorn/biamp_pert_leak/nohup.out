@@ -1,0 +1,134 @@
+2024-01-12 21:09:01.926 Python[32270:13578305] *** CFMessagePort: bootstrap_register(): failed 1100 (0x44c) 'Permission denied', port = 0x14807, name = 'org.python.python.ServiceProvider'
+See /usr/include/servers/bootstrap_defs.h for the error codes.
+2024-01-12 21:09:01.926 Python[32316:13578493] *** CFMessagePort: bootstrap_register(): failed 1100 (0x44c) 'Permission denied', port = 0x14d0f, name = 'org.python.python.ServiceProvider'
+See /usr/include/servers/bootstrap_defs.h for the error codes.
+2024-01-12 21:09:01.926 Python[32285:13578357] *** CFMessagePort: bootstrap_register(): failed 1100 (0x44c) 'Permission denied', port = 0x14d0f, name = 'org.python.python.ServiceProvider'
+See /usr/include/servers/bootstrap_defs.h for the error codes.
+Traceback (most recent call last):
+  File "/usr/local/bin/pilsimulator", line 8, in <module>
+    sys.exit(main())
+  File "/usr/local/lib/python3.8/site-packages/peppercornenumerator/pilsimulator.py", line 156, in main
+    integrate = get_integrator(filename)
+  File "/usr/local/lib/python3.8/site-packages/crnsimulator/solver.py", line 38, in get_integrator
+    return getattr(mod, function)
+AttributeError: module 'my_loader' has no attribute 'integrate'
+2024-01-12 21:30:46.760 Python[33723:13600648] *** CFMessagePort: bootstrap_register(): failed 1100 (0x44c) 'Permission denied', port = 0xb507, name = 'org.python.python.ServiceProvider'
+See /usr/include/servers/bootstrap_defs.h for the error codes.
+Traceback (most recent call last):
+  File "/usr/local/bin/pilsimulator", line 8, in <module>
+    sys.exit(main())
+  File "/usr/local/lib/python3.8/site-packages/peppercornenumerator/pilsimulator.py", line 98, in main
+    const.append(False if species[s][0][0] == 'i' else True)
+KeyError: 'CancelC'
+Traceback (most recent call last):
+  File "/usr/local/bin/pilsimulator", line 8, in <module>
+    sys.exit(main())
+  File "/usr/local/lib/python3.8/site-packages/peppercornenumerator/pilsimulator.py", line 98, in main
+    const.append(False if species[s][0][0] == 'i' else True)
+KeyError: 'CancelC'
+Traceback (most recent call last):
+  File "/usr/local/bin/pilsimulator", line 8, in <module>
+    sys.exit(main())
+  File "/usr/local/lib/python3.8/site-packages/peppercornenumerator/pilsimulator.py", line 98, in main
+    const.append(False if species[s][0][0] == 'i' else True)
+KeyError: 'CancelC'
+Traceback (most recent call last):
+  File "/usr/local/bin/pilsimulator", line 8, in <module>
+    sys.exit(main())
+  File "/usr/local/lib/python3.8/site-packages/peppercornenumerator/pilsimulator.py", line 98, in main
+    const.append(False if species[s][0][0] == 'i' else True)
+KeyError: 'CancelC'
+Traceback (most recent call last):
+  File "/usr/local/bin/pilsimulator", line 8, in <module>
+    sys.exit(main())
+  File "/usr/local/lib/python3.8/site-packages/peppercornenumerator/pilsimulator.py", line 98, in main
+    const.append(False if species[s][0][0] == 'i' else True)
+KeyError: 'CancelC'
+Traceback (most recent call last):
+  File "/usr/local/bin/pilsimulator", line 8, in <module>
+    sys.exit(main())
+  File "/usr/local/lib/python3.8/site-packages/peppercornenumerator/pilsimulator.py", line 98, in main
+    const.append(False if species[s][0][0] == 'i' else True)
+KeyError: 'CancelC'
+Traceback (most recent call last):
+  File "/usr/local/bin/pilsimulator", line 8, in <module>
+    sys.exit(main())
+  File "/usr/local/lib/python3.8/site-packages/peppercornenumerator/pilsimulator.py", line 98, in main
+    const.append(False if species[s][0][0] == 'i' else True)
+KeyError: 'CancelC'
+Traceback (most recent call last):
+  File "/usr/local/bin/pilsimulator", line 8, in <module>
+    sys.exit(main())
+  File "/usr/local/lib/python3.8/site-packages/peppercornenumerator/pilsimulator.py", line 98, in main
+    const.append(False if species[s][0][0] == 'i' else True)
+KeyError: 'CancelC'
+2024-01-12 21:44:21.250 Python[34475:13615783] *** CFMessagePort: bootstrap_register(): failed 1100 (0x44c) 'Permission denied', port = 0xb307, name = 'org.python.python.ServiceProvider'
+See /usr/include/servers/bootstrap_defs.h for the error codes.
+2024-01-12 21:44:21.250 Python[34521:13615984] *** CFMessagePort: bootstrap_register(): failed 1100 (0x44c) 'Permission denied', port = 0xb607, name = 'org.python.python.ServiceProvider'
+See /usr/include/servers/bootstrap_defs.h for the error codes.
+2024-01-12 21:44:21.250 Python[34513:13615959] *** CFMessagePort: bootstrap_register(): failed 1100 (0x44c) 'Permission denied', port = 0xb407, name = 'org.python.python.ServiceProvider'
+See /usr/include/servers/bootstrap_defs.h for the error codes.
+2024-01-12 21:44:21.251 Python[34478:13615793] *** CFMessagePort: bootstrap_register(): failed 1100 (0x44c) 'Permission denied', port = 0x14c07, name = 'org.python.python.ServiceProvider'
+See /usr/include/servers/bootstrap_defs.h for the error codes.
+2024-01-15 16:02:17.260 Python[76972:14966699] *** CFMessagePort: bootstrap_register(): failed 1100 (0x44c) 'Permission denied', port = 0x14403, name = 'org.python.python.ServiceProvider'
+See /usr/include/servers/bootstrap_defs.h for the error codes.
+2024-01-15 16:02:17.260 Python[76968:14966692] *** CFMessagePort: bootstrap_register(): failed 1100 (0x44c) 'Permission denied', port = 0x14307, name = 'org.python.python.ServiceProvider'
+See /usr/include/servers/bootstrap_defs.h for the error codes.
+2024-01-15 16:02:17.260 Python[77024:14966902] *** CFMessagePort: bootstrap_register(): failed 1100 (0x44c) 'Permission denied', port = 0x14703, name = 'org.python.python.ServiceProvider'
+See /usr/include/servers/bootstrap_defs.h for the error codes.
+2024-01-15 16:02:17.260 Python[76988:14966764] *** CFMessagePort: bootstrap_register(): failed 1100 (0x44c) 'Permission denied', port = 0xba07, name = 'org.python.python.ServiceProvider'
+See /usr/include/servers/bootstrap_defs.h for the error codes.
+2024-01-15 16:02:17.260 Python[77022:14966896] *** CFMessagePort: bootstrap_register(): failed 1100 (0x44c) 'Permission denied', port = 0xb907, name = 'org.python.python.ServiceProvider'
+See /usr/include/servers/bootstrap_defs.h for the error codes.
+2024-01-15 16:02:17.260 Python[77021:14966898] *** CFMessagePort: bootstrap_register(): failed 1100 (0x44c) 'Permission denied', port = 0xb93f, name = 'org.python.python.ServiceProvider'
+See /usr/include/servers/bootstrap_defs.h for the error codes.
+2024-01-15 16:02:17.260 Python[77013:14966881] *** CFMessagePort: bootstrap_register(): failed 1100 (0x44c) 'Permission denied', port = 0x14713, name = 'org.python.python.ServiceProvider'
+See /usr/include/servers/bootstrap_defs.h for the error codes.
+Traceback (most recent call last):
+  File "/usr/local/bin/pilsimulator", line 8, in <module>
+    sys.exit(main())
+  File "/usr/local/lib/python3.8/site-packages/peppercornenumerator/pilsimulator.py", line 98, in main
+    const.append(False if species[s][0][0] == 'i' else True)
+KeyError: 'CancelC'
+Traceback (most recent call last):
+  File "/usr/local/bin/pilsimulator", line 8, in <module>
+    sys.exit(main())
+  File "/usr/local/lib/python3.8/site-packages/peppercornenumerator/pilsimulator.py", line 98, in main
+    const.append(False if species[s][0][0] == 'i' else True)
+KeyError: 'CancelC'
+Traceback (most recent call last):
+  File "/usr/local/bin/pilsimulator", line 8, in <module>
+    sys.exit(main())
+  File "/usr/local/lib/python3.8/site-packages/peppercornenumerator/pilsimulator.py", line 98, in main
+    const.append(False if species[s][0][0] == 'i' else True)
+KeyError: 'CancelC'
+Traceback (most recent call last):
+  File "/usr/local/bin/pilsimulator", line 8, in <module>
+    sys.exit(main())
+  File "/usr/local/lib/python3.8/site-packages/peppercornenumerator/pilsimulator.py", line 98, in main
+    const.append(False if species[s][0][0] == 'i' else True)
+KeyError: 'CancelC'
+Traceback (most recent call last):
+  File "/usr/local/bin/pilsimulator", line 8, in <module>
+    sys.exit(main())
+  File "/usr/local/lib/python3.8/site-packages/peppercornenumerator/pilsimulator.py", line 98, in main
+    const.append(False if species[s][0][0] == 'i' else True)
+KeyError: 'CancelC'
+Traceback (most recent call last):
+  File "/usr/local/bin/pilsimulator", line 8, in <module>
+    sys.exit(main())
+  File "/usr/local/lib/python3.8/site-packages/peppercornenumerator/pilsimulator.py", line 98, in main
+    const.append(False if species[s][0][0] == 'i' else True)
+KeyError: 'CancelC'
+Traceback (most recent call last):
+  File "/usr/local/bin/pilsimulator", line 8, in <module>
+    sys.exit(main())
+  File "/usr/local/lib/python3.8/site-packages/peppercornenumerator/pilsimulator.py", line 98, in main
+    const.append(False if species[s][0][0] == 'i' else True)
+KeyError: 'CancelC'
+Traceback (most recent call last):
+  File "/usr/local/bin/pilsimulator", line 8, in <module>
+    sys.exit(main())
+  File "/usr/local/lib/python3.8/site-packages/peppercornenumerator/pilsimulator.py", line 98, in main
+    const.append(False if species[s][0][0] == 'i' else True)
+KeyError: 'CancelC'

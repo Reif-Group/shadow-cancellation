@@ -1,0 +1,33 @@
+length fA = 7
+length sA = 7
+length hAp = 15
+length hAq = 15
+length mA = 15
+
+length hYj = 15
+length hYi = 15
+length fY = 7
+length sY = 7
+length mY = 15
+
+length fB = 7
+length hBr = 15
+length hBs = 15
+length mB = 15
+length sB = 7
+
+
+Ap = sA mA fA hAp @initial 4 nM
+Aq = sA mA fA hAq @initial 4 nM
+
+Br = sB mB fB hBr @initial 4 nM
+Bs = sB mB fB hBs @initial 4 nM
+
+Yi = sY mY fY hYi @initial 4 nM
+Yj = sY mY fY hYj @initial 4 nM
+
+ReactABYi = hYi sB( mB( + fB( sA( mA( + fA* ) ) ) ) ) @initial 100 nM
+ProduceBYiYj = sY mY fY( hYj( + sY mY fY( hYi( + sB* ) ) ) ) @initial 100 nM
+BackAB = fB sA mA @initial 1000 nM
+HelperYYj = fY hYj fY @initial 75 nM
+

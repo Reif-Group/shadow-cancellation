@@ -1,0 +1,19 @@
+length hCj = 15
+length hCk = 15
+length fC = 7
+length sC = 7
+length mC = 15
+length hBr = 15
+length fB = 7
+length sB = 7
+length mB = 15
+
+Cj = sC mC fC hCj @initial 20 nM
+Ck = sC mC fC hCk @initial 1e-4 nM
+Br = sB mB fB hBr @initial 10 nM
+
+ReactCBCj = fB( sC( mC( + fC* ) ) ) mB*( sB*( + hCj ) ) @initial 100 nM
+ProduceBCjCk = sC mC fC( hCk( + sC mC fC( hCj( + sB* ) ) ) ) @initial 100 nM
+BackCB = fB sC mC @initial 75 nM
+HelperCCk = fC hCk fC @initial 75 nM
+

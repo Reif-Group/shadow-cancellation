@@ -1,0 +1,16 @@
+length sW = 7
+length fW = 7
+length mW = 15
+length hW = 15
+length sX1 = 7
+length fX1 = 7
+length mX1 = 15
+length hX1 = 15
+
+X1 = sX1 mX1 fX1 hX1 @initial 1 nM
+W = sW mW fW hW @initial 0 nM
+
+
+ReactX1W = hW sW( mX1( + fX1* ) ) @initial 15 nM
+ProduceX1W = sW mW fW( hW( + sW* ) ) @initial 200 nM
+
