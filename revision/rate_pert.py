@@ -1,9 +1,6 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[50]:
-
-
 import os
 import sys
 import random
@@ -11,16 +8,6 @@ import pandas
 import numpy as np
 import re
 import math
-
-
-# In[62]:
-
-
-random.randrange(0, 5e9)*1e-18
-
-
-# In[63]:
-
 
 HOME_DIR='./'
 print(sys.argv, len(sys.argv))
@@ -253,7 +240,10 @@ def write_out(headers, sections, out=None, cancel=False, zerooriginal=False,
             subbed_lines += [f'shAq = hAqR fAR mAR sAR @initial {aconc} nM']
             print(line, '\n', subbed_lines[-1])
         elif re.match(r'shBr = hBrR fBR mBR sBR @initial [0-9a-z\.\-]+ nM', line) is not None:
-            subbed_lines += [f'shBr = hBrR fBR mBR sBR @initial {bconc} nM']
+            if 'biamp' in ROOT_FOLDER:
+                subbed_lines += [line]
+            else:
+                subbed_lines += [f'shBr = hBrR fBR mBR sBR @initial {bconc} nM']
             print(line, '\n', subbed_lines[-1])
         elif re.match(r'shBs = hBsR fBR mBR sBR @initial [0-9a-z\.\-]+ nM', line) is not None:
             subbed_lines += [f'shBs = hBsR fBR mBR sBR @initial {bconc} nM']
