@@ -49,22 +49,22 @@ Ck = sC mC fC hCk @initial 0 nM
 O1 = sO1 mO1 fO1 hO1 @initial 1 nM
 O2 = sO2 mO2 fO2 hO2 @initial 1 nM
 
-shHelperB = fBR hBR fBR @initial 109 nM
+shHelperB = fBR hBR fBR @initial 113 nM
 US25 = fBR( hBR( fBR( + ) ) ) sCR*( mCR*( fCR*( + hCjR ) ) )
 US23 = fBR( hBR( fBR( + ) ) ) sCR*( mCR*( fCR*( + hCkR ) ) )
 US5 = hBR( fBR( hCjR + ) ) fBR* sCR*( mCR*( fCR*( + hCjR ) ) )
 US10 = hCkR fCR( mCR( sCR( + hBR( fBR( hCjR + ) ) fBR* ) ) )
-shReactCBCj = fBR*( hBR*( fBR*( sCR*( mCR*( fCR* + ) ) ) + ) ) hCjR @initial 146 nM
-shHelperCCk = fCR hCkR fCR @initial 109 nM
+shReactCBCj = fBR*( hBR*( fBR*( sCR*( mCR*( fCR* + ) ) ) + ) ) hCjR @initial 151 nM
+shHelperCCk = fCR hCkR fCR @initial 113 nM
 US45 = fCR*( hCkR*( fCR*( hCjR*( fBR*( + hBR ) ) + ) ) )
 US37 = hCkR( fCR( mCR sCR + ) ) fCR* hCjR*( fBR*( + hBR ) )
-shProduceBCjCk = fCR*( hCkR*( fCR*( hCjR*( fBR* + ) ) mCR sCR + ) ) mCR sCR @initial 146 nM
+shProduceBCjCk = fCR*( hCkR*( fCR*( hCjR*( fBR* + ) ) mCR sCR + ) ) mCR sCR @initial 151 nM
 US22 = hBR fBR hCjR
 shCj = hCjR fCR mCR sCR @initial 0 nM
 shCk = hCkR fCR mCR sCR @initial 0 nM
 shO1 = hO1 fO1 mO1 sO1 @initial 0 nM
 shO2 = hO1 fO1 mO1 sO2 @initial 1e-05 nM
-shBackBC = mCR sCR fBR @initial 146 nM
+shBackBC = mCR sCR fBR @initial 151 nM
 
 # Resting macrostates (16)
 macrostate HelperB = [HelperB]

@@ -24,7 +24,8 @@ ACONC = '0'
 BCONC = '0'
 CCONC = '0'
 LEAK = 1e-8
-SHADOW_LEAK = LEAK + 1e-8*PERT_FRAC//100
+SHADOW_LEAK = LEAK + 1e-8*(PERT_FRAC//100)
+print("shadow leak is ", SHADOW_LEAK)
 
 SCALE_FACTOR = 0 # By increasing the Backward strand conc this seems unnecessary
 
@@ -290,25 +291,25 @@ write_out(headers, sections, out_cancel, cancel=True)
 # In[69]:
 
 
-lines = read_lines(os.path.join(HOME_DIR, ROOT_FOLDER, 'shadow', 'main_enum.pil'))
-pert_lines = []
-for line in lines:
-    pert_lines.append(match_replace_rate_const(line, frac=PERT_FRAC))
-write_lines(pert_lines, os.path.join(HOME_DIR, ROOT_FOLDER, 'shadow', f'main_pert-{PERT_FRAC}_enum.pil'))
+# lines = read_lines(os.path.join(HOME_DIR, ROOT_FOLDER, 'shadow', 'main_enum.pil'))
+# pert_lines = []
+# for line in lines:
+    # pert_lines.append(match_replace_rate_const(line, frac=PERT_FRAC))
+# write_lines(pert_lines, os.path.join(HOME_DIR, ROOT_FOLDER, 'shadow', f'main_pert-{PERT_FRAC}_enum.pil'))
 
 
-# # Add leaks to Original, Shadow, and Perturbed
+# # # Add leaks to Original, Shadow, and Perturbed
 
-# In[70]:
+# # In[70]:
 
 
-ofile = os.path.join(HOME_DIR, ROOT_FOLDER, 'original', 'main_enum.pil')
-sfile = os.path.join(HOME_DIR, ROOT_FOLDER, 'shadow', f'main_pert-{PERT_FRAC}_enum.pil')
-cfile = os.path.join(HOME_DIR, ROOT_FOLDER, 'cancel', 'main_enum.pil')
-out_nocancel = os.path.join(OUT_DIR, 'orig_shadow_pert_nocancel_enum.pil') # CHANGE THE NAME IF YOU NEED
-out_cancel = os.path.join(OUT_DIR, 'orig_shadow_pert_cancel_enum.pil') # CHANGE THE NAME IF YOU NEED
+# ofile = os.path.join(HOME_DIR, ROOT_FOLDER, 'original', 'main_enum.pil')
+# sfile = os.path.join(HOME_DIR, ROOT_FOLDER, 'shadow', f'main_pert-{PERT_FRAC}_enum.pil')
+# cfile = os.path.join(HOME_DIR, ROOT_FOLDER, 'cancel', 'main_enum.pil')
+# out_nocancel = os.path.join(OUT_DIR, 'orig_shadow_pert_nocancel_enum.pil') # CHANGE THE NAME IF YOU NEED
+# out_cancel = os.path.join(OUT_DIR, 'orig_shadow_pert_cancel_enum.pil') # CHANGE THE NAME IF YOU NEED
 
-headers, sections = merge(ofile, sfile)
-write_out(headers, sections, out_nocancel, aconc=ACONC, bconc=BCONC, cconc=CCONC) # No cancellation
-headers, sections = merge(ofile, sfile, cfile)
-write_out(headers, sections, out_cancel, cancel=True, aconc=ACONC, bconc=BCONC, cconc=CCONC) # Cancellation included
+# headers, sections = merge(ofile, sfile)
+# write_out(headers, sections, out_nocancel, aconc=ACONC, bconc=BCONC, cconc=CCONC) # No cancellation
+# headers, sections = merge(ofile, sfile, cfile)
+# write_out(headers, sections, out_cancel, cancel=True, aconc=ACONC, bconc=BCONC, cconc=CCONC) # Cancellation included

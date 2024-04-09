@@ -44,15 +44,15 @@ macrostate shReactCBCj = [shReactCBCj]
 macrostate shBackCB = [shBackCB]
 
 # Condensed reactions (9)
-reaction [condensed    = 8e-5 /nM/s ] shCj + shReactCBCj -> BS39 + shBackCB
-reaction [condensed    = 8e-5 /nM/s ] shCk + shReactCBCj -> BS9 + shBackCB
-reaction [condensed    = 1e-4 /nM/s ] BS39 + shBackCB -> shCj + shReactCBCj
-reaction [condensed    = 1e-4 /nM/s ] BS9 + shBackCB -> shCk + shReactCBCj
-reaction [condensed    = 1e-4 /nM/s ] shBr + BS39 -> BS44 + BS18
-reaction [condensed    = 1e-4 /nM/s ] shBr + BS9 -> BS19 + BS18
-reaction [condensed    = 1e-4 /nM/s ] shProduceBCjCk + BS18 -> BS24 + shCj
-reaction [condensed    = 1e-4 /nM/s ] BS24 + shCj -> shProduceBCjCk + BS18
-reaction [condensed    = 1e-4 /nM/s ] shHelperCCk + BS24 -> BS32 + shCk
+reaction [condensed    = 0.0004 /nM/s ] shCj + shReactCBCj -> BS39 + shBackCB
+reaction [condensed    = 0.0004 /nM/s ] shCk + shReactCBCj -> BS9 + shBackCB
+reaction [condensed    = 0.0005 /nM/s ] BS39 + shBackCB -> shCj + shReactCBCj
+reaction [condensed    = 0.0005 /nM/s ] BS9 + shBackCB -> shCk + shReactCBCj
+reaction [condensed    = 0.0005 /nM/s ] shBr + BS39 -> BS44 + BS18
+reaction [condensed    = 0.0005 /nM/s ] shBr + BS9 -> BS19 + BS18
+reaction [condensed    = 0.0005 /nM/s ] shProduceBCjCk + BS18 -> BS24 + shCj
+reaction [condensed    = 0.0005 /nM/s ] BS24 + shCj -> shProduceBCjCk + BS18
+reaction [condensed    = 0.0005 /nM/s ] shHelperCCk + BS24 -> BS32 + shCk
 
 
 

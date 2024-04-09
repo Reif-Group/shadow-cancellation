@@ -51,13 +51,13 @@ macrostate shO2 = [shO2]
 macrostate shBackBC = [shBackBC]
 
 # Condensed reactions (9)
-reaction [condensed    = 0.00072 /nM/s ] shReactCBCj + shCj -> US5 + shBackBC
-reaction [condensed    = 0.00072 /nM/s ] shReactCBCj + shCk -> US10 + shBackBC
-reaction [condensed    = 0.0009 /nM/s ] US5 + shBackBC -> shReactCBCj + shCj
-reaction [condensed    = 0.0009 /nM/s ] US10 + shBackBC -> shReactCBCj + shCk
-reaction [condensed    = 0.0009 /nM/s ] shHelperB + US5 -> US25 + US22
-reaction [condensed    = 0.0009 /nM/s ] shHelperB + US10 -> US23 + US22
-reaction [condensed    = 0.0009 /nM/s ] shProduceBCjCk + US22 -> US37 + shCj
-reaction [condensed    = 0.0009 /nM/s ] US37 + shCj -> shProduceBCjCk + US22
-reaction [condensed    = 0.0009 /nM/s ] shHelperCCk + US37 -> US45 + shCk
+reaction [condensed    = 0.001 /nM/s ] shReactCBCj + shCj -> US5 + shBackBC
+reaction [condensed    = 0.001 /nM/s ] shReactCBCj + shCk -> US10 + shBackBC
+reaction [condensed    = 0.001 /nM/s ] US5 + shBackBC -> shReactCBCj + shCj
+reaction [condensed    = 0.001 /nM/s ] US10 + shBackBC -> shReactCBCj + shCk
+reaction [condensed    = 0.001 /nM/s ] shHelperB + US5 -> US25 + US22
+reaction [condensed    = 0.001 /nM/s ] shHelperB + US10 -> US23 + US22
+reaction [condensed    = 0.001 /nM/s ] shProduceBCjCk + US22 -> US37 + shCj
+reaction [condensed    = 0.001 /nM/s ] US37 + shCj -> shProduceBCjCk + US22
+reaction [condensed    = 0.001 /nM/s ] shHelperCCk + US37 -> US45 + shCk
 

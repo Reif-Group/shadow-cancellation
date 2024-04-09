@@ -48,20 +48,20 @@ Ck = sC mC fC hCk @initial 1e-05 nM
 O1 = sO1 mO1 fO1 hO1 @initial 10 nM
 O2 = sO2 mO2 fO2 hO2 @initial 10 nM
 
-shHelperCCk = fCR hCkR fCR @initial 65 nM
+shHelperCCk = fCR hCkR fCR @initial 28 nM
 BS32 = fCR*( hCkR*( fCR*( hCjR*( sBR*( + mBR ) ) + ) ) )
-shProduceBCjCk = hCjR( fCR( mCR sCR + hCkR( fCR( mCR sCR + ) ) ) ) sBR* @initial 87 nM
+shProduceBCjCk = hCjR( fCR( mCR sCR + hCkR( fCR( mCR sCR + ) ) ) ) sBR* @initial 37 nM
 BS24 = mBR sBR( hCjR( + hCkR( fCR( mCR sCR + ) ) fCR* ) )
 shBr = hBrR fBR mBR sBR @initial 10 nM
 BS44 = sBR*( mBR*( fBR*( sCR*( mCR*( fCR*( + hCjR ) ) ) + hBrR ) ) )
 BS19 = hBrR fBR( mBR( sBR( + ) ) ) sCR*( mCR*( fCR*( + hCkR ) ) )
-shCj = hCjR fCR mCR sCR @initial 0 nM
+shCj = hCjR fCR mCR sCR @initial 10 nM
 BS39 = hCjR fCR( mCR( sCR( + mBR( sBR( hCjR + ) ) fBR* ) ) )
 shCk = hCkR fCR mCR sCR @initial 0 nM
 BS9 = hCkR fCR( mCR( sCR( + mBR( sBR( hCjR + ) ) fBR* ) ) )
 BS18 = mBR sBR hCjR
-shReactCBCj = mCR( sCR( fBR( + mBR( sBR( hCjR + ) ) ) ) ) fCR* @initial 87 nM
-shBackCB = mCR sCR fBR @initial 87 nM
+shReactCBCj = mCR( sCR( fBR( + mBR( sBR( hCjR + ) ) ) ) ) fCR* @initial 37 nM
+shBackCB = mCR sCR fBR @initial 37 nM
 
 # Resting macrostates (16)
 macrostate BackCB = [BackCB]
@@ -121,4 +121,4 @@ reaction [condensed    = 1e-4 /nM/s ] shHelperCCk + BS24 -> BS32 + shCk
 
 
 reaction [condensed    = 1e-08 /nM/s ] ProduceBCjCk + HelperCCk -> Ck
-reaction [condensed    = 1e-08 /nM/s ] shProduceBCjCk + shHelperCCk -> shCk
+reaction [condensed    = 8e-08 /nM/s ] shProduceBCjCk + shHelperCCk -> shCk

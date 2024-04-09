@@ -1,0 +1,8 @@
+./leak_pert_run.sh uniamp_1em5_pert leak_pert 43200 "0" "Cj Ck shCj shCk" "0.0"
+./leak_pert_run.sh uniamp_1em5_pert leak_pert 43200 "100" "Cj Ck shCj shCk" "0.1"
+./leak_pert_run.sh uniamp_1em5_pert leak_pert 43200 "200" "Cj Ck shCj shCk" "0.1"
+./leak_pert_run.sh uniamp_1em5_pert leak_pert 43200 "300" "Cj Ck shCj shCk" "0.1"
+./leak_pert_run.sh uniamp_1em5_pert leak_pert 43200 "400" "Cj Ck shCj shCk" "0.15"
+./leak_pert_run.sh uniamp_1em5_pert leak_pert 43200 "500" "Cj Ck shCj shCk" "0.15"
+./leak_pert_run.sh uniamp_1em5_pert leak_pert 43200 "600" "Cj Ck shCj shCk" "0.15"
+./leak_pert_run.sh uniamp_1em5_pert leak_pert 43200 "700" "Cj Ck shCj shCk" "0.15"

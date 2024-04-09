@@ -120,5 +120,5 @@ reaction [condensed    = 1e-5 /nM/s ] shHelperCCk + BS24 -> BS32 + shCk
 
 
 
-reaction [condensed    = 2e-08 /nM/s ] ProduceBCjCk + HelperCCk -> Ck
+reaction [condensed    = 1e-08 /nM/s ] ProduceBCjCk + HelperCCk -> Ck
 reaction [condensed    = 1e-08 /nM/s ] shProduceBCjCk + shHelperCCk -> shCk
