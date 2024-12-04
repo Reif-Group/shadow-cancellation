@@ -1,0 +1,25 @@
+length hX1R = 15
+length hX2R = 15
+length fX1R = 7
+length fX2R = 7
+length sX1R = 7
+length sX2R = 7
+length mX1R = 15
+length mX2R = 15
+length mBR = 15
+length fBR = 7
+length hBR = 15
+length mBR = 15
+
+
+shX1 = hX1R fX1R mX1R sX1R @initial 1 nM
+shX2 = hX2R fX2R mX2R sX2R @initial 1e-5 nM
+
+
+
+sh_R_NUM_ReactX1B = fBR*( hBR*( fBR*( sX1R*( mX1R*( fX1R* + ) ) ) + ) ) hX1R @initial 300 nM
+sh_R_NUM_BackBX1 = mX1R sX1R fBR @initial 1000 nM
+sh_R_NUM_HelperBX1 = fBR hBR fBR @initial 1000 nM
+sh_R_NUM_FluxX1B = hBR fBR hX1R
+sh_R_NUM_ProduceBX1X2 = fX2R*( hX2R*( fX1R*( hX1R*( fBR* + ) ) mX1R sX1R + ) ) mX2R sX2R @initial 1000 nM
+sh_R_NUM_HelperX1X2 = fX1R hX2R fX2R @initial 1000 nM

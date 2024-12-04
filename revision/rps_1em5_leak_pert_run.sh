@@ -1,0 +1,8 @@
+./leak_pert_run.sh rps_1em5_pert leak_pert 720000 "0" "Ap Aq Br Bs Cj Ck shAp shAq shBr shBs shCj shCk" "0.0"
+./leak_pert_run.sh rps_1em5_pert leak_pert 720000 "100" "Ap Aq Br Bs Cj Ck shAp shAq shBr shBs shCj shCk" "0.1"
+./leak_pert_run.sh rps_1em5_pert leak_pert 720000 "200" "Ap Aq Br Bs Cj Ck shAp shAq shBr shBs shCj shCk" "0.1"
+./leak_pert_run.sh rps_1em5_pert leak_pert 720000 "300" "Ap Aq Br Bs Cj Ck shAp shAq shBr shBs shCj shCk" "0.1"
+./leak_pert_run.sh rps_1em5_pert leak_pert 720000 "400" "Ap Aq Br Bs Cj Ck shAp shAq shBr shBs shCj shCk" "0.15"
+./leak_pert_run.sh rps_1em5_pert leak_pert 720000 "500" "Ap Aq Br Bs Cj Ck shAp shAq shBr shBs shCj shCk" "0.15"
+./leak_pert_run.sh rps_1em5_pert leak_pert 720000 "600" "Ap Aq Br Bs Cj Ck shAp shAq shBr shBs shCj shCk" "0.15"
+./leak_pert_run.sh rps_1em5_pert leak_pert 720000 "700" "Ap Aq Br Bs Cj Ck shAp shAq shBr shBs shCj shCk" "0.15"

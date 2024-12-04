@@ -1,0 +1,31 @@
+length hCj = 15
+length hCk = 15
+length fC = 7
+length sC = 7
+length mC = 15
+length mB = 15
+length fB = 7
+length hB = 15
+length mB = 15
+
+length fO1 = 7
+length fO2 = 7
+length sO1 = 7
+length sO2 = 7
+length mO1 = 15
+length mO2 = 15
+length hO1 = 15
+length hO2 = 15
+
+
+Cj = sC mC fC hCj @initial 1 nM
+Ck = sC mC fC hCk @initial 1 nM
+O1 = sO1 mO1 fO1 hO1 @initial 1 nM
+O2 = sO2 mO2 fO2 hO2 @initial 1 nM
+
+
+ReactCBCj = hCj fB( hB( + fB( sC( mC( + fC* ) ) ) ) ) @initial 1000 nM
+BackBC = fB sC mC @initial 8000 nM
+HelperB = fB hB fB @initial 800 nM
+ProduceBCjCk = sC mC fC( hCk( + sC mC fC( hCj( + fB* ) ) ) ) @initial 1000 nM
+HelperCCk = fC hCk fC @initial 800 nM

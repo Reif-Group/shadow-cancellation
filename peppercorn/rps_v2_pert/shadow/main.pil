@@ -1,0 +1,40 @@
+length hCjR = 15
+length hCkR = 15
+length fCR = 7
+length sCR = 7
+length mCR = 15
+length hBrR = 15
+length hBsR = 15
+length fBR = 7
+length sBR = 7
+length mBR = 15
+length hApR = 15
+length hAqR = 15
+length fAR = 7
+length sAR = 7
+length mAR = 15
+
+
+shAp = hApR fAR mAR sAR @initial 11 nM
+shBr = hBrR fBR mBR sBR @initial 10 nM
+shCj = hCjR fCR mCR sCR @initial 3 nM
+shAq = hAqR fAR mAR sAR @initial 1e-5 nM
+shBs = hBsR fBR mBR sBR @initial 1e-5 nM
+shCk = hCkR fCR mCR sCR @initial 1e-5 nM
+
+
+shReactCBCj = mCR( sCR( fBR( + mBR( sBR( hCjR + ) ) ) ) ) fCR* @initial 300 nM
+shProduceBCjCk = hCjR( fCR( mCR sCR + hCkR( fCR( mCR sCR + ) ) ) ) sBR* @initial 300 nM
+shBackCB = mCR sCR fBR @initial 2000 nM
+shHelperCCk = fCR hCkR fCR @initial 200 nM
+
+shReactBABr = mBR( sBR( fAR( + mAR( sAR( hBrR + ) ) ) ) ) fBR* @initial 300 nM
+shProduceABrBs = hBrR( fBR( mBR sBR + hBsR( fBR( mBR sBR + ) ) ) ) sAR* @initial 300 nM
+shBackBA = mBR sBR fAR @initial 2000 nM
+shHelperBBs = fBR hBsR fBR @initial 200 nM
+
+shReactACAp = mAR( sAR( fCR( + mCR( sCR( hApR + ) ) ) ) ) fAR* @initial 300 nM
+shProduceCApAq = hApR( fAR( mAR sAR + hAqR( fAR( mAR sAR + ) ) ) ) sCR* @initial 300 nM
+shBackAC = mAR sAR fCR @initial 2000 nM
+shHelperAAq = fAR hAqR fAR @initial 200 nM
+

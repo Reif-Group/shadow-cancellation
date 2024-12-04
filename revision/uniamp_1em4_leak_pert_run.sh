@@ -1,0 +1,8 @@
+./leak_pert_run.sh uniamp_1em4_pert leak_pert 7200 "0" "Cj Ck shCj shCk" "0.0"
+./leak_pert_run.sh uniamp_1em4_pert leak_pert 7200 "100" "Cj Ck shCj shCk" "0.1"
+./leak_pert_run.sh uniamp_1em4_pert leak_pert 7200 "200" "Cj Ck shCj shCk" "0.1"
+./leak_pert_run.sh uniamp_1em4_pert leak_pert 7200 "300" "Cj Ck shCj shCk" "0.1"
+./leak_pert_run.sh uniamp_1em4_pert leak_pert 7200 "400" "Cj Ck shCj shCk" "0.15"
+./leak_pert_run.sh uniamp_1em4_pert leak_pert 7200 "500" "Cj Ck shCj shCk" "0.15"
+./leak_pert_run.sh uniamp_1em4_pert leak_pert 7200 "600" "Cj Ck shCj shCk" "0.15"
+./leak_pert_run.sh uniamp_1em4_pert leak_pert 7200 "700" "Cj Ck shCj shCk" "0.15"

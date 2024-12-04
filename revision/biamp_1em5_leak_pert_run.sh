@@ -1,0 +1,8 @@
+./leak_pert_run.sh biamp_1em5_pert leak_pert 108000 "0" "Cj Ck shCj shCk Br shBr" "0.0"
+./leak_pert_run.sh biamp_1em5_pert leak_pert 108000 "100" "Cj Ck shCj shCk Br shBr" "0.1"
+./leak_pert_run.sh biamp_1em5_pert leak_pert 108000 "200" "Cj Ck shCj shCk Br shBr" "0.1"
+./leak_pert_run.sh biamp_1em5_pert leak_pert 108000 "300" "Cj Ck shCj shCk Br shBr" "0.1"
+./leak_pert_run.sh biamp_1em5_pert leak_pert 108000 "400" "Cj Ck shCj shCk Br shBr" "0.15"
+./leak_pert_run.sh biamp_1em5_pert leak_pert 108000 "500" "Cj Ck shCj shCk Br shBr" "0.15"
+./leak_pert_run.sh biamp_1em5_pert leak_pert 108000 "600" "Cj Ck shCj shCk Br shBr" "0.15"
+./leak_pert_run.sh biamp_1em5_pert leak_pert 108000 "700" "Cj Ck shCj shCk Br shBr" "0.15"

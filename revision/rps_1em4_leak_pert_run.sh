@@ -1,0 +1,8 @@
+./leak_pert_run.sh rps_1em4_pert leak_pert 216000 "0" "Ap Aq Br Bs Cj Ck shAp shAq shBr shBs shCj shCk CancelC" "0.0"
+./leak_pert_run.sh rps_1em4_pert leak_pert 216000 "100" "Ap Aq Br Bs Cj Ck shAp shAq shBr shBs shCj shCk CancelC" "0.1"
+./leak_pert_run.sh rps_1em4_pert leak_pert 216000 "200" "Ap Aq Br Bs Cj Ck shAp shAq shBr shBs shCj shCk CancelC" "0.1"
+./leak_pert_run.sh rps_1em4_pert leak_pert 216000 "300" "Ap Aq Br Bs Cj Ck shAp shAq shBr shBs shCj shCk CancelC" "0.1"
+./leak_pert_run.sh rps_1em4_pert leak_pert 216000 "400" "Ap Aq Br Bs Cj Ck shAp shAq shBr shBs shCj shCk CancelC" "0.15"
+./leak_pert_run.sh rps_1em4_pert leak_pert 216000 "500" "Ap Aq Br Bs Cj Ck shAp shAq shBr shBs shCj shCk CancelC" "0.15"
+./leak_pert_run.sh rps_1em4_pert leak_pert 216000 "600" "Ap Aq Br Bs Cj Ck shAp shAq shBr shBs shCj shCk CancelC" "0.15"
+./leak_pert_run.sh rps_1em4_pert leak_pert 216000 "700" "Ap Aq Br Bs Cj Ck shAp shAq shBr shBs shCj shCk CancelC" "0.15"

@@ -1,0 +1,16 @@
+length hOA = 15
+length fOA = 7
+length sOA = 7
+length mOA = 15
+length hOB = 15
+length fOB = 7
+length sOB = 7
+length mOB = 15
+length hOY = 15
+length mOY = 15
+length fOY = 7
+length sOY = 7
+
+OA = sOA mOA fOA hOA @initial 3 nM
+OB = sOB mOB fOB hOB @initial 8 nM
+OY = sOY mOY fOY hOY @initial 5 nM

@@ -1,0 +1,18 @@
+### 
+length hX1 = 15
+length fX1 = 7
+length sX1 = 7
+length mX1 = 15
+length hX2 = 15
+length fX2 = 7
+length sX2 = 7
+length mX2 = 15
+
+###
+X1 = sX1 mX1 fX1 hX1 @initial 1 nM
+X2 = sX2 mX2 fX2 hX2 @initial 0 nM
+
+###
+ReactX1X2 = hX2 sX2( mX1( + fX1* ) ) @initial 35 nM
+ProduceX2X1 = sX1 mX1 fX1( hX1( + sX2 mX2 fX2( hX2( + sX2* ) ) ) )  @initial 200 nM
+HelperX2X1 = fX1 hX1 fX2 @initial 150 nM

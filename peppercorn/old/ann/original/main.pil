@@ -1,0 +1,26 @@
+length hC = 15
+length fC = 7
+length sC = 7
+length mC = 15
+length hB = 15
+length fB = 7
+length sB = 7
+length mB = 15
+length hW = 15
+length fW = 7
+length sW = 7
+length mW = 15
+
+
+C = sC mC fC hC @initial 4 nM
+B = sB mB fB hB @initial 4 nM
+W = sW mW fW hW @initial 0 nM
+
+ReactCBC = hC sB( mB( + fB( sC( mC( + fC* ) ) ) ) ) @initial 100 nM
+ProduceBW = sW mW fW( hW( + sB* ) ) @initial 200 nM
+BackCB = fB sC mC @initial 100 nM
+
+ReactBCB = hB sC( mC( + fC( sB( mB( + fB* ) ) ) ) ) @initial 100 nM
+ProduceCW = sW mW fW( hW( + sC* ) ) @initial 200 nM
+CackBC = fC sB mB @initial 100 nM
+

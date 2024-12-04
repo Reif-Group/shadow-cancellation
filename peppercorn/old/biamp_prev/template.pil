@@ -1,0 +1,18 @@
+length hX1 = 15
+length hX2 = 15
+length fX = 7
+length sX = 7
+length mX = 15
+length hY1 = 15
+length fY = 7
+length sY = 7
+length mY = 15
+
+X1 = sX mX fX hX1 @initial 4 nM
+X2 = sX mX fX hX2 @initial 1e-4 nM
+Y1 = sY mY fY hY1 @initial 4 nM
+
+ReactXYX1 = fY( sX( mX( + fX* ) ) ) mY*( sY*( + hX1 ) ) @initial 200 nM
+ProduceYX1X2 = sX mX fX( hX2( + sX mX fX( hX1( + sY* ) ) ) ) @initial 200 nM
+BackXY = fY sX mX @initial 200 nM
+HelperXX2 = fX hX2 fX @initial 150 nM

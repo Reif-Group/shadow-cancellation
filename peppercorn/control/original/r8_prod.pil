@@ -1,0 +1,29 @@
+length hX1 = 15
+length fX1 = 7
+length sX1 = 7
+length mX1 = 15
+length hX2 = 15
+length fX2 = 7
+length sX2 = 7
+length mX2 = 15
+
+length hO1 = 15
+length fO1 = 7
+length sO1 = 7
+length mO1 = 15
+length hO2 = 15
+length fO2 = 7
+length sO2 = 7
+length mO2 = 15
+
+
+X1 = sX1 mX1 fX1 hX1 @initial 1 nM
+X2 = sX2 mX2 fX2 hX2 @initial 0 nM
+
+O1 = sO1 mO1 fO1 hO1 @initial 1 nM
+O2 = sO2 mO2 fO2 hO2 @initial 1e-5 nM
+
+
+ReactX1X2 = hX2 sX1( mX1( + fX1* ) ) @initial 9000 nM
+ProduceX2X1 = sX1 mX1 fX1( hX1( + sX2 mX2 fX2( hX2( + sX1* ) ) ) )  @initial 700 nM
+HelperX2X1 = fX1 hX1 fX2 @initial 700 nM

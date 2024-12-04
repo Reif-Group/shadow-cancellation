@@ -1,0 +1,34 @@
+length hAR = 15
+length fAR = 7
+length sAR = 7
+length mAR = 15
+length hBR = 15
+length fBR = 7
+length sBR = 7
+length mBR = 15
+length hYR = 15
+length mYR = 15
+length fYR = 7
+length sYR = 7
+
+shA = sAR mAR fAR hAR @initial 3 nM
+shB = sBR mBR fBR hBR @initial 8 nM
+shY = sYR mYR fYR hYR @initial 5 nM
+
+shReactABY = hYR sBR( mBR( + fBR( sAR( mAR( + fAR* ) ) ) ) ) @initial 100 nM
+shProduceBYY = sYR mYR fYR( hYR( + sYR mYR fYR( hYR( + sBR* ) ) ) ) @initial 100 nM
+shBackBA = fBR sAR mAR @initial 1000 nM
+shHelperYY = fYR hYR fYR @initial 100 nM
+
+
+shReactAYA = hAR sYR( mYR( + fYR( sAR( mAR( + fAR* ) ) ) ) ) @initial 100 nM
+shProduceYAA = sAR mAR fAR( hAR( + sAR mAR fAR( hAR( + sYR* ) ) ) ) @initial 100 nM
+shBackAY = fYR sAR mAR @initial 1000 nM
+shHelperAA = fAR hAR fAR @initial 100 nM
+
+
+shReactBYB = hBR sYR( mYR( + fYR( sBR( mBR( + fBR* ) ) ) ) ) @initial 100 nM
+shProduceYBB = sBR mBR fBR( hBR( + sBR mBR fBR( hBR( + sYR* ) ) ) ) @initial 100 nM
+shBackBY = fYR sBR mBR @initial 1000 nM
+shHelperBB = fBR hBR fBR @initial 100 nM
+

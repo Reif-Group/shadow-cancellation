@@ -1,0 +1,26 @@
+# Domains (24) 
+length fA = 7
+length fB = 7
+length fY = 7
+length hAp = 15
+length hAq = 15
+length hBr = 15
+length hBs = 15
+length hYi = 15
+length hYj = 15
+length mA = 15
+length mB = 15
+length mY = 15
+length sA = 7
+length sB = 7
+length sY = 7
+
+Br = sB mB fB hBr @initial 8 nM
+Bs = sB mB fB hBs @initial 1e-5 nM
+Yi = sY mY fY hYi @initial 5 nM
+Yj = sY mY fY hYj @initial 1e-5 nM
+
+HelperBBs = fB hBs fB @initial 75 nM
+ReactBYBr = hBr sY( mY( + fY( sB( mB( + fB* ) ) ) ) ) @initial 100 nM
+BackBY = fY sB mB @initial 1000 nM
+ProduceYBrBs = sB mB fB( hBs( + sB mB fB( hBr( + sY* ) ) ) ) @initial 100 nM
